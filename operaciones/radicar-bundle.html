@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es-MX"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="POST /fhir/Bundle · DEMO / conceptual; contrato B6 materializado en FSH"><title>Radicar paquete FHIR · IG FHIR SUS México</title>
+<link rel="stylesheet" href="../assets/styles.css"></head><body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="site-header"><div class="header-inner"><a class="brand" href="../index.html" aria-label="Inicio de la guía"><span class="brand-mark">SUS</span><span class="brand-copy">Interoperabilidad de<br>Servicios de Salud</span></a><div class="guide-title"><h1>Guía de Implementación FHIR SUS–RDA México</h1><p>0.3.0 · IG-1F-Compensation-Workflow · Cámara de Compensación / Firely</p></div></div></header>
+<nav class="site-nav" aria-label="Navegación principal"><div><a href="../index.html">Inicio</a><a href="../indice.html">Índice</a><a href="../sus-rda-mx.html">RDA México</a><a href="../perfiles.html">Perfiles RDA</a><a href="../bundles.html">Documentos RDA</a><a href="../operaciones.html" class="active" aria-current="page">Operaciones RDA</a><a href="../terminologias.html">Terminologías</a><a href="../conformidad.html">Conformidad</a><a href="../soporte.html">Soporte</a></div></nav>
+<div class="breadcrumb"><a href="../indice.html">Tabla de Contenidos</a><span>›</span><strong>Radicar paquete FHIR</strong></div>
+<main id="contenido"><div class="build-box">SUS–RDA México — compilación local de desarrollo v0.3.0 basada en HL7® FHIR® R4. <strong>Implementación de referencia: Firely Server 6.10.0.</strong></div><div class="page-head"><h2>Radicar paquete FHIR</h2><p>POST /fhir/Bundle · DEMO / conceptual; contrato B6 materializado en FSH</p></div>
+<div class="metadata"><span><em>Canonical URL:</em> https://fhir.sus-rda-mx.local</span><span><em>Version:</em> 0.3.0</span><span><em>Draft as of:</em> 2026-10-07</span><span><em>Computable Name:</em> RIPSRDAMX</span></div><aside class="notice"><strong>PROVISIONAL · datos sintéticos.</strong> Esta guía experimental no es un estándar oficial mexicano. México/SUS es el único dominio objetivo; Colombia se conserva exclusivamente como <code>REFERENCE_PATTERN</code>. No contiene PHI/PII.</aside>
+<section><h3>Metadatos de operación</h3><div class="table-wrap"><table><thead><tr><th>Campo</th><th>Valor</th></tr></thead><tbody><tr><td>Nombre funcional</td><td>Radicar paquete FHIR</td></tr><tr><td>Nombre técnico</td><td>create Bundle</td></tr><tr><td>Método HTTP</td><td><code>POST</code></td></tr><tr><td>Ruta</td><td><code>/fhir/Bundle</code></td></tr><tr><td>Actor solicitante</td><td>Institución prestadora</td></tr><tr><td>Actor receptor</td><td>Cámara de Compensación SUS</td></tr><tr><td>Actor notificado</td><td>Institución responsable candidata, después de aceptación operacional</td></tr><tr><td>Entrada</td><td>SUSCrossCareBundle</td></tr><tr><td>Salida</td><td>OperationOutcome + código único de radicado</td></tr><tr><td>Recurso FHIR involucrado</td><td>Bundle / SUSCrossCareBundle</td></tr><tr><td>Estado</td><td>DEMO / conceptual; contrato B6 materializado en FSH</td></tr><tr><td>Clasificación</td><td><span class="tag provisional">PROVISIONAL</span> <span class="tag provisional">DEMO</span></td></tr></tbody></table></div></section>
+<section><h3>Propósito</h3><p>Radicar paquete FHIR documenta una capacidad <span class="tag provisional">PROVISIONAL</span> para México/SUS con datos sintéticos. No declara estándar oficial mexicano ni endpoint productivo.</p></section>
+<section class="split"><article><h3>Errores esperados</h3><ul><li>400 Bundle inválido</li><li>422 referencias o perfiles no conformes</li><li>409 idempotencia/radicado duplicado</li><li>403 actor no autorizado</li></ul></article><article><h3>OperationOutcome cuando aplica</h3><p>Las fallas de parseo, perfil, terminología, autorización o contrato deben representarse como <code>OperationOutcome</code> cuando la interacción sea FHIR o cuando la fachada operacional necesite devolver un diagnóstico interoperable.</p></article></section>
+<section class="split"><article><h3>Seguridad esperada</h3><p>Autenticación institucional, autorización por organización, minimización y no registro de cuerpos FHIR.</p></article><article><h3>Trazabilidad</h3><p>Genera radicado operacional, timeline, Provenance/AuditEvent cuando aplique y referencia al Bundle aceptado.</p></article></section>
+<section><h3>Ejemplos request/response</h3><div class="example-grid"><article class="example-card"><h3>Ejemplo request</h3><pre class="code-block"><code>{
+  &quot;resourceType&quot;: &quot;Bundle&quot;,
+  &quot;meta&quot;: {
+    &quot;profile&quot;: [
+      &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-bundle&quot;
+    ]
+  },
+  &quot;type&quot;: &quot;collection&quot;,
+  &quot;entry&quot;: [
+    {
+      &quot;resource&quot;: {
+        &quot;resourceType&quot;: &quot;Claim&quot;,
+        &quot;identifier&quot;: [
+          {
+            &quot;value&quot;: &quot;RAD-SINT-001&quot;
+          }
+        ]
+      }
+    }
+  ]
+}</code></pre></article><article class="example-card"><h3>Ejemplo response</h3><pre class="code-block"><code>{
+  &quot;resourceType&quot;: &quot;OperationOutcome&quot;,
+  &quot;issue&quot;: [
+    {
+      &quot;severity&quot;: &quot;information&quot;,
+      &quot;code&quot;: &quot;informational&quot;,
+      &quot;diagnostics&quot;: &quot;Radicación sintética aceptada: RAD-SINT-001&quot;
+    }
+  ]
+}</code></pre></article></div></section>
+<section><h3>Diagrama de secuencia simple</h3><div class="flow compact" role="img" aria-label="Diagrama de secuencia simple"><span>Institución prestadora</span><b>POST /fhir/Bundle</b><span>Cámara de Compensación SUS</span><b>respuesta</b><span>OperationOutcome + código único de radicado</span></div></section>
+<section><h3>Restricciones</h3><ul><li>La radicación se envía a la Cámara de Compensación; no es envío directo a IMSS.</li><li>No contiene unitPrice, net ni total.</li><li>No contiene CFDI.</li><li>No contiene pago ni evidencia de pago.</li><li>La valoración económica ocurre después.</li><li>Coverage.payor no confirma responsable financiero final.</li></ul></section>
+<section><h3>Resumen para implementadores</h3><p>Usar para radicar el paquete mínimo FHIR ante la Cámara. No mezclar con liquidación, pago, CFDI ni consulta directa a institución responsable.</p></section>
+</main>
+<footer>IG © 2026+ Proyecto SUS–RDA México · FHIR 4.0.1 · PROVISIONAL · no oficial · datos sintéticos.</footer>
+</body></html>
