@@ -12,7 +12,7 @@
 <section><h3>Diagnósticos de egreso</h3><ul><li>Tratamiento oncológico de continuidad indicado</li><li>Sin desenlace clínico real</li></ul></section>
 <section><h3>Recursos FHIR usados</h3><div class="table-wrap"><table><thead><tr><th>Recurso FHIR usado</th><th>Rol en el caso</th></tr></thead><tbody><tr><td><code>MedicationRequest</code></td><td>Uso clínico-administrativo sintético</td></tr><tr><td><code>MedicationDispense candidato</code></td><td>Uso clínico-administrativo sintético</td></tr><tr><td><code>Condition</code></td><td>Uso clínico-administrativo sintético</td></tr><tr><td><code>Encounter</code></td><td>Uso clínico-administrativo sintético</td></tr><tr><td><code>Claim</code></td><td>Uso clínico-administrativo sintético</td></tr><tr><td><code>Coverage</code></td><td>Uso clínico-administrativo sintético</td></tr><tr><td><code>Patient</code></td><td>Uso clínico-administrativo sintético</td></tr><tr><td><code>Provenance</code></td><td>Uso clínico-administrativo sintético</td></tr></tbody></table></div></section>
 <section class="split"><article><h3>Bundle usado</h3><p><code>SUSCrossCareBundle</code></p></article><article><h3>Operación FHIR asociada</h3><p><code>POST /fhir/Bundle</code></p></article></section>
-<section class="split"><article><h3>Validaciones técnicas</h3><ul><li>MedicationRequest con sujeto y Encounter</li><li>Claim referencia evidencia mínima</li><li>Sin unitPrice/net/total</li><li>Provenance del paquete</li></ul></article><article><h3>Validaciones terminológicas</h3><ul><li>SNOMED CT candidato no obligatorio</li><li>RxNorm candidato no obligatorio</li><li>ICD-10 PROVISIONAL</li><li>CUBS candidato</li></ul></article></section>
+<section class="split"><article><h3>Validaciones técnicas</h3><ul><li>MedicationRequest con sujeto y Encounter</li><li>Claim referencia evidencia mínima</li><li>Sin unitPrice/net/total</li><li>Provenance del paquete</li></ul></article><article><h3>Validaciones terminológicas</h3><ul><li>Clave local clínica pendiente; no se exige SNOMED CT en Fase 0</li><li>Clave local de medicamento pendiente; no se exige RxNorm en Fase 0</li><li>ICD-10 PROVISIONAL</li><li>CUBS candidato</li></ul></article></section>
 <section><h3>Reglas aplicadas</h3><ul><li>continuidad</li><li>alto costo</li><li>evidencia de tratamiento previo</li><li>sin montos de origen</li></ul></section>
 <section><h3>Vista 360 aplicable</h3><p>Tratamientos previos relevantes, dispensaciones candidatas y soportes autorizados.</p></section>
 <section><h3>Soportes clínicos</h3><ul><li>Orden médica sintética</li><li>Soporte de tratamiento previo</li><li>DocumentReference candidato</li></ul></section>
@@ -22,4 +22,5 @@
 </main>
 <footer>IG © 2026+ Proyecto SUS–RDA México · FHIR 4.0.1 · PROVISIONAL · no oficial · datos sintéticos.</footer>
 </body></html>
+
 
