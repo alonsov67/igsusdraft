@@ -1,0 +1,95 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "SUSServiceCodeCS",
+  "id": "sus-service-code-provisional",
+  "title": "SUS Synthetic Service Code System (PROVISIONAL)",
+  "description": "Códigos de servicio exclusivamente sintéticos. Son placeholders para un futuro catálogo CUBS gobernado y no representan valores CUBS oficiales.",
+  "url": "https://fhir.sus-rda-mx.local/CodeSystem/sus-service-code-provisional",
+  "concept": [
+    {
+      "code": "SVC-EMERGENCY",
+      "display": "Synthetic emergency service"
+    },
+    {
+      "code": "SVC-OBSTETRIC",
+      "display": "Synthetic obstetric emergency service"
+    },
+    {
+      "code": "SVC-INFARCTION",
+      "display": "Synthetic infarction pathway service"
+    },
+    {
+      "code": "SVC-STROKE",
+      "display": "Synthetic stroke pathway service"
+    },
+    {
+      "code": "SVC-CONTINUITY",
+      "display": "Synthetic ambulatory continuity service"
+    },
+    {
+      "code": "SVC-VACCINATION",
+      "display": "Synthetic vaccination service"
+    },
+    {
+      "code": "SVC-PRIMARY-CARE",
+      "display": "Synthetic primary care service"
+    },
+    {
+      "code": "SVC-DIAGNOSTIC",
+      "display": "Synthetic diagnostic service"
+    },
+    {
+      "code": "SVC-RADIOTHERAPY",
+      "display": "Synthetic radiotherapy service"
+    },
+    {
+      "code": "SVC-ED-INITIAL",
+      "display": "Atencion inicial de urgencias"
+    },
+    {
+      "code": "SVC-ABG",
+      "display": "Gases arteriales"
+    },
+    {
+      "code": "SVC-RX-CHEST",
+      "display": "Radiografia portatil de torax"
+    },
+    {
+      "code": "SVC-NEBULIZATION",
+      "display": "Nebulizacion broncodilatadora"
+    },
+    {
+      "code": "SVC-OBS-2D",
+      "display": "Observacion clinica por 2 dias"
+    },
+    {
+      "code": "SVC-DISCHARGE-HOME",
+      "display": "Egreso a casa"
+    },
+    {
+      "code": "SVC-HOSP-HTN",
+      "display": "Hospitalizacion por hipertension descompensada"
+    },
+    {
+      "code": "SVC-BP-MONITORING",
+      "display": "Monitoreo seriado de presion arterial"
+    },
+    {
+      "code": "SVC-INFLUENZA-VACCINE",
+      "display": "Aplicacion de vacuna contra influenza"
+    },
+    {
+      "code": "SVC-POST-DISCHARGE",
+      "display": "Control ambulatorio post-egreso"
+    },
+    {
+      "code": "SVC-TELECONSULT-COPD",
+      "display": "Teleconsulta de control de EPOC"
+    }
+  ],
+  "caseSensitive": true,
+  "version": "2026.10-demo",
+  "count": 20
+}

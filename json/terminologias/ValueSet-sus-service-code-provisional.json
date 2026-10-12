@@ -1,0 +1,16 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "SUSServiceCodeVS",
+  "id": "sus-service-code-provisional",
+  "title": "SUS Synthetic Service ValueSet (PROVISIONAL)",
+  "description": "Servicios sintéticos B6; el binding a CUBS y sus vigencias se difiere al servicio terminológico futuro.",
+  "url": "https://fhir.sus-rda-mx.local/ValueSet/sus-service-code-provisional",
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.sus-rda-mx.local/CodeSystem/sus-service-code-provisional"
+      }
+    ]
+  }
+}
