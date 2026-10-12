@@ -1,0 +1,23 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ValueSet-sus-fase0-service-working</title><link rel="stylesheet" href="../../assets/styles.css"><style>pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f6f6f6;color:#222}</style></head><body><main><a href="../../ejemplos.html">Volver a ejemplos</a> · <a href="ValueSet-sus-fase0-service-working.json" download>Descargar JSON</a><h1>ValueSet-sus-fase0-service-working</h1><p>Fase 0. Consulta de primera vez por medicina general. Código 890201 de la hoja compartida CUBS, originado en CUPS; namespace de trabajo pendiente de aprobación.</p><pre>{
+  "resourceType": "ValueSet",
+  "id": "sus-fase0-service-working",
+  "url": "https://fhir.sus-rda-mx.local/ValueSet/sus-fase0-service-working",
+  "name": "SUSFase0ServiceWorkingVS",
+  "title": "Servicios permitidos en el ejemplo Fase 0",
+  "status": "draft",
+  "experimental": true,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.sus-rda-mx.local/CodeSystem/sus-fase0-service-working",
+        "version": "2026-10-09-working",
+        "concept": [
+          {
+            "code": "890201",
+            "display": "CONSULTA DE PRIMERA VEZ POR MEDICINA GENERAL"
+          }
+        ]
+      }
+    ]
+  }
+}</pre></main></body></html>

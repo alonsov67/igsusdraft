@@ -1,0 +1,94 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Claim-consulta-primera-vez-890201</title><link rel="stylesheet" href="../../assets/styles.css"><style>pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f6f6f6;color:#222}</style></head><body><main><a href="../../ejemplos.html">Volver a ejemplos</a> · <a href="Claim-consulta-primera-vez-890201.json" download>Descargar JSON</a><h1>Claim-consulta-primera-vez-890201</h1><p>Fase 0. Consulta de primera vez por medicina general. Código 890201 de la hoja compartida CUBS, originado en CUPS; namespace de trabajo pendiente de aprobación.</p><pre>{
+  "resourceType": "Claim",
+  "id": "reclamacion-primera-vez",
+  "identifier": [
+    {
+      "system": "https://fhir.sus-rda-mx.local/NamingSystem/transaccion-demo/prestador",
+      "value": "TX-primera-vez-001"
+    }
+  ],
+  "status": "active",
+  "type": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+        "code": "professional"
+      }
+    ]
+  },
+  "use": "claim",
+  "patient": {
+    "reference": "Patient/paciente-primera-vez"
+  },
+  "created": "2026-10-12T09:31:00-06:00",
+  "provider": {
+    "reference": "Organization/prestador-primera-vez"
+  },
+  "priority": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/processpriority",
+        "code": "normal"
+      }
+    ]
+  },
+  "insurance": [
+    {
+      "sequence": 1,
+      "focal": true,
+      "coverage": {
+        "reference": "Coverage/derechos-primera-vez"
+      }
+    }
+  ],
+  "item": [
+    {
+      "sequence": 1,
+      "extension": [
+        {
+          "url": "https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id",
+          "valueIdentifier": {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/linea-demo",
+            "value": "LINEA-primera-vez-001"
+          }
+        }
+      ],
+      "productOrService": {
+        "coding": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/CodeSystem/sus-fase0-service-working",
+            "version": "2026-10-09-working",
+            "code": "890201",
+            "display": "CONSULTA DE PRIMERA VEZ POR MEDICINA GENERAL"
+          }
+        ],
+        "text": "Consulta de primera vez por medicina general"
+      },
+      "quantity": {
+        "value": 1
+      },
+      "servicedDate": "2026-10-12",
+      "encounter": [
+        {
+          "reference": "Encounter/atencion-primera-vez"
+        }
+      ],
+      "diagnosisSequence": [
+        1
+      ]
+    }
+  ],
+  "diagnosis": [
+    {
+      "sequence": 1,
+      "diagnosisReference": {
+        "reference": "Condition/diagnostico-primera-vez"
+      }
+    }
+  ],
+  "meta": {
+    "profile": [
+      "https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-ambulatory-claim"
+    ]
+  }
+}</pre></main></body></html>

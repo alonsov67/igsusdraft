@@ -1,0 +1,13 @@
+{
+  "fhirVersion": "4.0.1",
+  "resources": 8,
+  "result": "pass",
+  "checks": [
+    "FHIR R4 model parsing",
+    "internal references",
+    "required terminology membership",
+    "initial Claim constraints",
+    "diagnosis present"
+  ],
+  "limitations": "No complete snapshot validator, no server execution, no clinical or institutional approval."
+}

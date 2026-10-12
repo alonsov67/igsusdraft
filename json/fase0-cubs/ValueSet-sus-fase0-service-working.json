@@ -1,0 +1,23 @@
+{
+  "resourceType": "ValueSet",
+  "id": "sus-fase0-service-working",
+  "url": "https://fhir.sus-rda-mx.local/ValueSet/sus-fase0-service-working",
+  "name": "SUSFase0ServiceWorkingVS",
+  "title": "Servicios permitidos en el ejemplo Fase 0",
+  "status": "draft",
+  "experimental": true,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.sus-rda-mx.local/CodeSystem/sus-fase0-service-working",
+        "version": "2026-10-09-working",
+        "concept": [
+          {
+            "code": "890201",
+            "display": "CONSULTA DE PRIMERA VEZ POR MEDICINA GENERAL"
+          }
+        ]
+      }
+    ]
+  }
+}

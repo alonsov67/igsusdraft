@@ -1,0 +1,19 @@
+{
+  "resourceType": "CodeSystem",
+  "id": "sus-fase0-service-working",
+  "url": "https://fhir.sus-rda-mx.local/CodeSystem/sus-fase0-service-working",
+  "version": "2026-10-09-working",
+  "name": "SUSFase0ServiceWorkingCS",
+  "title": "Servicios Fase 0: extracto de trabajo CUBS",
+  "status": "draft",
+  "experimental": true,
+  "caseSensitive": true,
+  "content": "fragment",
+  "description": "Hoja CUBS - Servicios Ambulatorios, fila 2, DGMOSS Listado de Terminologias - Acotado (1).xlsm. Derivada de CUPS compartidos por el equipo. Namespace de trabajo; no catalogo oficial mexicano aprobado.",
+  "concept": [
+    {
+      "code": "890201",
+      "display": "CONSULTA DE PRIMERA VEZ POR MEDICINA GENERAL"
+    }
+  ]
+}
