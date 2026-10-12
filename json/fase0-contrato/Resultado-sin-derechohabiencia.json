@@ -1,0 +1,13 @@
+{
+  "resourceType": "Parameters",
+  "parameter": [
+    {
+      "name": "businessStatus",
+      "valueCode": "exception-no-verified-payer"
+    },
+    {
+      "name": "generatedClaims",
+      "valueInteger": 0
+    }
+  ]
+}

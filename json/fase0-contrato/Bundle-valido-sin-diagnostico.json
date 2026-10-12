@@ -1,0 +1,365 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "identifier": {
+    "system": "https://example.invalid/prestador/sistema",
+    "value": "TX-control-hta-001"
+  },
+  "timestamp": "2026-10-12T09:31:00-06:00",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:73180e85-6b08-5ac7-b0bf-085173ab9c9a",
+      "resource": {
+        "resourceType": "Patient",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/curp",
+            "value": "LOPA700101MDFXXX01"
+          }
+        ],
+        "name": [
+          {
+            "use": "usual",
+            "given": [
+              "Ana"
+            ],
+            "family": "Lopez"
+          }
+        ],
+        "birthDate": "1970-01-01",
+        "meta": {
+          "profile": [
+            "https://fhir.sus-rda-mx.local/StructureDefinition/fase0-patient|2026-10-12-contract"
+          ]
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0fb76c00-5acc-5ad5-bd47-060c7ae35ee5",
+      "resource": {
+        "resourceType": "Organization",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo",
+            "value": "PRESTADOR-DEMO"
+          }
+        ],
+        "name": "Institución prestadora sintética"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b40b330d-f25d-5eab-a8cd-374770776652",
+      "resource": {
+        "resourceType": "Organization",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo",
+            "value": "IMSS"
+          }
+        ],
+        "name": "IMSS (derechohabiencia sintetica; no insurer inicial)"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0b231d02-c0fb-5009-8677-a77aa7cdf94a",
+      "resource": {
+        "resourceType": "Location",
+        "status": "active",
+        "name": "Unidad de ejemplo con CLUES de la muestra; evento sintetico",
+        "managingOrganization": {
+          "reference": "urn:uuid:0fb76c00-5acc-5ad5-bd47-060c7ae35ee5"
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/clues-working",
+            "value": "NLHUN000043"
+          }
+        ],
+        "description": "CLUES: Orden1 fila 2177; no prueba de atencion real ni adscripcion institucional.",
+        "meta": {
+          "profile": [
+            "https://fhir.sus-rda-mx.local/StructureDefinition/fase0-location|2026-10-12-contract"
+          ]
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c9856909-7cf1-53f7-a92e-4ae6beb391fd",
+      "resource": {
+        "resourceType": "Coverage",
+        "status": "active",
+        "beneficiary": {
+          "reference": "urn:uuid:73180e85-6b08-5ac7-b0bf-085173ab9c9a"
+        },
+        "payor": [
+          {
+            "reference": "urn:uuid:b40b330d-f25d-5eab-a8cd-374770776652"
+          }
+        ],
+        "period": {
+          "start": "2026-01-01",
+          "end": "2026-12-31"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1ab305f0-7bde-5fb1-bd1e-e5d52d9ded3d",
+      "resource": {
+        "resourceType": "Encounter",
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/folio-atencion-demo",
+            "value": "FOLIO-control-hta"
+          }
+        ],
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB"
+        },
+        "subject": {
+          "reference": "urn:uuid:73180e85-6b08-5ac7-b0bf-085173ab9c9a"
+        },
+        "serviceProvider": {
+          "reference": "urn:uuid:0fb76c00-5acc-5ad5-bd47-060c7ae35ee5"
+        },
+        "location": [
+          {
+            "location": {
+              "reference": "urn:uuid:0b231d02-c0fb-5009-8677-a77aa7cdf94a"
+            }
+          }
+        ],
+        "period": {
+          "start": "2026-10-12T09:00:00-06:00",
+          "end": "2026-10-12T09:30:00-06:00"
+        },
+        "meta": {
+          "profile": [
+            "https://fhir.sus-rda-mx.local/StructureDefinition/fase0-encounter|2026-10-12-contract"
+          ]
+        },
+        "extension": [
+          {
+            "url": "https://fhir.sus-rda-mx.local/StructureDefinition/fase0-clues-snapshot",
+            "valueIdentifier": {
+              "system": "https://fhir.sus-rda-mx.local/NamingSystem/clues-working",
+              "value": "NLHUN000043"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7157c64f-7377-5b9e-864a-b4eb58812d22",
+      "resource": {
+        "resourceType": "Claim",
+        "identifier": [
+          {
+            "system": "https://example.invalid/prestador/sistema",
+            "value": "TX-control-hta-001"
+          }
+        ],
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional"
+            }
+          ]
+        },
+        "use": "claim",
+        "patient": {
+          "reference": "urn:uuid:73180e85-6b08-5ac7-b0bf-085173ab9c9a"
+        },
+        "created": "2026-10-12T09:31:00-06:00",
+        "provider": {
+          "reference": "urn:uuid:0fb76c00-5acc-5ad5-bd47-060c7ae35ee5"
+        },
+        "priority": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/processpriority",
+              "code": "normal"
+            }
+          ]
+        },
+        "insurance": [
+          {
+            "sequence": 1,
+            "focal": true,
+            "coverage": {
+              "reference": "urn:uuid:c9856909-7cf1-53f7-a92e-4ae6beb391fd"
+            }
+          }
+        ],
+        "item": [
+          {
+            "sequence": 1,
+            "extension": [
+              {
+                "url": "https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id",
+                "valueIdentifier": {
+                  "system": "https://fhir.sus-rda-mx.local/NamingSystem/linea-demo",
+                  "value": "LINEA-control-hta-001"
+                }
+              }
+            ],
+            "productOrService": {
+              "coding": [
+                {
+                  "system": "https://fhir.sus-rda-mx.local/CodeSystem/sus-fase0-service-working",
+                  "version": "2026-10-12-working",
+                  "code": "890301",
+                  "display": "CONSULTA DE CONTROL O DE SEGUIMIENTO POR MEDICINA GENERAL"
+                }
+              ],
+              "text": "CONSULTA DE CONTROL O DE SEGUIMIENTO POR MEDICINA GENERAL"
+            },
+            "quantity": {
+              "value": 1
+            },
+            "encounter": [
+              {
+                "reference": "urn:uuid:1ab305f0-7bde-5fb1-bd1e-e5d52d9ded3d"
+              }
+            ],
+            "servicedPeriod": {
+              "start": "2026-10-12T09:00:00-06:00",
+              "end": "2026-10-12T09:30:00-06:00"
+            }
+          }
+        ],
+        "meta": {
+          "profile": [
+            "https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-ambulatory-claim|2026-10-12-contract"
+          ]
+        },
+        "extension": [
+          {
+            "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence",
+            "extension": [
+              {
+                "url": "curp",
+                "valueString": "LOPA700101MDFXXX01"
+              },
+              {
+                "url": "curpValidated",
+                "valueBoolean": true
+              },
+              {
+                "url": "queryStatus",
+                "valueCode": "complete"
+              },
+              {
+                "url": "sourceSystem",
+                "valueUri": "https://example.invalid/crub"
+              },
+              {
+                "url": "queriedAt",
+                "valueDateTime": "2026-10-12T08:30:00-06:00"
+              },
+              {
+                "url": "consultationHash",
+                "valueString": "HASH-SINTETICO-NO-AUTENTICADO"
+              },
+              {
+                "url": "response",
+                "valueAttachment": {
+                  "contentType": "application/json",
+                  "data": "eyJzeW50aGV0aWMiOiB0cnVlLCAiY3VycCI6ICJMT1BBNzAwMTAxTURGWFhYMDEiLCAicXVlcnlTdGF0dXMiOiAiY29tcGxldGUiLCAiY3VycFZhbGlkYXRlZCI6IHRydWUsICJpbnN0aXR1dGlvbnMiOiBbIklNU1MiXSwgInNlcnZpY2VfZGF0ZXRpbWUiOiAiMjAyNi0xMC0xMlQwOTowMDowMC0wNjowMCJ9",
+                  "title": "Respuesta ilustrativa: no esquema oficial CRUB"
+                }
+              },
+              {
+                "url": "defaultApplied",
+                "valueBoolean": false
+              },
+              {
+                "url": "returnedInstitution",
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "https://fhir.sus-rda-mx.local/CodeSystem/instituciones-fase0-working",
+                      "code": "IMSS"
+                    }
+                  ]
+                }
+              },
+              {
+                "url": "effectiveInstitution",
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "https://fhir.sus-rda-mx.local/CodeSystem/instituciones-fase0-working",
+                      "code": "IMSS"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "url": "https://fhir.sus-rda-mx.local/StructureDefinition/fase0-provider-coverage-check",
+            "extension": [
+              {
+                "url": "internalRegistryChecked",
+                "valueBoolean": true
+              },
+              {
+                "url": "crubChecked",
+                "valueBoolean": true
+              },
+              {
+                "url": "providerCovered",
+                "valueBoolean": false
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a950b0ec-c37b-5d88-b0f5-65de3d306004",
+      "resource": {
+        "resourceType": "Provenance",
+        "target": [
+          {
+            "reference": "urn:uuid:7157c64f-7377-5b9e-864a-b4eb58812d22"
+          },
+          {
+            "reference": "urn:uuid:1ab305f0-7bde-5fb1-bd1e-e5d52d9ded3d"
+          }
+        ],
+        "recorded": "2026-10-12T09:31:00-06:00",
+        "agent": [
+          {
+            "who": {
+              "reference": "urn:uuid:0fb76c00-5acc-5ad5-bd47-060c7ae35ee5"
+            }
+          }
+        ],
+        "entity": [
+          {
+            "role": "source",
+            "what": {
+              "identifier": {
+                "system": "https://example.invalid/prestador/sistema",
+                "value": "TX-control-hta-001"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "meta": {
+    "profile": [
+      "https://fhir.sus-rda-mx.local/StructureDefinition/fase0-collection|2026-10-12-contract"
+    ]
+  }
+}

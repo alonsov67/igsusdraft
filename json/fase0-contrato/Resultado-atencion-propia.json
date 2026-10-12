@@ -1,0 +1,13 @@
+{
+  "resourceType": "Parameters",
+  "parameter": [
+    {
+      "name": "providerBelongsToRightsSet",
+      "valueBoolean": true
+    },
+    {
+      "name": "generatedClaims",
+      "valueInteger": 0
+    }
+  ]
+}

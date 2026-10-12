@@ -1,0 +1,365 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../../assets/styles.css"><title>Bundle-inmunizacion</title></head><body><main><a href="../../ejemplos.html">Volver a ejemplos</a> · <a download href="Bundle-inmunizacion.json">Descargar JSON</a><h1>Bundle-inmunizacion</h1><p>Contrato propuesto Fase 0 · 2026-10-12-contract. Datos, hashes y tarifa de ejemplo sinteticos. No aprobacion de la Secretaria.</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere;background:#f6f6f6;color:#222;padding:20px">{
+  &quot;resourceType&quot;: &quot;Bundle&quot;,
+  &quot;type&quot;: &quot;collection&quot;,
+  &quot;identifier&quot;: {
+    &quot;system&quot;: &quot;https://example.invalid/prestador/sistema&quot;,
+    &quot;value&quot;: &quot;TX-inmunizacion-001&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-10-12T09:31:00-06:00&quot;,
+  &quot;entry&quot;: [
+    {
+      &quot;fullUrl&quot;: &quot;urn:uuid:36ede33e-0edf-5666-8e12-6cb2717bb590&quot;,
+      &quot;resource&quot;: {
+        &quot;resourceType&quot;: &quot;Patient&quot;,
+        &quot;active&quot;: true,
+        &quot;identifier&quot;: [
+          {
+            &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/NamingSystem/curp&quot;,
+            &quot;value&quot;: &quot;SAMA600303MDFXXX03&quot;
+          }
+        ],
+        &quot;name&quot;: [
+          {
+            &quot;use&quot;: &quot;usual&quot;,
+            &quot;given&quot;: [
+              &quot;Marta&quot;
+            ],
+            &quot;family&quot;: &quot;Sanchez&quot;
+          }
+        ],
+        &quot;birthDate&quot;: &quot;1960-03-03&quot;,
+        &quot;meta&quot;: {
+          &quot;profile&quot;: [
+            &quot;https://fhir.sus-rda-mx.local/StructureDefinition/fase0-patient|2026-10-12-contract&quot;
+          ]
+        }
+      }
+    },
+    {
+      &quot;fullUrl&quot;: &quot;urn:uuid:8e52bf76-a6fc-5d39-a0ab-ae75e3a011a4&quot;,
+      &quot;resource&quot;: {
+        &quot;resourceType&quot;: &quot;Organization&quot;,
+        &quot;active&quot;: true,
+        &quot;identifier&quot;: [
+          {
+            &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo&quot;,
+            &quot;value&quot;: &quot;PRESTADOR-DEMO&quot;
+          }
+        ],
+        &quot;name&quot;: &quot;Institución prestadora sintética&quot;
+      }
+    },
+    {
+      &quot;fullUrl&quot;: &quot;urn:uuid:97c60c9a-e0ce-52fd-9635-0545264496d1&quot;,
+      &quot;resource&quot;: {
+        &quot;resourceType&quot;: &quot;Organization&quot;,
+        &quot;active&quot;: true,
+        &quot;identifier&quot;: [
+          {
+            &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo&quot;,
+            &quot;value&quot;: &quot;IMSS&quot;
+          }
+        ],
+        &quot;name&quot;: &quot;IMSS (derechohabiencia sintetica; no insurer inicial)&quot;
+      }
+    },
+    {
+      &quot;fullUrl&quot;: &quot;urn:uuid:5524a57b-807a-5c0b-942c-ba2be828866e&quot;,
+      &quot;resource&quot;: {
+        &quot;resourceType&quot;: &quot;Location&quot;,
+        &quot;status&quot;: &quot;active&quot;,
+        &quot;name&quot;: &quot;Unidad de ejemplo con CLUES de la muestra; evento sintetico&quot;,
+        &quot;managingOrganization&quot;: {
+          &quot;reference&quot;: &quot;urn:uuid:8e52bf76-a6fc-5d39-a0ab-ae75e3a011a4&quot;
+        },
+        &quot;identifier&quot;: [
+          {
+            &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/NamingSystem/clues-working&quot;,
+            &quot;value&quot;: &quot;NLHUN000043&quot;
+          }
+        ],
+        &quot;description&quot;: &quot;CLUES: Orden1 fila 2177; no prueba de atencion real ni adscripcion institucional.&quot;,
+        &quot;meta&quot;: {
+          &quot;profile&quot;: [
+            &quot;https://fhir.sus-rda-mx.local/StructureDefinition/fase0-location|2026-10-12-contract&quot;
+          ]
+        }
+      }
+    },
+    {
+      &quot;fullUrl&quot;: &quot;urn:uuid:b94142c2-1f75-5465-8922-afed96cb60df&quot;,
+      &quot;resource&quot;: {
+        &quot;resourceType&quot;: &quot;Coverage&quot;,
+        &quot;status&quot;: &quot;active&quot;,
+        &quot;beneficiary&quot;: {
+          &quot;reference&quot;: &quot;urn:uuid:36ede33e-0edf-5666-8e12-6cb2717bb590&quot;
+        },
+        &quot;payor&quot;: [
+          {
+            &quot;reference&quot;: &quot;urn:uuid:97c60c9a-e0ce-52fd-9635-0545264496d1&quot;
+          }
+        ],
+        &quot;period&quot;: {
+          &quot;start&quot;: &quot;2026-01-01&quot;,
+          &quot;end&quot;: &quot;2026-12-31&quot;
+        }
+      }
+    },
+    {
+      &quot;fullUrl&quot;: &quot;urn:uuid:019f7f8f-1e93-57ae-97f0-4a3b834d96ac&quot;,
+      &quot;resource&quot;: {
+        &quot;resourceType&quot;: &quot;Encounter&quot;,
+        &quot;identifier&quot;: [
+          {
+            &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/NamingSystem/folio-atencion-demo&quot;,
+            &quot;value&quot;: &quot;FOLIO-inmunizacion&quot;
+          }
+        ],
+        &quot;status&quot;: &quot;finished&quot;,
+        &quot;class&quot;: {
+          &quot;system&quot;: &quot;http://terminology.hl7.org/CodeSystem/v3-ActCode&quot;,
+          &quot;code&quot;: &quot;AMB&quot;
+        },
+        &quot;subject&quot;: {
+          &quot;reference&quot;: &quot;urn:uuid:36ede33e-0edf-5666-8e12-6cb2717bb590&quot;
+        },
+        &quot;serviceProvider&quot;: {
+          &quot;reference&quot;: &quot;urn:uuid:8e52bf76-a6fc-5d39-a0ab-ae75e3a011a4&quot;
+        },
+        &quot;location&quot;: [
+          {
+            &quot;location&quot;: {
+              &quot;reference&quot;: &quot;urn:uuid:5524a57b-807a-5c0b-942c-ba2be828866e&quot;
+            }
+          }
+        ],
+        &quot;period&quot;: {
+          &quot;start&quot;: &quot;2026-10-12T09:00:00-06:00&quot;,
+          &quot;end&quot;: &quot;2026-10-12T09:30:00-06:00&quot;
+        },
+        &quot;meta&quot;: {
+          &quot;profile&quot;: [
+            &quot;https://fhir.sus-rda-mx.local/StructureDefinition/fase0-encounter|2026-10-12-contract&quot;
+          ]
+        },
+        &quot;extension&quot;: [
+          {
+            &quot;url&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/fase0-clues-snapshot&quot;,
+            &quot;valueIdentifier&quot;: {
+              &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/NamingSystem/clues-working&quot;,
+              &quot;value&quot;: &quot;NLHUN000043&quot;
+            }
+          }
+        ]
+      }
+    },
+    {
+      &quot;fullUrl&quot;: &quot;urn:uuid:4211cb1f-06c3-5bf4-9258-11b3d93fbe79&quot;,
+      &quot;resource&quot;: {
+        &quot;resourceType&quot;: &quot;Claim&quot;,
+        &quot;identifier&quot;: [
+          {
+            &quot;system&quot;: &quot;https://example.invalid/prestador/sistema&quot;,
+            &quot;value&quot;: &quot;TX-inmunizacion-001&quot;
+          }
+        ],
+        &quot;status&quot;: &quot;active&quot;,
+        &quot;type&quot;: {
+          &quot;coding&quot;: [
+            {
+              &quot;system&quot;: &quot;http://terminology.hl7.org/CodeSystem/claim-type&quot;,
+              &quot;code&quot;: &quot;professional&quot;
+            }
+          ]
+        },
+        &quot;use&quot;: &quot;claim&quot;,
+        &quot;patient&quot;: {
+          &quot;reference&quot;: &quot;urn:uuid:36ede33e-0edf-5666-8e12-6cb2717bb590&quot;
+        },
+        &quot;created&quot;: &quot;2026-10-12T09:31:00-06:00&quot;,
+        &quot;provider&quot;: {
+          &quot;reference&quot;: &quot;urn:uuid:8e52bf76-a6fc-5d39-a0ab-ae75e3a011a4&quot;
+        },
+        &quot;priority&quot;: {
+          &quot;coding&quot;: [
+            {
+              &quot;system&quot;: &quot;http://terminology.hl7.org/CodeSystem/processpriority&quot;,
+              &quot;code&quot;: &quot;normal&quot;
+            }
+          ]
+        },
+        &quot;insurance&quot;: [
+          {
+            &quot;sequence&quot;: 1,
+            &quot;focal&quot;: true,
+            &quot;coverage&quot;: {
+              &quot;reference&quot;: &quot;urn:uuid:b94142c2-1f75-5465-8922-afed96cb60df&quot;
+            }
+          }
+        ],
+        &quot;item&quot;: [
+          {
+            &quot;sequence&quot;: 1,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id&quot;,
+                &quot;valueIdentifier&quot;: {
+                  &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/NamingSystem/linea-demo&quot;,
+                  &quot;value&quot;: &quot;LINEA-inmunizacion-001&quot;
+                }
+              }
+            ],
+            &quot;productOrService&quot;: {
+              &quot;coding&quot;: [
+                {
+                  &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/CodeSystem/sus-fase0-service-working&quot;,
+                  &quot;version&quot;: &quot;2026-10-12-working&quot;,
+                  &quot;code&quot;: &quot;993106&quot;,
+                  &quot;display&quot;: &quot;VACUNACION CONTRA NEUMOCOCO&quot;
+                }
+              ],
+              &quot;text&quot;: &quot;VACUNACION CONTRA NEUMOCOCO&quot;
+            },
+            &quot;quantity&quot;: {
+              &quot;value&quot;: 1
+            },
+            &quot;encounter&quot;: [
+              {
+                &quot;reference&quot;: &quot;urn:uuid:019f7f8f-1e93-57ae-97f0-4a3b834d96ac&quot;
+              }
+            ],
+            &quot;servicedPeriod&quot;: {
+              &quot;start&quot;: &quot;2026-10-12T09:00:00-06:00&quot;,
+              &quot;end&quot;: &quot;2026-10-12T09:30:00-06:00&quot;
+            }
+          }
+        ],
+        &quot;meta&quot;: {
+          &quot;profile&quot;: [
+            &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-vaccination-claim|2026-10-12-contract&quot;
+          ]
+        },
+        &quot;extension&quot;: [
+          {
+            &quot;url&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;curp&quot;,
+                &quot;valueString&quot;: &quot;SAMA600303MDFXXX03&quot;
+              },
+              {
+                &quot;url&quot;: &quot;curpValidated&quot;,
+                &quot;valueBoolean&quot;: true
+              },
+              {
+                &quot;url&quot;: &quot;queryStatus&quot;,
+                &quot;valueCode&quot;: &quot;complete&quot;
+              },
+              {
+                &quot;url&quot;: &quot;sourceSystem&quot;,
+                &quot;valueUri&quot;: &quot;https://example.invalid/crub&quot;
+              },
+              {
+                &quot;url&quot;: &quot;queriedAt&quot;,
+                &quot;valueDateTime&quot;: &quot;2026-10-12T08:30:00-06:00&quot;
+              },
+              {
+                &quot;url&quot;: &quot;consultationHash&quot;,
+                &quot;valueString&quot;: &quot;HASH-SINTETICO-NO-AUTENTICADO&quot;
+              },
+              {
+                &quot;url&quot;: &quot;response&quot;,
+                &quot;valueAttachment&quot;: {
+                  &quot;contentType&quot;: &quot;application/json&quot;,
+                  &quot;data&quot;: &quot;eyJzeW50aGV0aWMiOiB0cnVlLCAiY3VycCI6ICJTQU1BNjAwMzAzTURGWFhYMDMiLCAicXVlcnlTdGF0dXMiOiAiY29tcGxldGUiLCAiY3VycFZhbGlkYXRlZCI6IHRydWUsICJpbnN0aXR1dGlvbnMiOiBbIklNU1MiXSwgInNlcnZpY2VfZGF0ZXRpbWUiOiAiMjAyNi0xMC0xMlQwOTowMDowMC0wNjowMCJ9&quot;,
+                  &quot;title&quot;: &quot;Respuesta ilustrativa: no esquema oficial CRUB&quot;
+                }
+              },
+              {
+                &quot;url&quot;: &quot;defaultApplied&quot;,
+                &quot;valueBoolean&quot;: false
+              },
+              {
+                &quot;url&quot;: &quot;returnedInstitution&quot;,
+                &quot;valueCodeableConcept&quot;: {
+                  &quot;coding&quot;: [
+                    {
+                      &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/CodeSystem/instituciones-fase0-working&quot;,
+                      &quot;code&quot;: &quot;IMSS&quot;
+                    }
+                  ]
+                }
+              },
+              {
+                &quot;url&quot;: &quot;effectiveInstitution&quot;,
+                &quot;valueCodeableConcept&quot;: {
+                  &quot;coding&quot;: [
+                    {
+                      &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/CodeSystem/instituciones-fase0-working&quot;,
+                      &quot;code&quot;: &quot;IMSS&quot;
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            &quot;url&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/fase0-provider-coverage-check&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;internalRegistryChecked&quot;,
+                &quot;valueBoolean&quot;: true
+              },
+              {
+                &quot;url&quot;: &quot;crubChecked&quot;,
+                &quot;valueBoolean&quot;: true
+              },
+              {
+                &quot;url&quot;: &quot;providerCovered&quot;,
+                &quot;valueBoolean&quot;: false
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      &quot;fullUrl&quot;: &quot;urn:uuid:e83fec9a-50bb-5340-a847-64eb1903e58e&quot;,
+      &quot;resource&quot;: {
+        &quot;resourceType&quot;: &quot;Provenance&quot;,
+        &quot;target&quot;: [
+          {
+            &quot;reference&quot;: &quot;urn:uuid:4211cb1f-06c3-5bf4-9258-11b3d93fbe79&quot;
+          },
+          {
+            &quot;reference&quot;: &quot;urn:uuid:019f7f8f-1e93-57ae-97f0-4a3b834d96ac&quot;
+          }
+        ],
+        &quot;recorded&quot;: &quot;2026-10-12T09:31:00-06:00&quot;,
+        &quot;agent&quot;: [
+          {
+            &quot;who&quot;: {
+              &quot;reference&quot;: &quot;urn:uuid:8e52bf76-a6fc-5d39-a0ab-ae75e3a011a4&quot;
+            }
+          }
+        ],
+        &quot;entity&quot;: [
+          {
+            &quot;role&quot;: &quot;source&quot;,
+            &quot;what&quot;: {
+              &quot;identifier&quot;: {
+                &quot;system&quot;: &quot;https://example.invalid/prestador/sistema&quot;,
+                &quot;value&quot;: &quot;TX-inmunizacion-001&quot;
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  &quot;meta&quot;: {
+    &quot;profile&quot;: [
+      &quot;https://fhir.sus-rda-mx.local/StructureDefinition/fase0-collection|2026-10-12-contract&quot;
+    ]
+  }
+}</pre></main></body></html>

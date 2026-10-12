@@ -1,0 +1,25 @@
+{
+  "resourceType": "CodeSystem",
+  "id": "instituciones-fase0-working",
+  "url": "https://fhir.sus-rda-mx.local/CodeSystem/instituciones-fase0-working",
+  "status": "draft",
+  "experimental": true,
+  "version": "2026-10-12-contract",
+  "content": "fragment",
+  "caseSensitive": true,
+  "description": "Claves de trabajo para ejemplos; no URI oficial institucional aprobada.",
+  "concept": [
+    {
+      "code": "IMSS",
+      "display": "IMSS"
+    },
+    {
+      "code": "ISSSTE",
+      "display": "ISSSTE"
+    },
+    {
+      "code": "PRESTADOR-DEMO",
+      "display": "PRESTADOR-DEMO"
+    }
+  ]
+}

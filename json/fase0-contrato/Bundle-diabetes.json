@@ -1,0 +1,413 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "identifier": {
+    "system": "https://example.invalid/prestador/sistema",
+    "value": "TX-diabetes-001"
+  },
+  "timestamp": "2026-10-12T09:31:00-06:00",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:4c637f2e-7145-592b-9b8a-86dff5cead74",
+      "resource": {
+        "resourceType": "Patient",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/curp",
+            "value": "GALU650202HDFXXX02"
+          }
+        ],
+        "name": [
+          {
+            "use": "usual",
+            "given": [
+              "Luis"
+            ],
+            "family": "Garcia"
+          }
+        ],
+        "birthDate": "1965-02-02",
+        "meta": {
+          "profile": [
+            "https://fhir.sus-rda-mx.local/StructureDefinition/fase0-patient|2026-10-12-contract"
+          ]
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d22e6d26-c724-5196-b0fd-555b20a769ec",
+      "resource": {
+        "resourceType": "Organization",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo",
+            "value": "PRESTADOR-DEMO"
+          }
+        ],
+        "name": "Institución prestadora sintética"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c78857c7-be93-5029-bbf8-3317d4d770fe",
+      "resource": {
+        "resourceType": "Organization",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo",
+            "value": "IMSS"
+          }
+        ],
+        "name": "IMSS (derechohabiencia sintetica; no insurer inicial)"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:67e0e95e-3d67-582f-aa5e-9fd19802434f",
+      "resource": {
+        "resourceType": "Location",
+        "status": "active",
+        "name": "Unidad de ejemplo con CLUES de la muestra; evento sintetico",
+        "managingOrganization": {
+          "reference": "urn:uuid:d22e6d26-c724-5196-b0fd-555b20a769ec"
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/clues-working",
+            "value": "NLHUN000043"
+          }
+        ],
+        "description": "CLUES: Orden1 fila 2177; no prueba de atencion real ni adscripcion institucional.",
+        "meta": {
+          "profile": [
+            "https://fhir.sus-rda-mx.local/StructureDefinition/fase0-location|2026-10-12-contract"
+          ]
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5d9fbcaf-0818-5b9f-a79f-421f544ee757",
+      "resource": {
+        "resourceType": "Coverage",
+        "status": "active",
+        "beneficiary": {
+          "reference": "urn:uuid:4c637f2e-7145-592b-9b8a-86dff5cead74"
+        },
+        "payor": [
+          {
+            "reference": "urn:uuid:c78857c7-be93-5029-bbf8-3317d4d770fe"
+          }
+        ],
+        "period": {
+          "start": "2026-01-01",
+          "end": "2026-12-31"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:56c51d3e-6704-5191-9f75-02c117123198",
+      "resource": {
+        "resourceType": "Encounter",
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/folio-atencion-demo",
+            "value": "FOLIO-diabetes"
+          }
+        ],
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB"
+        },
+        "subject": {
+          "reference": "urn:uuid:4c637f2e-7145-592b-9b8a-86dff5cead74"
+        },
+        "serviceProvider": {
+          "reference": "urn:uuid:d22e6d26-c724-5196-b0fd-555b20a769ec"
+        },
+        "location": [
+          {
+            "location": {
+              "reference": "urn:uuid:67e0e95e-3d67-582f-aa5e-9fd19802434f"
+            }
+          }
+        ],
+        "period": {
+          "start": "2026-10-12T09:00:00-06:00",
+          "end": "2026-10-12T09:30:00-06:00"
+        },
+        "diagnosis": [
+          {
+            "condition": {
+              "reference": "urn:uuid:82a2e2e4-7f45-5053-b43e-23b8a6664550"
+            },
+            "rank": 1
+          }
+        ],
+        "meta": {
+          "profile": [
+            "https://fhir.sus-rda-mx.local/StructureDefinition/fase0-encounter|2026-10-12-contract"
+          ]
+        },
+        "extension": [
+          {
+            "url": "https://fhir.sus-rda-mx.local/StructureDefinition/fase0-clues-snapshot",
+            "valueIdentifier": {
+              "system": "https://fhir.sus-rda-mx.local/NamingSystem/clues-working",
+              "value": "NLHUN000043"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:82a2e2e4-7f45-5053-b43e-23b8a6664550",
+      "resource": {
+        "resourceType": "Condition",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10",
+              "code": "E11.9"
+            }
+          ],
+          "text": "Diabetes mellitus tipo 2 sin complicaciones"
+        },
+        "subject": {
+          "reference": "urn:uuid:4c637f2e-7145-592b-9b8a-86dff5cead74"
+        },
+        "encounter": {
+          "reference": "urn:uuid:56c51d3e-6704-5191-9f75-02c117123198"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:858b459a-d47f-5b67-8928-9fbdc7ed7526",
+      "resource": {
+        "resourceType": "Claim",
+        "identifier": [
+          {
+            "system": "https://example.invalid/prestador/sistema",
+            "value": "TX-diabetes-001"
+          }
+        ],
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional"
+            }
+          ]
+        },
+        "use": "claim",
+        "patient": {
+          "reference": "urn:uuid:4c637f2e-7145-592b-9b8a-86dff5cead74"
+        },
+        "created": "2026-10-12T09:31:00-06:00",
+        "provider": {
+          "reference": "urn:uuid:d22e6d26-c724-5196-b0fd-555b20a769ec"
+        },
+        "priority": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/processpriority",
+              "code": "normal"
+            }
+          ]
+        },
+        "insurance": [
+          {
+            "sequence": 1,
+            "focal": true,
+            "coverage": {
+              "reference": "urn:uuid:5d9fbcaf-0818-5b9f-a79f-421f544ee757"
+            }
+          }
+        ],
+        "item": [
+          {
+            "sequence": 1,
+            "extension": [
+              {
+                "url": "https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id",
+                "valueIdentifier": {
+                  "system": "https://fhir.sus-rda-mx.local/NamingSystem/linea-demo",
+                  "value": "LINEA-diabetes-001"
+                }
+              }
+            ],
+            "productOrService": {
+              "coding": [
+                {
+                  "system": "https://fhir.sus-rda-mx.local/CodeSystem/sus-fase0-service-working",
+                  "version": "2026-10-12-working",
+                  "code": "890301",
+                  "display": "CONSULTA DE CONTROL O DE SEGUIMIENTO POR MEDICINA GENERAL"
+                }
+              ],
+              "text": "CONSULTA DE CONTROL O DE SEGUIMIENTO POR MEDICINA GENERAL"
+            },
+            "quantity": {
+              "value": 1
+            },
+            "encounter": [
+              {
+                "reference": "urn:uuid:56c51d3e-6704-5191-9f75-02c117123198"
+              }
+            ],
+            "diagnosisSequence": [
+              1
+            ],
+            "servicedPeriod": {
+              "start": "2026-10-12T09:00:00-06:00",
+              "end": "2026-10-12T09:30:00-06:00"
+            }
+          }
+        ],
+        "diagnosis": [
+          {
+            "sequence": 1,
+            "diagnosisReference": {
+              "reference": "urn:uuid:82a2e2e4-7f45-5053-b43e-23b8a6664550"
+            }
+          }
+        ],
+        "meta": {
+          "profile": [
+            "https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-ambulatory-claim|2026-10-12-contract"
+          ]
+        },
+        "extension": [
+          {
+            "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence",
+            "extension": [
+              {
+                "url": "curp",
+                "valueString": "GALU650202HDFXXX02"
+              },
+              {
+                "url": "curpValidated",
+                "valueBoolean": true
+              },
+              {
+                "url": "queryStatus",
+                "valueCode": "complete"
+              },
+              {
+                "url": "sourceSystem",
+                "valueUri": "https://example.invalid/crub"
+              },
+              {
+                "url": "queriedAt",
+                "valueDateTime": "2026-10-12T08:30:00-06:00"
+              },
+              {
+                "url": "consultationHash",
+                "valueString": "HASH-SINTETICO-NO-AUTENTICADO"
+              },
+              {
+                "url": "response",
+                "valueAttachment": {
+                  "contentType": "application/json",
+                  "data": "eyJzeW50aGV0aWMiOiB0cnVlLCAiY3VycCI6ICJHQUxVNjUwMjAySERGWFhYMDIiLCAicXVlcnlTdGF0dXMiOiAiY29tcGxldGUiLCAiY3VycFZhbGlkYXRlZCI6IHRydWUsICJpbnN0aXR1dGlvbnMiOiBbIklNU1MiXSwgInNlcnZpY2VfZGF0ZXRpbWUiOiAiMjAyNi0xMC0xMlQwOTowMDowMC0wNjowMCJ9",
+                  "title": "Respuesta ilustrativa: no esquema oficial CRUB"
+                }
+              },
+              {
+                "url": "defaultApplied",
+                "valueBoolean": false
+              },
+              {
+                "url": "returnedInstitution",
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "https://fhir.sus-rda-mx.local/CodeSystem/instituciones-fase0-working",
+                      "code": "IMSS"
+                    }
+                  ]
+                }
+              },
+              {
+                "url": "effectiveInstitution",
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "https://fhir.sus-rda-mx.local/CodeSystem/instituciones-fase0-working",
+                      "code": "IMSS"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "url": "https://fhir.sus-rda-mx.local/StructureDefinition/fase0-provider-coverage-check",
+            "extension": [
+              {
+                "url": "internalRegistryChecked",
+                "valueBoolean": true
+              },
+              {
+                "url": "crubChecked",
+                "valueBoolean": true
+              },
+              {
+                "url": "providerCovered",
+                "valueBoolean": false
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:925f6daa-185d-5cb3-ab5f-1b9ef78edc49",
+      "resource": {
+        "resourceType": "Provenance",
+        "target": [
+          {
+            "reference": "urn:uuid:858b459a-d47f-5b67-8928-9fbdc7ed7526"
+          },
+          {
+            "reference": "urn:uuid:56c51d3e-6704-5191-9f75-02c117123198"
+          }
+        ],
+        "recorded": "2026-10-12T09:31:00-06:00",
+        "agent": [
+          {
+            "who": {
+              "reference": "urn:uuid:d22e6d26-c724-5196-b0fd-555b20a769ec"
+            }
+          }
+        ],
+        "entity": [
+          {
+            "role": "source",
+            "what": {
+              "identifier": {
+                "system": "https://example.invalid/prestador/sistema",
+                "value": "TX-diabetes-001"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "meta": {
+    "profile": [
+      "https://fhir.sus-rda-mx.local/StructureDefinition/fase0-collection|2026-10-12-contract"
+    ]
+  }
+}

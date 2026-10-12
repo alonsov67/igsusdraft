@@ -1,0 +1,3376 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../../assets/styles.css"><title>StructureDefinition-sus-fase0-eligibility-evidence</title></head><body><main><a href="../../ejemplos.html">Volver a ejemplos</a> · <a download href="StructureDefinition-sus-fase0-eligibility-evidence.json">Descargar JSON</a><h1>StructureDefinition-sus-fase0-eligibility-evidence</h1><p>Contrato propuesto Fase 0 · 2026-10-12-contract. Datos, hashes y tarifa de ejemplo sinteticos. No aprobacion de la Secretaria.</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere;background:#f6f6f6;color:#222;padding:20px">{
+  &quot;resourceType&quot;: &quot;StructureDefinition&quot;,
+  &quot;id&quot;: &quot;sus-fase0-eligibility-evidence&quot;,
+  &quot;url&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence&quot;,
+  &quot;version&quot;: &quot;2026-10-12-contract&quot;,
+  &quot;name&quot;: &quot;SUSFase0EligibilityEvidence&quot;,
+  &quot;title&quot;: &quot;Evidencia de validacion de CURP y derechohabiencia en la reclamacion&quot;,
+  &quot;status&quot;: &quot;draft&quot;,
+  &quot;description&quot;: &quot;Evidencia de consulta y verificacion central a fecha del servicio. Una respuesta aportada por el prestador no determina responsabilidad financiera. Namespace de trabajo; hash sintetico no autentica una consulta.&quot;,
+  &quot;fhirVersion&quot;: &quot;4.0.1&quot;,
+  &quot;mapping&quot;: [
+    {
+      &quot;identity&quot;: &quot;rim&quot;,
+      &quot;uri&quot;: &quot;http://hl7.org/v3&quot;,
+      &quot;name&quot;: &quot;RIM Mapping&quot;
+    }
+  ],
+  &quot;kind&quot;: &quot;complex-type&quot;,
+  &quot;abstract&quot;: false,
+  &quot;context&quot;: [
+    {
+      &quot;expression&quot;: &quot;Claim&quot;,
+      &quot;type&quot;: &quot;element&quot;
+    },
+    {
+      &quot;expression&quot;: &quot;Encounter&quot;,
+      &quot;type&quot;: &quot;element&quot;
+    }
+  ],
+  &quot;type&quot;: &quot;Extension&quot;,
+  &quot;baseDefinition&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;,
+  &quot;derivation&quot;: &quot;constraint&quot;,
+  &quot;snapshot&quot;: {
+    &quot;element&quot;: [
+      {
+        &quot;id&quot;: &quot;Extension&quot;,
+        &quot;path&quot;: &quot;Extension&quot;,
+        &quot;short&quot;: &quot;Evidencia de validacion de CURP y derechohabiencia en la reclamacion&quot;,
+        &quot;definition&quot;: &quot;Evidencia de consulta y verificacion central a fecha del servicio. Una respuesta aportada por el prestador no determina responsabilidad financiera. Namespace de trabajo; hash sintetico no autentica una consulta.&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;*&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;condition&quot;: [
+          &quot;ele-1&quot;
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), &#x27;value&#x27;)])&quot;
+          },
+          {
+            &quot;key&quot;: &quot;sus-dh-default&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Sin instituciones retornadas no se asigna una institucion efectiva.&quot;,
+            &quot;expression&quot;: &quot;extension.where(url=&#x27;returnedInstitution&#x27;).empty() implies extension.where(url=&#x27;effectiveInstitution&#x27;).empty()&quot;,
+            &quot;source&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence&quot;
+          },
+          {
+            &quot;key&quot;: &quot;sus-dh-no-default&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Con instituciones retornadas no se aplica el valor por defecto.&quot;,
+            &quot;expression&quot;: &quot;extension.where(url=&#x27;returnedInstitution&#x27;).exists() implies (extension.where(url=&#x27;defaultApplied&#x27;).value = false)&quot;,
+            &quot;source&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          },
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.id&quot;,
+        &quot;path&quot;: &quot;Extension.id&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;Unique id for inter-element referencing&quot;,
+        &quot;definition&quot;: &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.id&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;string&quot;
+              }
+            ]
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;slicing&quot;: {
+          &quot;discriminator&quot;: [
+            {
+              &quot;type&quot;: &quot;value&quot;,
+              &quot;path&quot;: &quot;url&quot;
+            }
+          ],
+          &quot;description&quot;: &quot;Extensions are always sliced by (at least) url&quot;,
+          &quot;rules&quot;: &quot;open&quot;
+        },
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 8,
+        &quot;max&quot;: &quot;*&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curp&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;curp&quot;,
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curp.id&quot;,
+        &quot;path&quot;: &quot;Extension.extension.id&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;Unique id for inter-element referencing&quot;,
+        &quot;definition&quot;: &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.id&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;string&quot;
+              }
+            ]
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curp.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;slicing&quot;: {
+          &quot;discriminator&quot;: [
+            {
+              &quot;type&quot;: &quot;value&quot;,
+              &quot;path&quot;: &quot;url&quot;
+            }
+          ],
+          &quot;description&quot;: &quot;Extensions are always sliced by (at least) url&quot;,
+          &quot;rules&quot;: &quot;open&quot;
+        },
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;0&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curp.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;identifies the meaning of the extension&quot;,
+        &quot;definition&quot;: &quot;Source of the definition for the extension code - a logical name or a URL.&quot;,
+        &quot;comment&quot;: &quot;The definition may point directly to a computable or human-readable definition of the extensibility codes, or it may be a logical URI as declared in some other specification. The definition SHALL be a URI for the Structure Definition defining the extension.&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.url&quot;,
+          &quot;min&quot;: 1,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;uri&quot;
+              }
+            ]
+          }
+        ],
+        &quot;fixedUri&quot;: &quot;curp&quot;,
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curp.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;short&quot;: &quot;Value of extension&quot;,
+        &quot;definition&quot;: &quot;Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.value[x]&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curpValidated&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;curpValidated&quot;,
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curpValidated.id&quot;,
+        &quot;path&quot;: &quot;Extension.extension.id&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;Unique id for inter-element referencing&quot;,
+        &quot;definition&quot;: &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.id&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;string&quot;
+              }
+            ]
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curpValidated.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;slicing&quot;: {
+          &quot;discriminator&quot;: [
+            {
+              &quot;type&quot;: &quot;value&quot;,
+              &quot;path&quot;: &quot;url&quot;
+            }
+          ],
+          &quot;description&quot;: &quot;Extensions are always sliced by (at least) url&quot;,
+          &quot;rules&quot;: &quot;open&quot;
+        },
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;0&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curpValidated.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;identifies the meaning of the extension&quot;,
+        &quot;definition&quot;: &quot;Source of the definition for the extension code - a logical name or a URL.&quot;,
+        &quot;comment&quot;: &quot;The definition may point directly to a computable or human-readable definition of the extensibility codes, or it may be a logical URI as declared in some other specification. The definition SHALL be a URI for the Structure Definition defining the extension.&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.url&quot;,
+          &quot;min&quot;: 1,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;uri&quot;
+              }
+            ]
+          }
+        ],
+        &quot;fixedUri&quot;: &quot;curpValidated&quot;,
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curpValidated.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;short&quot;: &quot;Value of extension&quot;,
+        &quot;definition&quot;: &quot;Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.value[x]&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;boolean&quot;
+          }
+        ],
+        &quot;patternBoolean&quot;: true,
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queryStatus&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;queryStatus&quot;,
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queryStatus.id&quot;,
+        &quot;path&quot;: &quot;Extension.extension.id&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;Unique id for inter-element referencing&quot;,
+        &quot;definition&quot;: &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.id&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;string&quot;
+              }
+            ]
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queryStatus.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;slicing&quot;: {
+          &quot;discriminator&quot;: [
+            {
+              &quot;type&quot;: &quot;value&quot;,
+              &quot;path&quot;: &quot;url&quot;
+            }
+          ],
+          &quot;description&quot;: &quot;Extensions are always sliced by (at least) url&quot;,
+          &quot;rules&quot;: &quot;open&quot;
+        },
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;0&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queryStatus.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;identifies the meaning of the extension&quot;,
+        &quot;definition&quot;: &quot;Source of the definition for the extension code - a logical name or a URL.&quot;,
+        &quot;comment&quot;: &quot;The definition may point directly to a computable or human-readable definition of the extensibility codes, or it may be a logical URI as declared in some other specification. The definition SHALL be a URI for the Structure Definition defining the extension.&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.url&quot;,
+          &quot;min&quot;: 1,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;uri&quot;
+              }
+            ]
+          }
+        ],
+        &quot;fixedUri&quot;: &quot;queryStatus&quot;,
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queryStatus.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;short&quot;: &quot;Value of extension&quot;,
+        &quot;definition&quot;: &quot;Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.value[x]&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;code&quot;
+          }
+        ],
+        &quot;patternCode&quot;: &quot;complete&quot;,
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:sourceSystem&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;sourceSystem&quot;,
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:sourceSystem.id&quot;,
+        &quot;path&quot;: &quot;Extension.extension.id&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;Unique id for inter-element referencing&quot;,
+        &quot;definition&quot;: &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.id&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;string&quot;
+              }
+            ]
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:sourceSystem.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;slicing&quot;: {
+          &quot;discriminator&quot;: [
+            {
+              &quot;type&quot;: &quot;value&quot;,
+              &quot;path&quot;: &quot;url&quot;
+            }
+          ],
+          &quot;description&quot;: &quot;Extensions are always sliced by (at least) url&quot;,
+          &quot;rules&quot;: &quot;open&quot;
+        },
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;0&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:sourceSystem.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;identifies the meaning of the extension&quot;,
+        &quot;definition&quot;: &quot;Source of the definition for the extension code - a logical name or a URL.&quot;,
+        &quot;comment&quot;: &quot;The definition may point directly to a computable or human-readable definition of the extensibility codes, or it may be a logical URI as declared in some other specification. The definition SHALL be a URI for the Structure Definition defining the extension.&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.url&quot;,
+          &quot;min&quot;: 1,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;uri&quot;
+              }
+            ]
+          }
+        ],
+        &quot;fixedUri&quot;: &quot;sourceSystem&quot;,
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:sourceSystem.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;short&quot;: &quot;Value of extension&quot;,
+        &quot;definition&quot;: &quot;Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.value[x]&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;uri&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queriedAt&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;queriedAt&quot;,
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queriedAt.id&quot;,
+        &quot;path&quot;: &quot;Extension.extension.id&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;Unique id for inter-element referencing&quot;,
+        &quot;definition&quot;: &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.id&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;string&quot;
+              }
+            ]
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queriedAt.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;slicing&quot;: {
+          &quot;discriminator&quot;: [
+            {
+              &quot;type&quot;: &quot;value&quot;,
+              &quot;path&quot;: &quot;url&quot;
+            }
+          ],
+          &quot;description&quot;: &quot;Extensions are always sliced by (at least) url&quot;,
+          &quot;rules&quot;: &quot;open&quot;
+        },
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;0&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queriedAt.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;identifies the meaning of the extension&quot;,
+        &quot;definition&quot;: &quot;Source of the definition for the extension code - a logical name or a URL.&quot;,
+        &quot;comment&quot;: &quot;The definition may point directly to a computable or human-readable definition of the extensibility codes, or it may be a logical URI as declared in some other specification. The definition SHALL be a URI for the Structure Definition defining the extension.&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.url&quot;,
+          &quot;min&quot;: 1,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;uri&quot;
+              }
+            ]
+          }
+        ],
+        &quot;fixedUri&quot;: &quot;queriedAt&quot;,
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queriedAt.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;short&quot;: &quot;Value of extension&quot;,
+        &quot;definition&quot;: &quot;Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.value[x]&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;dateTime&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:consultationHash&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;consultationHash&quot;,
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:consultationHash.id&quot;,
+        &quot;path&quot;: &quot;Extension.extension.id&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;Unique id for inter-element referencing&quot;,
+        &quot;definition&quot;: &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.id&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;string&quot;
+              }
+            ]
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:consultationHash.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;slicing&quot;: {
+          &quot;discriminator&quot;: [
+            {
+              &quot;type&quot;: &quot;value&quot;,
+              &quot;path&quot;: &quot;url&quot;
+            }
+          ],
+          &quot;description&quot;: &quot;Extensions are always sliced by (at least) url&quot;,
+          &quot;rules&quot;: &quot;open&quot;
+        },
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;0&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:consultationHash.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;identifies the meaning of the extension&quot;,
+        &quot;definition&quot;: &quot;Source of the definition for the extension code - a logical name or a URL.&quot;,
+        &quot;comment&quot;: &quot;The definition may point directly to a computable or human-readable definition of the extensibility codes, or it may be a logical URI as declared in some other specification. The definition SHALL be a URI for the Structure Definition defining the extension.&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.url&quot;,
+          &quot;min&quot;: 1,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;uri&quot;
+              }
+            ]
+          }
+        ],
+        &quot;fixedUri&quot;: &quot;consultationHash&quot;,
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:consultationHash.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;short&quot;: &quot;Value of extension&quot;,
+        &quot;definition&quot;: &quot;Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.value[x]&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;response&quot;,
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.id&quot;,
+        &quot;path&quot;: &quot;Extension.extension.id&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;Unique id for inter-element referencing&quot;,
+        &quot;definition&quot;: &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.id&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;string&quot;
+              }
+            ]
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;slicing&quot;: {
+          &quot;discriminator&quot;: [
+            {
+              &quot;type&quot;: &quot;value&quot;,
+              &quot;path&quot;: &quot;url&quot;
+            }
+          ],
+          &quot;description&quot;: &quot;Extensions are always sliced by (at least) url&quot;,
+          &quot;rules&quot;: &quot;open&quot;
+        },
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;0&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;identifies the meaning of the extension&quot;,
+        &quot;definition&quot;: &quot;Source of the definition for the extension code - a logical name or a URL.&quot;,
+        &quot;comment&quot;: &quot;The definition may point directly to a computable or human-readable definition of the extensibility codes, or it may be a logical URI as declared in some other specification. The definition SHALL be a URI for the Structure Definition defining the extension.&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.url&quot;,
+          &quot;min&quot;: 1,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;uri&quot;
+              }
+            ]
+          }
+        ],
+        &quot;fixedUri&quot;: &quot;response&quot;,
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;short&quot;: &quot;Value of extension&quot;,
+        &quot;definition&quot;: &quot;Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.value[x]&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Attachment&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.value[x].id&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x].id&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;Unique id for inter-element referencing&quot;,
+        &quot;definition&quot;: &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.id&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;string&quot;
+              }
+            ]
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.value[x].extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x].extension&quot;,
+        &quot;slicing&quot;: {
+          &quot;discriminator&quot;: [
+            {
+              &quot;type&quot;: &quot;value&quot;,
+              &quot;path&quot;: &quot;url&quot;
+            }
+          ],
+          &quot;description&quot;: &quot;Extensions are always sliced by (at least) url&quot;,
+          &quot;rules&quot;: &quot;open&quot;
+        },
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;*&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.value[x].contentType&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x].contentType&quot;,
+        &quot;short&quot;: &quot;Mime type of the content, with charset etc.&quot;,
+        &quot;definition&quot;: &quot;Identifies the type of the data in the attachment and allows a method to be chosen to interpret or render the data. Includes mime type parameters such as charset where appropriate.&quot;,
+        &quot;requirements&quot;: &quot;Processors of the data need to be able to know how to interpret the data.&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Attachment.contentType&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;code&quot;
+          }
+        ],
+        &quot;example&quot;: [
+          {
+            &quot;label&quot;: &quot;General&quot;,
+            &quot;valueCode&quot;: &quot;text/plain; charset=UTF-8, image/png&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: true,
+        &quot;binding&quot;: {
+          &quot;extension&quot;: [
+            {
+              &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/elementdefinition-bindingName&quot;,
+              &quot;valueString&quot;: &quot;MimeType&quot;
+            },
+            {
+              &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/elementdefinition-isCommonBinding&quot;,
+              &quot;valueBoolean&quot;: true
+            }
+          ],
+          &quot;strength&quot;: &quot;required&quot;,
+          &quot;description&quot;: &quot;The mime type of an attachment. Any valid mime type is allowed.&quot;,
+          &quot;valueSet&quot;: &quot;http://hl7.org/fhir/ValueSet/mimetypes|4.0.1&quot;
+        },
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;v2&quot;,
+            &quot;map&quot;: &quot;ED.2+ED.3/RP.2+RP.3. Note conversion may be needed if old style values are being used&quot;
+          },
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;./mediaType, ./charset&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.value[x].language&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x].language&quot;,
+        &quot;short&quot;: &quot;Human language of the content (BCP-47)&quot;,
+        &quot;definition&quot;: &quot;The human language of the content. The value can be any valid value according to BCP 47.&quot;,
+        &quot;requirements&quot;: &quot;Users need to be able to choose between the languages in a set of attachments.&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Attachment.language&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;code&quot;
+          }
+        ],
+        &quot;example&quot;: [
+          {
+            &quot;label&quot;: &quot;General&quot;,
+            &quot;valueCode&quot;: &quot;en-AU&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: true,
+        &quot;binding&quot;: {
+          &quot;extension&quot;: [
+            {
+              &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/elementdefinition-maxValueSet&quot;,
+              &quot;valueCanonical&quot;: &quot;http://hl7.org/fhir/ValueSet/all-languages&quot;
+            },
+            {
+              &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/elementdefinition-bindingName&quot;,
+              &quot;valueString&quot;: &quot;Language&quot;
+            },
+            {
+              &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/elementdefinition-isCommonBinding&quot;,
+              &quot;valueBoolean&quot;: true
+            }
+          ],
+          &quot;strength&quot;: &quot;preferred&quot;,
+          &quot;description&quot;: &quot;A human language.&quot;,
+          &quot;valueSet&quot;: &quot;http://hl7.org/fhir/ValueSet/languages&quot;
+        },
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;./language&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.value[x].data&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x].data&quot;,
+        &quot;short&quot;: &quot;Data inline, base64ed&quot;,
+        &quot;definition&quot;: &quot;The actual data of the attachment - a sequence of bytes, base64 encoded.&quot;,
+        &quot;comment&quot;: &quot;The base64-encoded data SHALL be expressed in the same character set as the base resource XML or JSON.&quot;,
+        &quot;requirements&quot;: &quot;The data needs to able to be transmitted inline.&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Attachment.data&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;base64Binary&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;v2&quot;,
+            &quot;map&quot;: &quot;ED.5&quot;
+          },
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;./data&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.value[x].url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x].url&quot;,
+        &quot;short&quot;: &quot;Uri where the data can be found&quot;,
+        &quot;definition&quot;: &quot;A location where the data can be accessed.&quot;,
+        &quot;comment&quot;: &quot;If both data and url are provided, the url SHALL point to the same content as the data contains. Urls may be relative references or may reference transient locations such as a wrapping envelope using cid: though this has ramifications for using signatures. Relative URLs are interpreted relative to the service url, like a resource reference, rather than relative to the resource itself. If a URL is provided, it SHALL resolve to actual data.&quot;,
+        &quot;requirements&quot;: &quot;The data needs to be transmitted by reference.&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Attachment.url&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;url&quot;
+          }
+        ],
+        &quot;example&quot;: [
+          {
+            &quot;label&quot;: &quot;General&quot;,
+            &quot;valueUrl&quot;: &quot;http://www.acme.com/logo-small.png&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: true,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;v2&quot;,
+            &quot;map&quot;: &quot;RP.1+RP.2 - if they refer to a URL (see v2.6)&quot;
+          },
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;./reference/literal&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.value[x].size&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x].size&quot;,
+        &quot;short&quot;: &quot;Number of bytes of content (if url provided)&quot;,
+        &quot;definition&quot;: &quot;The number of bytes of data that make up this attachment (before base64 encoding, if that is done).&quot;,
+        &quot;comment&quot;: &quot;The number of bytes is redundant if the data is provided as a base64binary, but is useful if the data is provided as a url reference.&quot;,
+        &quot;requirements&quot;: &quot;Representing the size allows applications to determine whether they should fetch the content automatically in advance, or refuse to fetch it at all.&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Attachment.size&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;unsignedInt&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: true,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A (needs data type R3 proposal)&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.value[x].hash&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x].hash&quot;,
+        &quot;short&quot;: &quot;Hash of the data (sha-1, base64ed)&quot;,
+        &quot;definition&quot;: &quot;The calculated hash of the data using SHA-1. Represented using base64.&quot;,
+        &quot;comment&quot;: &quot;The hash is calculated on the data prior to base64 encoding, if the data is based64 encoded. The hash is not intended to support digital signatures. Where protection against malicious threats a digital signature should be considered, see [Provenance.signature](provenance-definitions.html#Provenance.signature) for mechanism to protect a resource with a digital signature.&quot;,
+        &quot;requirements&quot;: &quot;Included so that applications can verify that the contents of a location have not changed due to technical failures (e.g., storage rot, transport glitch, incorrect version).&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Attachment.hash&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;base64Binary&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: true,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;.integrityCheck[parent::ED/integrityCheckAlgorithm=\&quot;SHA-1\&quot;]&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.value[x].title&quot;,
+        &quot;extension&quot;: [
+          {
+            &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable&quot;,
+            &quot;valueBoolean&quot;: true
+          }
+        ],
+        &quot;path&quot;: &quot;Extension.extension.value[x].title&quot;,
+        &quot;short&quot;: &quot;Label to display in place of the data&quot;,
+        &quot;definition&quot;: &quot;A label or set of text to display in place of the data.&quot;,
+        &quot;requirements&quot;: &quot;Applications need a label to display to a human user in place of the actual data if the data cannot be rendered or perceived by the viewer.&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Attachment.title&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;example&quot;: [
+          {
+            &quot;label&quot;: &quot;General&quot;,
+            &quot;valueString&quot;: &quot;Official Corporate Logo&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: true,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;./title/data&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.value[x].creation&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x].creation&quot;,
+        &quot;short&quot;: &quot;Date attachment was first created&quot;,
+        &quot;definition&quot;: &quot;The date that the attachment was first created.&quot;,
+        &quot;requirements&quot;: &quot;This is often tracked as an integrity issue for use of the attachment.&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Attachment.creation&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;dateTime&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: true,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A (needs data type R3 proposal)&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:returnedInstitution&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;returnedInstitution&quot;,
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;*&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:returnedInstitution.id&quot;,
+        &quot;path&quot;: &quot;Extension.extension.id&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;Unique id for inter-element referencing&quot;,
+        &quot;definition&quot;: &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.id&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;string&quot;
+              }
+            ]
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:returnedInstitution.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;slicing&quot;: {
+          &quot;discriminator&quot;: [
+            {
+              &quot;type&quot;: &quot;value&quot;,
+              &quot;path&quot;: &quot;url&quot;
+            }
+          ],
+          &quot;description&quot;: &quot;Extensions are always sliced by (at least) url&quot;,
+          &quot;rules&quot;: &quot;open&quot;
+        },
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;0&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:returnedInstitution.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;identifies the meaning of the extension&quot;,
+        &quot;definition&quot;: &quot;Source of the definition for the extension code - a logical name or a URL.&quot;,
+        &quot;comment&quot;: &quot;The definition may point directly to a computable or human-readable definition of the extensibility codes, or it may be a logical URI as declared in some other specification. The definition SHALL be a URI for the Structure Definition defining the extension.&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.url&quot;,
+          &quot;min&quot;: 1,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;uri&quot;
+              }
+            ]
+          }
+        ],
+        &quot;fixedUri&quot;: &quot;returnedInstitution&quot;,
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:returnedInstitution.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;short&quot;: &quot;Value of extension&quot;,
+        &quot;definition&quot;: &quot;Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.value[x]&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;CodeableConcept&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:effectiveInstitution&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;effectiveInstitution&quot;,
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;*&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:effectiveInstitution.id&quot;,
+        &quot;path&quot;: &quot;Extension.extension.id&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;Unique id for inter-element referencing&quot;,
+        &quot;definition&quot;: &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.id&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;string&quot;
+              }
+            ]
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:effectiveInstitution.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;slicing&quot;: {
+          &quot;discriminator&quot;: [
+            {
+              &quot;type&quot;: &quot;value&quot;,
+              &quot;path&quot;: &quot;url&quot;
+            }
+          ],
+          &quot;description&quot;: &quot;Extensions are always sliced by (at least) url&quot;,
+          &quot;rules&quot;: &quot;open&quot;
+        },
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;0&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:effectiveInstitution.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;identifies the meaning of the extension&quot;,
+        &quot;definition&quot;: &quot;Source of the definition for the extension code - a logical name or a URL.&quot;,
+        &quot;comment&quot;: &quot;The definition may point directly to a computable or human-readable definition of the extensibility codes, or it may be a logical URI as declared in some other specification. The definition SHALL be a URI for the Structure Definition defining the extension.&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.url&quot;,
+          &quot;min&quot;: 1,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;uri&quot;
+              }
+            ]
+          }
+        ],
+        &quot;fixedUri&quot;: &quot;effectiveInstitution&quot;,
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:effectiveInstitution.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;short&quot;: &quot;Value of extension&quot;,
+        &quot;definition&quot;: &quot;Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.value[x]&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;CodeableConcept&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:defaultApplied&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;defaultApplied&quot;,
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:defaultApplied.id&quot;,
+        &quot;path&quot;: &quot;Extension.extension.id&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;Unique id for inter-element referencing&quot;,
+        &quot;definition&quot;: &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.id&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;string&quot;
+              }
+            ]
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:defaultApplied.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;slicing&quot;: {
+          &quot;discriminator&quot;: [
+            {
+              &quot;type&quot;: &quot;value&quot;,
+              &quot;path&quot;: &quot;url&quot;
+            }
+          ],
+          &quot;description&quot;: &quot;Extensions are always sliced by (at least) url&quot;,
+          &quot;rules&quot;: &quot;open&quot;
+        },
+        &quot;short&quot;: &quot;Additional content defined by implementations&quot;,
+        &quot;definition&quot;: &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+        &quot;comment&quot;: &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;alias&quot;: [
+          &quot;extensions&quot;,
+          &quot;user content&quot;
+        ],
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;0&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Element.extension&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;*&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          },
+          {
+            &quot;key&quot;: &quot;ext-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Must have either extensions or value[x], not both&quot;,
+            &quot;expression&quot;: &quot;extension.exists() != value.exists()&quot;,
+            &quot;xpath&quot;: &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), \&quot;value\&quot;)])&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;n/a&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:defaultApplied.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;identifies the meaning of the extension&quot;,
+        &quot;definition&quot;: &quot;Source of the definition for the extension code - a logical name or a URL.&quot;,
+        &quot;comment&quot;: &quot;The definition may point directly to a computable or human-readable definition of the extensibility codes, or it may be a logical URI as declared in some other specification. The definition SHALL be a URI for the Structure Definition defining the extension.&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.url&quot;,
+          &quot;min&quot;: 1,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;uri&quot;
+              }
+            ]
+          }
+        ],
+        &quot;fixedUri&quot;: &quot;defaultApplied&quot;,
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:defaultApplied.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;short&quot;: &quot;Value of extension&quot;,
+        &quot;definition&quot;: &quot;Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.value[x]&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;boolean&quot;
+          }
+        ],
+        &quot;patternBoolean&quot;: false,
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.url&quot;,
+        &quot;path&quot;: &quot;Extension.url&quot;,
+        &quot;representation&quot;: [
+          &quot;xmlAttr&quot;
+        ],
+        &quot;short&quot;: &quot;identifies the meaning of the extension&quot;,
+        &quot;definition&quot;: &quot;Source of the definition for the extension code - a logical name or a URL.&quot;,
+        &quot;comment&quot;: &quot;The definition may point directly to a computable or human-readable definition of the extensibility codes, or it may be a logical URI as declared in some other specification. The definition SHALL be a URI for the Structure Definition defining the extension.&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.url&quot;,
+          &quot;min&quot;: 1,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;http://hl7.org/fhirpath/System.String&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type&quot;,
+                &quot;valueUrl&quot;: &quot;uri&quot;
+              }
+            ]
+          }
+        ],
+        &quot;fixedUri&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence&quot;,
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.value[x]&quot;,
+        &quot;short&quot;: &quot;Value of extension&quot;,
+        &quot;definition&quot;: &quot;Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;0&quot;,
+        &quot;base&quot;: {
+          &quot;path&quot;: &quot;Extension.value[x]&quot;,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: &quot;1&quot;
+        },
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;base64Binary&quot;
+          },
+          {
+            &quot;code&quot;: &quot;boolean&quot;
+          },
+          {
+            &quot;code&quot;: &quot;canonical&quot;
+          },
+          {
+            &quot;code&quot;: &quot;code&quot;
+          },
+          {
+            &quot;code&quot;: &quot;date&quot;
+          },
+          {
+            &quot;code&quot;: &quot;dateTime&quot;
+          },
+          {
+            &quot;code&quot;: &quot;decimal&quot;
+          },
+          {
+            &quot;code&quot;: &quot;id&quot;
+          },
+          {
+            &quot;code&quot;: &quot;instant&quot;
+          },
+          {
+            &quot;code&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;code&quot;: &quot;markdown&quot;
+          },
+          {
+            &quot;code&quot;: &quot;oid&quot;
+          },
+          {
+            &quot;code&quot;: &quot;positiveInt&quot;
+          },
+          {
+            &quot;code&quot;: &quot;string&quot;
+          },
+          {
+            &quot;code&quot;: &quot;time&quot;
+          },
+          {
+            &quot;code&quot;: &quot;unsignedInt&quot;
+          },
+          {
+            &quot;code&quot;: &quot;uri&quot;
+          },
+          {
+            &quot;code&quot;: &quot;url&quot;
+          },
+          {
+            &quot;code&quot;: &quot;uuid&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Address&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Age&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Annotation&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Attachment&quot;
+          },
+          {
+            &quot;code&quot;: &quot;CodeableConcept&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Coding&quot;
+          },
+          {
+            &quot;code&quot;: &quot;ContactPoint&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Count&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Distance&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Duration&quot;
+          },
+          {
+            &quot;code&quot;: &quot;HumanName&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Identifier&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Money&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Period&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Quantity&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Range&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Ratio&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Reference&quot;
+          },
+          {
+            &quot;code&quot;: &quot;SampledData&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Signature&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Timing&quot;
+          },
+          {
+            &quot;code&quot;: &quot;ContactDetail&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Contributor&quot;
+          },
+          {
+            &quot;code&quot;: &quot;DataRequirement&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Expression&quot;
+          },
+          {
+            &quot;code&quot;: &quot;ParameterDefinition&quot;
+          },
+          {
+            &quot;code&quot;: &quot;RelatedArtifact&quot;
+          },
+          {
+            &quot;code&quot;: &quot;TriggerDefinition&quot;
+          },
+          {
+            &quot;code&quot;: &quot;UsageContext&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Dosage&quot;
+          },
+          {
+            &quot;code&quot;: &quot;Meta&quot;
+          }
+        ],
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;ele-1&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;All FHIR elements must have a @value or children&quot;,
+            &quot;expression&quot;: &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+            &quot;xpath&quot;: &quot;@value|f:*|h:div&quot;,
+            &quot;source&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Element&quot;
+          }
+        ],
+        &quot;isModifier&quot;: false,
+        &quot;isSummary&quot;: false,
+        &quot;mapping&quot;: [
+          {
+            &quot;identity&quot;: &quot;rim&quot;,
+            &quot;map&quot;: &quot;N/A&quot;
+          }
+        ]
+      }
+    ]
+  },
+  &quot;differential&quot;: {
+    &quot;element&quot;: [
+      {
+        &quot;id&quot;: &quot;Extension&quot;,
+        &quot;path&quot;: &quot;Extension&quot;,
+        &quot;short&quot;: &quot;Evidencia de validacion de CURP y derechohabiencia en la reclamacion&quot;,
+        &quot;definition&quot;: &quot;Evidencia de consulta y verificacion central a fecha del servicio. Una respuesta aportada por el prestador no determina responsabilidad financiera. Namespace de trabajo; hash sintetico no autentica una consulta.&quot;,
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;sus-dh-default&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Sin instituciones retornadas no se asigna una institucion efectiva.&quot;,
+            &quot;expression&quot;: &quot;extension.where(url=&#x27;returnedInstitution&#x27;).empty() implies extension.where(url=&#x27;effectiveInstitution&#x27;).empty()&quot;,
+            &quot;source&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence&quot;
+          },
+          {
+            &quot;key&quot;: &quot;sus-dh-no-default&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Con instituciones retornadas no se aplica el valor por defecto.&quot;,
+            &quot;expression&quot;: &quot;extension.where(url=&#x27;returnedInstitution&#x27;).exists() implies (extension.where(url=&#x27;defaultApplied&#x27;).value = false)&quot;,
+            &quot;source&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;min&quot;: 8
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curp&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;curp&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curp.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curp.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;curp&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curp.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;string&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curpValidated&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;curpValidated&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curpValidated.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curpValidated.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;curpValidated&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curpValidated.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;boolean&quot;
+          }
+        ],
+        &quot;patternBoolean&quot;: true
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queryStatus&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;queryStatus&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queryStatus.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queryStatus.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;queryStatus&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queryStatus.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;code&quot;
+          }
+        ],
+        &quot;patternCode&quot;: &quot;complete&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:sourceSystem&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;sourceSystem&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:sourceSystem.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:sourceSystem.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;sourceSystem&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:sourceSystem.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;uri&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queriedAt&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;queriedAt&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queriedAt.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queriedAt.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;queriedAt&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queriedAt.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;dateTime&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:consultationHash&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;consultationHash&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:consultationHash.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:consultationHash.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;consultationHash&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:consultationHash.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;string&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;response&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;response&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Attachment&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.value[x].contentType&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x].contentType&quot;,
+        &quot;min&quot;: 1
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.value[x].data&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x].data&quot;,
+        &quot;min&quot;: 1
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:returnedInstitution&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;returnedInstitution&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;*&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:returnedInstitution.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:returnedInstitution.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;returnedInstitution&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:returnedInstitution.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;CodeableConcept&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:effectiveInstitution&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;effectiveInstitution&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;*&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:effectiveInstitution.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:effectiveInstitution.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;effectiveInstitution&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:effectiveInstitution.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;CodeableConcept&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:defaultApplied&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;defaultApplied&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:defaultApplied.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:defaultApplied.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;defaultApplied&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:defaultApplied.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;boolean&quot;
+          }
+        ],
+        &quot;patternBoolean&quot;: false
+      },
+      {
+        &quot;id&quot;: &quot;Extension.url&quot;,
+        &quot;path&quot;: &quot;Extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.value[x]&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      }
+    ]
+  }
+}</pre></main></body></html>

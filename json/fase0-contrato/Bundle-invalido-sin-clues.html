@@ -1,0 +1,407 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../../assets/styles.css"><title>Bundle-invalido-sin-clues</title></head><body><main><a href="../../ejemplos.html">Volver a ejemplos</a> · <a download href="Bundle-invalido-sin-clues.json">Descargar JSON</a><h1>Bundle-invalido-sin-clues</h1><p>Contrato propuesto Fase 0 · 2026-10-12-contract. Datos, hashes y tarifa de ejemplo sinteticos. No aprobacion de la Secretaria.</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere;background:#f6f6f6;color:#222;padding:20px">{
+  &quot;resourceType&quot;: &quot;Bundle&quot;,
+  &quot;type&quot;: &quot;collection&quot;,
+  &quot;identifier&quot;: {
+    &quot;system&quot;: &quot;https://example.invalid/prestador/sistema&quot;,
+    &quot;value&quot;: &quot;TX-primera-vez-001&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-10-12T09:31:00-06:00&quot;,
+  &quot;entry&quot;: [
+    {
+      &quot;fullUrl&quot;: &quot;urn:uuid:b59b1ee2-3071-5844-9437-c2e714b7b5a5&quot;,
+      &quot;resource&quot;: {
+        &quot;resourceType&quot;: &quot;Patient&quot;,
+        &quot;active&quot;: true,
+        &quot;identifier&quot;: [
+          {
+            &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/NamingSystem/curp&quot;,
+            &quot;value&quot;: &quot;GODE561231HDFABC09&quot;
+          }
+        ],
+        &quot;name&quot;: [
+          {
+            &quot;use&quot;: &quot;usual&quot;,
+            &quot;given&quot;: [
+              &quot;Pedro&quot;
+            ],
+            &quot;family&quot;: &quot;Perez&quot;
+          }
+        ],
+        &quot;birthDate&quot;: &quot;1956-12-31&quot;,
+        &quot;meta&quot;: {
+          &quot;profile&quot;: [
+            &quot;https://fhir.sus-rda-mx.local/StructureDefinition/fase0-patient|2026-10-12-contract&quot;
+          ]
+        }
+      }
+    },
+    {
+      &quot;fullUrl&quot;: &quot;urn:uuid:1465aa55-41f5-5747-a5c7-0c929294e85d&quot;,
+      &quot;resource&quot;: {
+        &quot;resourceType&quot;: &quot;Organization&quot;,
+        &quot;active&quot;: true,
+        &quot;identifier&quot;: [
+          {
+            &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo&quot;,
+            &quot;value&quot;: &quot;PRESTADOR-DEMO&quot;
+          }
+        ],
+        &quot;name&quot;: &quot;Institución prestadora sintética&quot;
+      }
+    },
+    {
+      &quot;fullUrl&quot;: &quot;urn:uuid:910c5b5e-a595-573f-a714-27ea66daedf4&quot;,
+      &quot;resource&quot;: {
+        &quot;resourceType&quot;: &quot;Organization&quot;,
+        &quot;active&quot;: true,
+        &quot;identifier&quot;: [
+          {
+            &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo&quot;,
+            &quot;value&quot;: &quot;IMSS&quot;
+          }
+        ],
+        &quot;name&quot;: &quot;IMSS (derechohabiencia sintetica; no insurer inicial)&quot;
+      }
+    },
+    {
+      &quot;fullUrl&quot;: &quot;urn:uuid:bfbfa3d6-e2dd-5be1-8e91-d566f6283a92&quot;,
+      &quot;resource&quot;: {
+        &quot;resourceType&quot;: &quot;Location&quot;,
+        &quot;status&quot;: &quot;active&quot;,
+        &quot;name&quot;: &quot;Unidad de ejemplo con CLUES de la muestra; evento sintetico&quot;,
+        &quot;managingOrganization&quot;: {
+          &quot;reference&quot;: &quot;urn:uuid:1465aa55-41f5-5747-a5c7-0c929294e85d&quot;
+        },
+        &quot;description&quot;: &quot;CLUES: Orden1 fila 2177; no prueba de atencion real ni adscripcion institucional.&quot;,
+        &quot;meta&quot;: {
+          &quot;profile&quot;: [
+            &quot;https://fhir.sus-rda-mx.local/StructureDefinition/fase0-location|2026-10-12-contract&quot;
+          ]
+        }
+      }
+    },
+    {
+      &quot;fullUrl&quot;: &quot;urn:uuid:d74b494b-02cb-51a6-b709-2057ec671206&quot;,
+      &quot;resource&quot;: {
+        &quot;resourceType&quot;: &quot;Coverage&quot;,
+        &quot;status&quot;: &quot;active&quot;,
+        &quot;beneficiary&quot;: {
+          &quot;reference&quot;: &quot;urn:uuid:b59b1ee2-3071-5844-9437-c2e714b7b5a5&quot;
+        },
+        &quot;payor&quot;: [
+          {
+            &quot;reference&quot;: &quot;urn:uuid:910c5b5e-a595-573f-a714-27ea66daedf4&quot;
+          }
+        ],
+        &quot;period&quot;: {
+          &quot;start&quot;: &quot;2026-01-01&quot;,
+          &quot;end&quot;: &quot;2026-12-31&quot;
+        }
+      }
+    },
+    {
+      &quot;fullUrl&quot;: &quot;urn:uuid:5c01df49-7ee7-5c08-a214-904942c01a62&quot;,
+      &quot;resource&quot;: {
+        &quot;resourceType&quot;: &quot;Encounter&quot;,
+        &quot;identifier&quot;: [
+          {
+            &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/NamingSystem/folio-atencion-demo&quot;,
+            &quot;value&quot;: &quot;FOLIO-primera-vez&quot;
+          }
+        ],
+        &quot;status&quot;: &quot;finished&quot;,
+        &quot;class&quot;: {
+          &quot;system&quot;: &quot;http://terminology.hl7.org/CodeSystem/v3-ActCode&quot;,
+          &quot;code&quot;: &quot;AMB&quot;
+        },
+        &quot;subject&quot;: {
+          &quot;reference&quot;: &quot;urn:uuid:b59b1ee2-3071-5844-9437-c2e714b7b5a5&quot;
+        },
+        &quot;serviceProvider&quot;: {
+          &quot;reference&quot;: &quot;urn:uuid:1465aa55-41f5-5747-a5c7-0c929294e85d&quot;
+        },
+        &quot;location&quot;: [
+          {
+            &quot;location&quot;: {
+              &quot;reference&quot;: &quot;urn:uuid:bfbfa3d6-e2dd-5be1-8e91-d566f6283a92&quot;
+            }
+          }
+        ],
+        &quot;period&quot;: {
+          &quot;start&quot;: &quot;2026-10-12T09:00:00-06:00&quot;,
+          &quot;end&quot;: &quot;2026-10-12T09:30:00-06:00&quot;
+        },
+        &quot;diagnosis&quot;: [
+          {
+            &quot;condition&quot;: {
+              &quot;reference&quot;: &quot;urn:uuid:daf90a86-6639-5b10-b9c0-494a2c2e1ef8&quot;
+            },
+            &quot;rank&quot;: 1
+          }
+        ],
+        &quot;meta&quot;: {
+          &quot;profile&quot;: [
+            &quot;https://fhir.sus-rda-mx.local/StructureDefinition/fase0-encounter|2026-10-12-contract&quot;
+          ]
+        },
+        &quot;extension&quot;: [
+          {
+            &quot;url&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/fase0-clues-snapshot&quot;,
+            &quot;valueIdentifier&quot;: {
+              &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/NamingSystem/clues-working&quot;,
+              &quot;value&quot;: &quot;NLHUN000043&quot;
+            }
+          }
+        ]
+      }
+    },
+    {
+      &quot;fullUrl&quot;: &quot;urn:uuid:daf90a86-6639-5b10-b9c0-494a2c2e1ef8&quot;,
+      &quot;resource&quot;: {
+        &quot;resourceType&quot;: &quot;Condition&quot;,
+        &quot;clinicalStatus&quot;: {
+          &quot;coding&quot;: [
+            {
+              &quot;system&quot;: &quot;http://terminology.hl7.org/CodeSystem/condition-clinical&quot;,
+              &quot;code&quot;: &quot;active&quot;
+            }
+          ]
+        },
+        &quot;code&quot;: {
+          &quot;coding&quot;: [
+            {
+              &quot;system&quot;: &quot;http://hl7.org/fhir/sid/icd-10&quot;,
+              &quot;code&quot;: &quot;J44.9&quot;
+            }
+          ],
+          &quot;text&quot;: &quot;EPOC no especificada&quot;
+        },
+        &quot;subject&quot;: {
+          &quot;reference&quot;: &quot;urn:uuid:b59b1ee2-3071-5844-9437-c2e714b7b5a5&quot;
+        },
+        &quot;encounter&quot;: {
+          &quot;reference&quot;: &quot;urn:uuid:5c01df49-7ee7-5c08-a214-904942c01a62&quot;
+        }
+      }
+    },
+    {
+      &quot;fullUrl&quot;: &quot;urn:uuid:240ef0d0-ed5e-5deb-8fe8-a5e5951fadc0&quot;,
+      &quot;resource&quot;: {
+        &quot;resourceType&quot;: &quot;Claim&quot;,
+        &quot;identifier&quot;: [
+          {
+            &quot;system&quot;: &quot;https://example.invalid/prestador/sistema&quot;,
+            &quot;value&quot;: &quot;TX-primera-vez-001&quot;
+          }
+        ],
+        &quot;status&quot;: &quot;active&quot;,
+        &quot;type&quot;: {
+          &quot;coding&quot;: [
+            {
+              &quot;system&quot;: &quot;http://terminology.hl7.org/CodeSystem/claim-type&quot;,
+              &quot;code&quot;: &quot;professional&quot;
+            }
+          ]
+        },
+        &quot;use&quot;: &quot;claim&quot;,
+        &quot;patient&quot;: {
+          &quot;reference&quot;: &quot;urn:uuid:b59b1ee2-3071-5844-9437-c2e714b7b5a5&quot;
+        },
+        &quot;created&quot;: &quot;2026-10-12T09:31:00-06:00&quot;,
+        &quot;provider&quot;: {
+          &quot;reference&quot;: &quot;urn:uuid:1465aa55-41f5-5747-a5c7-0c929294e85d&quot;
+        },
+        &quot;priority&quot;: {
+          &quot;coding&quot;: [
+            {
+              &quot;system&quot;: &quot;http://terminology.hl7.org/CodeSystem/processpriority&quot;,
+              &quot;code&quot;: &quot;normal&quot;
+            }
+          ]
+        },
+        &quot;insurance&quot;: [
+          {
+            &quot;sequence&quot;: 1,
+            &quot;focal&quot;: true,
+            &quot;coverage&quot;: {
+              &quot;reference&quot;: &quot;urn:uuid:d74b494b-02cb-51a6-b709-2057ec671206&quot;
+            }
+          }
+        ],
+        &quot;item&quot;: [
+          {
+            &quot;sequence&quot;: 1,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id&quot;,
+                &quot;valueIdentifier&quot;: {
+                  &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/NamingSystem/linea-demo&quot;,
+                  &quot;value&quot;: &quot;LINEA-primera-vez-001&quot;
+                }
+              }
+            ],
+            &quot;productOrService&quot;: {
+              &quot;coding&quot;: [
+                {
+                  &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/CodeSystem/sus-fase0-service-working&quot;,
+                  &quot;version&quot;: &quot;2026-10-12-working&quot;,
+                  &quot;code&quot;: &quot;890201&quot;,
+                  &quot;display&quot;: &quot;CONSULTA DE PRIMERA VEZ POR MEDICINA GENERAL&quot;
+                }
+              ],
+              &quot;text&quot;: &quot;CONSULTA DE PRIMERA VEZ POR MEDICINA GENERAL&quot;
+            },
+            &quot;quantity&quot;: {
+              &quot;value&quot;: 1
+            },
+            &quot;encounter&quot;: [
+              {
+                &quot;reference&quot;: &quot;urn:uuid:5c01df49-7ee7-5c08-a214-904942c01a62&quot;
+              }
+            ],
+            &quot;diagnosisSequence&quot;: [
+              1
+            ],
+            &quot;servicedPeriod&quot;: {
+              &quot;start&quot;: &quot;2026-10-12T09:00:00-06:00&quot;,
+              &quot;end&quot;: &quot;2026-10-12T09:30:00-06:00&quot;
+            }
+          }
+        ],
+        &quot;diagnosis&quot;: [
+          {
+            &quot;sequence&quot;: 1,
+            &quot;diagnosisReference&quot;: {
+              &quot;reference&quot;: &quot;urn:uuid:daf90a86-6639-5b10-b9c0-494a2c2e1ef8&quot;
+            }
+          }
+        ],
+        &quot;meta&quot;: {
+          &quot;profile&quot;: [
+            &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-ambulatory-claim|2026-10-12-contract&quot;
+          ]
+        },
+        &quot;extension&quot;: [
+          {
+            &quot;url&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;curp&quot;,
+                &quot;valueString&quot;: &quot;GODE561231HDFABC09&quot;
+              },
+              {
+                &quot;url&quot;: &quot;curpValidated&quot;,
+                &quot;valueBoolean&quot;: true
+              },
+              {
+                &quot;url&quot;: &quot;queryStatus&quot;,
+                &quot;valueCode&quot;: &quot;complete&quot;
+              },
+              {
+                &quot;url&quot;: &quot;sourceSystem&quot;,
+                &quot;valueUri&quot;: &quot;https://example.invalid/crub&quot;
+              },
+              {
+                &quot;url&quot;: &quot;queriedAt&quot;,
+                &quot;valueDateTime&quot;: &quot;2026-10-12T08:30:00-06:00&quot;
+              },
+              {
+                &quot;url&quot;: &quot;consultationHash&quot;,
+                &quot;valueString&quot;: &quot;HASH-SINTETICO-NO-AUTENTICADO&quot;
+              },
+              {
+                &quot;url&quot;: &quot;response&quot;,
+                &quot;valueAttachment&quot;: {
+                  &quot;contentType&quot;: &quot;application/json&quot;,
+                  &quot;data&quot;: &quot;eyJzeW50aGV0aWMiOiB0cnVlLCAiY3VycCI6ICJHT0RFNTYxMjMxSERGQUJDMDkiLCAicXVlcnlTdGF0dXMiOiAiY29tcGxldGUiLCAiY3VycFZhbGlkYXRlZCI6IHRydWUsICJpbnN0aXR1dGlvbnMiOiBbIklNU1MiXSwgInNlcnZpY2VfZGF0ZXRpbWUiOiAiMjAyNi0xMC0xMlQwOTowMDowMC0wNjowMCJ9&quot;,
+                  &quot;title&quot;: &quot;Respuesta ilustrativa: no esquema oficial CRUB&quot;
+                }
+              },
+              {
+                &quot;url&quot;: &quot;defaultApplied&quot;,
+                &quot;valueBoolean&quot;: false
+              },
+              {
+                &quot;url&quot;: &quot;returnedInstitution&quot;,
+                &quot;valueCodeableConcept&quot;: {
+                  &quot;coding&quot;: [
+                    {
+                      &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/CodeSystem/instituciones-fase0-working&quot;,
+                      &quot;code&quot;: &quot;IMSS&quot;
+                    }
+                  ]
+                }
+              },
+              {
+                &quot;url&quot;: &quot;effectiveInstitution&quot;,
+                &quot;valueCodeableConcept&quot;: {
+                  &quot;coding&quot;: [
+                    {
+                      &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/CodeSystem/instituciones-fase0-working&quot;,
+                      &quot;code&quot;: &quot;IMSS&quot;
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            &quot;url&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/fase0-provider-coverage-check&quot;,
+            &quot;extension&quot;: [
+              {
+                &quot;url&quot;: &quot;internalRegistryChecked&quot;,
+                &quot;valueBoolean&quot;: true
+              },
+              {
+                &quot;url&quot;: &quot;crubChecked&quot;,
+                &quot;valueBoolean&quot;: true
+              },
+              {
+                &quot;url&quot;: &quot;providerCovered&quot;,
+                &quot;valueBoolean&quot;: false
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      &quot;fullUrl&quot;: &quot;urn:uuid:eaae114f-c5ed-5fcb-85e8-26659f98627b&quot;,
+      &quot;resource&quot;: {
+        &quot;resourceType&quot;: &quot;Provenance&quot;,
+        &quot;target&quot;: [
+          {
+            &quot;reference&quot;: &quot;urn:uuid:240ef0d0-ed5e-5deb-8fe8-a5e5951fadc0&quot;
+          },
+          {
+            &quot;reference&quot;: &quot;urn:uuid:5c01df49-7ee7-5c08-a214-904942c01a62&quot;
+          }
+        ],
+        &quot;recorded&quot;: &quot;2026-10-12T09:31:00-06:00&quot;,
+        &quot;agent&quot;: [
+          {
+            &quot;who&quot;: {
+              &quot;reference&quot;: &quot;urn:uuid:1465aa55-41f5-5747-a5c7-0c929294e85d&quot;
+            }
+          }
+        ],
+        &quot;entity&quot;: [
+          {
+            &quot;role&quot;: &quot;source&quot;,
+            &quot;what&quot;: {
+              &quot;identifier&quot;: {
+                &quot;system&quot;: &quot;https://example.invalid/prestador/sistema&quot;,
+                &quot;value&quot;: &quot;TX-primera-vez-001&quot;
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  &quot;meta&quot;: {
+    &quot;profile&quot;: [
+      &quot;https://fhir.sus-rda-mx.local/StructureDefinition/fase0-collection|2026-10-12-contract&quot;
+    ]
+  }
+}</pre></main></body></html>

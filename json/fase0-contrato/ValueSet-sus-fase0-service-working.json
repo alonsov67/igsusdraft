@@ -1,0 +1,28 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "SUSFase0ServiceWorkingVS",
+  "id": "sus-fase0-service-working",
+  "title": "Servicios permitidos en el ejemplo Fase 0",
+  "version": "2026-10-12-working",
+  "url": "https://fhir.sus-rda-mx.local/ValueSet/sus-fase0-service-working",
+  "experimental": true,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.sus-rda-mx.local/CodeSystem/sus-fase0-service-working",
+        "concept": [
+          {
+            "code": "890201"
+          },
+          {
+            "code": "890301"
+          },
+          {
+            "code": "993106"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,178 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../../assets/styles.css"><title>Claim-control-hta</title></head><body><main><a href="../../ejemplos.html">Volver a ejemplos</a> · <a download href="Claim-control-hta.json">Descargar JSON</a><h1>Claim-control-hta</h1><p>Contrato propuesto Fase 0 · 2026-10-12-contract. Datos, hashes y tarifa de ejemplo sinteticos. No aprobacion de la Secretaria.</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere;background:#f6f6f6;color:#222;padding:20px">{
+  &quot;resourceType&quot;: &quot;Claim&quot;,
+  &quot;identifier&quot;: [
+    {
+      &quot;system&quot;: &quot;https://example.invalid/prestador/sistema&quot;,
+      &quot;value&quot;: &quot;TX-control-hta-001&quot;
+    }
+  ],
+  &quot;status&quot;: &quot;active&quot;,
+  &quot;type&quot;: {
+    &quot;coding&quot;: [
+      {
+        &quot;system&quot;: &quot;http://terminology.hl7.org/CodeSystem/claim-type&quot;,
+        &quot;code&quot;: &quot;professional&quot;
+      }
+    ]
+  },
+  &quot;use&quot;: &quot;claim&quot;,
+  &quot;patient&quot;: {
+    &quot;reference&quot;: &quot;urn:uuid:73180e85-6b08-5ac7-b0bf-085173ab9c9a&quot;
+  },
+  &quot;created&quot;: &quot;2026-10-12T09:31:00-06:00&quot;,
+  &quot;provider&quot;: {
+    &quot;reference&quot;: &quot;urn:uuid:0fb76c00-5acc-5ad5-bd47-060c7ae35ee5&quot;
+  },
+  &quot;priority&quot;: {
+    &quot;coding&quot;: [
+      {
+        &quot;system&quot;: &quot;http://terminology.hl7.org/CodeSystem/processpriority&quot;,
+        &quot;code&quot;: &quot;normal&quot;
+      }
+    ]
+  },
+  &quot;insurance&quot;: [
+    {
+      &quot;sequence&quot;: 1,
+      &quot;focal&quot;: true,
+      &quot;coverage&quot;: {
+        &quot;reference&quot;: &quot;urn:uuid:c9856909-7cf1-53f7-a92e-4ae6beb391fd&quot;
+      }
+    }
+  ],
+  &quot;item&quot;: [
+    {
+      &quot;sequence&quot;: 1,
+      &quot;extension&quot;: [
+        {
+          &quot;url&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id&quot;,
+          &quot;valueIdentifier&quot;: {
+            &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/NamingSystem/linea-demo&quot;,
+            &quot;value&quot;: &quot;LINEA-control-hta-001&quot;
+          }
+        }
+      ],
+      &quot;productOrService&quot;: {
+        &quot;coding&quot;: [
+          {
+            &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/CodeSystem/sus-fase0-service-working&quot;,
+            &quot;version&quot;: &quot;2026-10-12-working&quot;,
+            &quot;code&quot;: &quot;890301&quot;,
+            &quot;display&quot;: &quot;CONSULTA DE CONTROL O DE SEGUIMIENTO POR MEDICINA GENERAL&quot;
+          }
+        ],
+        &quot;text&quot;: &quot;CONSULTA DE CONTROL O DE SEGUIMIENTO POR MEDICINA GENERAL&quot;
+      },
+      &quot;quantity&quot;: {
+        &quot;value&quot;: 1
+      },
+      &quot;encounter&quot;: [
+        {
+          &quot;reference&quot;: &quot;urn:uuid:1ab305f0-7bde-5fb1-bd1e-e5d52d9ded3d&quot;
+        }
+      ],
+      &quot;diagnosisSequence&quot;: [
+        1
+      ],
+      &quot;servicedPeriod&quot;: {
+        &quot;start&quot;: &quot;2026-10-12T09:00:00-06:00&quot;,
+        &quot;end&quot;: &quot;2026-10-12T09:30:00-06:00&quot;
+      }
+    }
+  ],
+  &quot;diagnosis&quot;: [
+    {
+      &quot;sequence&quot;: 1,
+      &quot;diagnosisReference&quot;: {
+        &quot;reference&quot;: &quot;urn:uuid:9eff3c99-a2de-50d0-a158-c404e92e1691&quot;
+      }
+    }
+  ],
+  &quot;meta&quot;: {
+    &quot;profile&quot;: [
+      &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-ambulatory-claim|2026-10-12-contract&quot;
+    ]
+  },
+  &quot;extension&quot;: [
+    {
+      &quot;url&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence&quot;,
+      &quot;extension&quot;: [
+        {
+          &quot;url&quot;: &quot;curp&quot;,
+          &quot;valueString&quot;: &quot;LOPA700101MDFXXX01&quot;
+        },
+        {
+          &quot;url&quot;: &quot;curpValidated&quot;,
+          &quot;valueBoolean&quot;: true
+        },
+        {
+          &quot;url&quot;: &quot;queryStatus&quot;,
+          &quot;valueCode&quot;: &quot;complete&quot;
+        },
+        {
+          &quot;url&quot;: &quot;sourceSystem&quot;,
+          &quot;valueUri&quot;: &quot;https://example.invalid/crub&quot;
+        },
+        {
+          &quot;url&quot;: &quot;queriedAt&quot;,
+          &quot;valueDateTime&quot;: &quot;2026-10-12T08:30:00-06:00&quot;
+        },
+        {
+          &quot;url&quot;: &quot;consultationHash&quot;,
+          &quot;valueString&quot;: &quot;HASH-SINTETICO-NO-AUTENTICADO&quot;
+        },
+        {
+          &quot;url&quot;: &quot;response&quot;,
+          &quot;valueAttachment&quot;: {
+            &quot;contentType&quot;: &quot;application/json&quot;,
+            &quot;data&quot;: &quot;eyJzeW50aGV0aWMiOiB0cnVlLCAiY3VycCI6ICJMT1BBNzAwMTAxTURGWFhYMDEiLCAicXVlcnlTdGF0dXMiOiAiY29tcGxldGUiLCAiY3VycFZhbGlkYXRlZCI6IHRydWUsICJpbnN0aXR1dGlvbnMiOiBbIklNU1MiXSwgInNlcnZpY2VfZGF0ZXRpbWUiOiAiMjAyNi0xMC0xMlQwOTowMDowMC0wNjowMCJ9&quot;,
+            &quot;title&quot;: &quot;Respuesta ilustrativa: no esquema oficial CRUB&quot;
+          }
+        },
+        {
+          &quot;url&quot;: &quot;defaultApplied&quot;,
+          &quot;valueBoolean&quot;: false
+        },
+        {
+          &quot;url&quot;: &quot;returnedInstitution&quot;,
+          &quot;valueCodeableConcept&quot;: {
+            &quot;coding&quot;: [
+              {
+                &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/CodeSystem/instituciones-fase0-working&quot;,
+                &quot;code&quot;: &quot;IMSS&quot;
+              }
+            ]
+          }
+        },
+        {
+          &quot;url&quot;: &quot;effectiveInstitution&quot;,
+          &quot;valueCodeableConcept&quot;: {
+            &quot;coding&quot;: [
+              {
+                &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/CodeSystem/instituciones-fase0-working&quot;,
+                &quot;code&quot;: &quot;IMSS&quot;
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      &quot;url&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/fase0-provider-coverage-check&quot;,
+      &quot;extension&quot;: [
+        {
+          &quot;url&quot;: &quot;internalRegistryChecked&quot;,
+          &quot;valueBoolean&quot;: true
+        },
+        {
+          &quot;url&quot;: &quot;crubChecked&quot;,
+          &quot;valueBoolean&quot;: true
+        },
+        {
+          &quot;url&quot;: &quot;providerCovered&quot;,
+          &quot;valueBoolean&quot;: false
+        }
+      ]
+    }
+  ]
+}</pre></main></body></html>

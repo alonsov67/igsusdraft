@@ -1,0 +1,167 @@
+{
+  "resourceType": "Claim",
+  "identifier": [
+    {
+      "system": "https://example.invalid/prestador/sistema",
+      "value": "TX-inmunizacion-001"
+    }
+  ],
+  "status": "active",
+  "type": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+        "code": "professional"
+      }
+    ]
+  },
+  "use": "claim",
+  "patient": {
+    "reference": "urn:uuid:36ede33e-0edf-5666-8e12-6cb2717bb590"
+  },
+  "created": "2026-10-12T09:31:00-06:00",
+  "provider": {
+    "reference": "urn:uuid:8e52bf76-a6fc-5d39-a0ab-ae75e3a011a4"
+  },
+  "priority": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/processpriority",
+        "code": "normal"
+      }
+    ]
+  },
+  "insurance": [
+    {
+      "sequence": 1,
+      "focal": true,
+      "coverage": {
+        "reference": "urn:uuid:b94142c2-1f75-5465-8922-afed96cb60df"
+      }
+    }
+  ],
+  "item": [
+    {
+      "sequence": 1,
+      "extension": [
+        {
+          "url": "https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id",
+          "valueIdentifier": {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/linea-demo",
+            "value": "LINEA-inmunizacion-001"
+          }
+        }
+      ],
+      "productOrService": {
+        "coding": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/CodeSystem/sus-fase0-service-working",
+            "version": "2026-10-12-working",
+            "code": "993106",
+            "display": "VACUNACION CONTRA NEUMOCOCO"
+          }
+        ],
+        "text": "VACUNACION CONTRA NEUMOCOCO"
+      },
+      "quantity": {
+        "value": 1
+      },
+      "encounter": [
+        {
+          "reference": "urn:uuid:019f7f8f-1e93-57ae-97f0-4a3b834d96ac"
+        }
+      ],
+      "servicedPeriod": {
+        "start": "2026-10-12T09:00:00-06:00",
+        "end": "2026-10-12T09:30:00-06:00"
+      }
+    }
+  ],
+  "meta": {
+    "profile": [
+      "https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-vaccination-claim|2026-10-12-contract"
+    ]
+  },
+  "extension": [
+    {
+      "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence",
+      "extension": [
+        {
+          "url": "curp",
+          "valueString": "SAMA600303MDFXXX03"
+        },
+        {
+          "url": "curpValidated",
+          "valueBoolean": true
+        },
+        {
+          "url": "queryStatus",
+          "valueCode": "complete"
+        },
+        {
+          "url": "sourceSystem",
+          "valueUri": "https://example.invalid/crub"
+        },
+        {
+          "url": "queriedAt",
+          "valueDateTime": "2026-10-12T08:30:00-06:00"
+        },
+        {
+          "url": "consultationHash",
+          "valueString": "HASH-SINTETICO-NO-AUTENTICADO"
+        },
+        {
+          "url": "response",
+          "valueAttachment": {
+            "contentType": "application/json",
+            "data": "eyJzeW50aGV0aWMiOiB0cnVlLCAiY3VycCI6ICJTQU1BNjAwMzAzTURGWFhYMDMiLCAicXVlcnlTdGF0dXMiOiAiY29tcGxldGUiLCAiY3VycFZhbGlkYXRlZCI6IHRydWUsICJpbnN0aXR1dGlvbnMiOiBbIklNU1MiXSwgInNlcnZpY2VfZGF0ZXRpbWUiOiAiMjAyNi0xMC0xMlQwOTowMDowMC0wNjowMCJ9",
+            "title": "Respuesta ilustrativa: no esquema oficial CRUB"
+          }
+        },
+        {
+          "url": "defaultApplied",
+          "valueBoolean": false
+        },
+        {
+          "url": "returnedInstitution",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "https://fhir.sus-rda-mx.local/CodeSystem/instituciones-fase0-working",
+                "code": "IMSS"
+              }
+            ]
+          }
+        },
+        {
+          "url": "effectiveInstitution",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "https://fhir.sus-rda-mx.local/CodeSystem/instituciones-fase0-working",
+                "code": "IMSS"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "url": "https://fhir.sus-rda-mx.local/StructureDefinition/fase0-provider-coverage-check",
+      "extension": [
+        {
+          "url": "internalRegistryChecked",
+          "valueBoolean": true
+        },
+        {
+          "url": "crubChecked",
+          "valueBoolean": true
+        },
+        {
+          "url": "providerCovered",
+          "valueBoolean": false
+        }
+      ]
+    }
+  ]
+}
