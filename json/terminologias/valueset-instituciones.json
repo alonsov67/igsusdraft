@@ -1,0 +1,30 @@
+{
+  "resourceType": "ValueSet",
+  "id": "instituciones-ejemplo",
+  "url": "https://fhir.sus-rda-mx.local/ValueSet/instituciones-ejemplo",
+  "name": "InstitucionesEjemploVS",
+  "status": "draft",
+  "experimental": true,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.sus-rda-mx.local/CodeSystem/instituciones-ejemplo",
+        "version": "demo-2026-10-12",
+        "concept": [
+          {
+            "code": "IMSS",
+            "display": "IMSS"
+          },
+          {
+            "code": "ISSSTE",
+            "display": "ISSSTE"
+          },
+          {
+            "code": "IMSS-BIENESTAR",
+            "display": "IMSS-BIENESTAR"
+          }
+        ]
+      }
+    ]
+  }
+}

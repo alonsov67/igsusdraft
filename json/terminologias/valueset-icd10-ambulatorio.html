@@ -1,0 +1,30 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../../assets/styles.css"><title>valueset-icd10-ambulatorio</title><style>pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f6f6f6;color:#222}</style></head><body><main><a href="../../terminologias.html">Volver a terminologías</a> · <a href="valueset-icd10-ambulatorio.json" download>Descargar JSON</a><h1>valueset-icd10-ambulatorio</h1><p>Ejemplo ilustrativo. Los fragmentos Patient y Claim muestran únicamente el uso del dato, no recursos completos validados.</p><pre>{
+  "resourceType": "ValueSet",
+  "id": "diagnosticos-ambulatorios-ejemplo",
+  "url": "https://fhir.sus-rda-mx.local/ValueSet/diagnosticos-ambulatorios-ejemplo",
+  "name": "DiagnosticosAmbulatoriosEjemplo",
+  "status": "draft",
+  "experimental": true,
+  "description": "Subconjunto ilustrativo: HTA, diabetes y EPOC. No representa frecuencia estadística ni edición mexicana aprobada.",
+  "compose": {
+    "include": [
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10",
+        "concept": [
+          {
+            "code": "I10",
+            "display": "Essential (primary) hypertension"
+          },
+          {
+            "code": "E11.9",
+            "display": "Type 2 diabetes mellitus without complications"
+          },
+          {
+            "code": "J44.9",
+            "display": "Chronic obstructive pulmonary disease, unspecified"
+          }
+        ]
+      }
+    ]
+  }
+}</pre></main></body></html>

@@ -1,0 +1,10 @@
+{
+  "resourceType": "Patient",
+  "id": "curp-ejemplo",
+  "identifier": [
+    {
+      "system": "https://fhir.sus-rda-mx.local/NamingSystem/curp",
+      "value": "GODE561231HDFABC09"
+    }
+  ]
+}

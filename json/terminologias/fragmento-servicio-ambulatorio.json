@@ -1,0 +1,15 @@
+{
+  "resourceType": "Claim",
+  "id": "fragmento-servicio",
+  "item": [
+    {
+      "sequence": 1,
+      "productOrService": {
+        "text": "Consulta ambulatoria de control de hipertensión"
+      },
+      "quantity": {
+        "value": 1
+      }
+    }
+  ]
+}
