@@ -2,66 +2,52 @@
   &quot;resourceType&quot;: &quot;StructureDefinition&quot;,
   &quot;id&quot;: &quot;sus-fase0-ambulatory-claim&quot;,
   &quot;url&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-ambulatory-claim&quot;,
+  &quot;version&quot;: &quot;0.0.1&quot;,
   &quot;name&quot;: &quot;SUSFase0AmbulatoryClaim&quot;,
   &quot;title&quot;: &quot;Reclamacion inicial ambulatoria Fase 0 (trabajo)&quot;,
   &quot;status&quot;: &quot;draft&quot;,
-  &quot;experimental&quot;: true,
+  &quot;description&quot;: &quot;Recepcion inicial sin institucion responsable resuelta ni soportes clinicos adicionales. Requiere diagnostico en consulta; inmunizacion se define en otro perfil.&quot;,
   &quot;fhirVersion&quot;: &quot;4.0.1&quot;,
   &quot;kind&quot;: &quot;resource&quot;,
   &quot;abstract&quot;: false,
   &quot;type&quot;: &quot;Claim&quot;,
   &quot;baseDefinition&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Claim&quot;,
   &quot;derivation&quot;: &quot;constraint&quot;,
-  &quot;description&quot;: &quot;Recepcion inicial sin insurer ni supportingInfo. Consulta con diagnostico. Perfil especifico de trabajo: no reemplaza silenciosamente SUSCrossCareClaim.&quot;,
   &quot;differential&quot;: {
     &quot;element&quot;: [
       {
-        &quot;id&quot;: &quot;Claim&quot;,
-        &quot;path&quot;: &quot;Claim&quot;
-      },
-      {
         &quot;id&quot;: &quot;Claim.identifier&quot;,
         &quot;path&quot;: &quot;Claim.identifier&quot;,
-        &quot;min&quot;: 1,
-        &quot;max&quot;: &quot;*&quot;
-      },
-      {
-        &quot;id&quot;: &quot;Claim.use&quot;,
-        &quot;path&quot;: &quot;Claim.use&quot;,
-        &quot;min&quot;: 1,
-        &quot;max&quot;: &quot;1&quot;,
-        &quot;fixedCode&quot;: &quot;claim&quot;
+        &quot;min&quot;: 1
       },
       {
         &quot;id&quot;: &quot;Claim.status&quot;,
         &quot;path&quot;: &quot;Claim.status&quot;,
-        &quot;min&quot;: 1,
-        &quot;max&quot;: &quot;1&quot;,
-        &quot;fixedCode&quot;: &quot;active&quot;
+        &quot;patternCode&quot;: &quot;active&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Claim.use&quot;,
+        &quot;path&quot;: &quot;Claim.use&quot;,
+        &quot;patternCode&quot;: &quot;claim&quot;
       },
       {
         &quot;id&quot;: &quot;Claim.insurer&quot;,
         &quot;path&quot;: &quot;Claim.insurer&quot;,
-        &quot;min&quot;: 0,
         &quot;max&quot;: &quot;0&quot;
       },
       {
         &quot;id&quot;: &quot;Claim.supportingInfo&quot;,
         &quot;path&quot;: &quot;Claim.supportingInfo&quot;,
-        &quot;min&quot;: 0,
         &quot;max&quot;: &quot;0&quot;
       },
       {
         &quot;id&quot;: &quot;Claim.diagnosis&quot;,
         &quot;path&quot;: &quot;Claim.diagnosis&quot;,
-        &quot;min&quot;: 1,
-        &quot;max&quot;: &quot;*&quot;
+        &quot;min&quot;: 1
       },
       {
         &quot;id&quot;: &quot;Claim.diagnosis.diagnosis[x]&quot;,
         &quot;path&quot;: &quot;Claim.diagnosis.diagnosis[x]&quot;,
-        &quot;min&quot;: 1,
-        &quot;max&quot;: &quot;1&quot;,
         &quot;type&quot;: [
           {
             &quot;code&quot;: &quot;Reference&quot;,
@@ -74,14 +60,41 @@
       {
         &quot;id&quot;: &quot;Claim.item&quot;,
         &quot;path&quot;: &quot;Claim.item&quot;,
+        &quot;min&quot;: 1
+      },
+      {
+        &quot;id&quot;: &quot;Claim.item.extension&quot;,
+        &quot;path&quot;: &quot;Claim.item.extension&quot;,
+        &quot;slicing&quot;: {
+          &quot;discriminator&quot;: [
+            {
+              &quot;type&quot;: &quot;value&quot;,
+              &quot;path&quot;: &quot;url&quot;
+            }
+          ],
+          &quot;ordered&quot;: false,
+          &quot;rules&quot;: &quot;open&quot;
+        },
+        &quot;min&quot;: 1
+      },
+      {
+        &quot;id&quot;: &quot;Claim.item.extension:serviceLineId&quot;,
+        &quot;path&quot;: &quot;Claim.item.extension&quot;,
+        &quot;sliceName&quot;: &quot;serviceLineId&quot;,
         &quot;min&quot;: 1,
-        &quot;max&quot;: &quot;*&quot;
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;,
+            &quot;profile&quot;: [
+              &quot;https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id&quot;
+            ]
+          }
+        ]
       },
       {
         &quot;id&quot;: &quot;Claim.item.productOrService&quot;,
         &quot;path&quot;: &quot;Claim.item.productOrService&quot;,
-        &quot;min&quot;: 1,
-        &quot;max&quot;: &quot;1&quot;,
         &quot;binding&quot;: {
           &quot;strength&quot;: &quot;required&quot;,
           &quot;valueSet&quot;: &quot;https://fhir.sus-rda-mx.local/ValueSet/sus-fase0-service-working&quot;
@@ -90,8 +103,27 @@
       {
         &quot;id&quot;: &quot;Claim.item.serviced[x]&quot;,
         &quot;path&quot;: &quot;Claim.item.serviced[x]&quot;,
-        &quot;min&quot;: 1,
-        &quot;max&quot;: &quot;1&quot;
+        &quot;min&quot;: 1
+      },
+      {
+        &quot;id&quot;: &quot;Claim.item.quantity&quot;,
+        &quot;path&quot;: &quot;Claim.item.quantity&quot;,
+        &quot;min&quot;: 1
+      },
+      {
+        &quot;id&quot;: &quot;Claim.item.quantity.value&quot;,
+        &quot;path&quot;: &quot;Claim.item.quantity.value&quot;,
+        &quot;min&quot;: 1
+      },
+      {
+        &quot;id&quot;: &quot;Claim.item.unitPrice&quot;,
+        &quot;path&quot;: &quot;Claim.item.unitPrice&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Claim.item.net&quot;,
+        &quot;path&quot;: &quot;Claim.item.net&quot;,
+        &quot;max&quot;: &quot;0&quot;
       },
       {
         &quot;id&quot;: &quot;Claim.item.encounter&quot;,
@@ -100,33 +132,8 @@
         &quot;max&quot;: &quot;1&quot;
       },
       {
-        &quot;id&quot;: &quot;Claim.item.quantity&quot;,
-        &quot;path&quot;: &quot;Claim.item.quantity&quot;,
-        &quot;min&quot;: 1,
-        &quot;max&quot;: &quot;1&quot;
-      },
-      {
-        &quot;id&quot;: &quot;Claim.item.quantity.value&quot;,
-        &quot;path&quot;: &quot;Claim.item.quantity.value&quot;,
-        &quot;min&quot;: 1,
-        &quot;max&quot;: &quot;1&quot;
-      },
-      {
-        &quot;id&quot;: &quot;Claim.item.unitPrice&quot;,
-        &quot;path&quot;: &quot;Claim.item.unitPrice&quot;,
-        &quot;min&quot;: 0,
-        &quot;max&quot;: &quot;0&quot;
-      },
-      {
-        &quot;id&quot;: &quot;Claim.item.net&quot;,
-        &quot;path&quot;: &quot;Claim.item.net&quot;,
-        &quot;min&quot;: 0,
-        &quot;max&quot;: &quot;0&quot;
-      },
-      {
         &quot;id&quot;: &quot;Claim.total&quot;,
         &quot;path&quot;: &quot;Claim.total&quot;,
-        &quot;min&quot;: 0,
         &quot;max&quot;: &quot;0&quot;
       }
     ]

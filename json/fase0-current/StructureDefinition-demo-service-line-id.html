@@ -1,0 +1,62 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../../assets/styles.css"><main><a href="../../demo.html">Volver</a> | <a download href="StructureDefinition-demo-service-line-id.json">Descargar JSON</a><h1>StructureDefinition-demo-service-line-id</h1><p>Fase 0: propuesta de trabajo, datos sinteticos.</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere;background:#f6f6f6;color:#222;padding:20px">{
+  &quot;resourceType&quot;: &quot;StructureDefinition&quot;,
+  &quot;id&quot;: &quot;demo-service-line-id&quot;,
+  &quot;url&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id&quot;,
+  &quot;version&quot;: &quot;0.0.1&quot;,
+  &quot;name&quot;: &quot;SUSFase0ServiceLineId&quot;,
+  &quot;title&quot;: &quot;Identificador de linea compensable Fase 0&quot;,
+  &quot;status&quot;: &quot;draft&quot;,
+  &quot;description&quot;: &quot;Identificador estable de la linea; referencia de trabajo ATE-005. No define la responsabilidad financiera.&quot;,
+  &quot;fhirVersion&quot;: &quot;4.0.1&quot;,
+  &quot;kind&quot;: &quot;complex-type&quot;,
+  &quot;abstract&quot;: false,
+  &quot;context&quot;: [
+    {
+      &quot;expression&quot;: &quot;Claim.item&quot;,
+      &quot;type&quot;: &quot;element&quot;
+    }
+  ],
+  &quot;type&quot;: &quot;Extension&quot;,
+  &quot;baseDefinition&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;,
+  &quot;derivation&quot;: &quot;constraint&quot;,
+  &quot;differential&quot;: {
+    &quot;element&quot;: [
+      {
+        &quot;id&quot;: &quot;Extension&quot;,
+        &quot;path&quot;: &quot;Extension&quot;,
+        &quot;short&quot;: &quot;Identificador de linea compensable Fase 0&quot;,
+        &quot;definition&quot;: &quot;Identificador estable de la linea; referencia de trabajo ATE-005. No define la responsabilidad financiera.&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.url&quot;,
+        &quot;path&quot;: &quot;Extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Identifier&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.value[x].system&quot;,
+        &quot;path&quot;: &quot;Extension.value[x].system&quot;,
+        &quot;min&quot;: 1
+      },
+      {
+        &quot;id&quot;: &quot;Extension.value[x].value&quot;,
+        &quot;path&quot;: &quot;Extension.value[x].value&quot;,
+        &quot;min&quot;: 1
+      }
+    ]
+  }
+}</pre></main></html>

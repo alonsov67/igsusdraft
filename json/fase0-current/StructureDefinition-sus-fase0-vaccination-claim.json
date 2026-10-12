@@ -2,82 +2,121 @@
   "resourceType": "StructureDefinition",
   "id": "sus-fase0-vaccination-claim",
   "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-vaccination-claim",
+  "version": "0.0.1",
   "name": "SUSFase0VaccinationClaim",
   "title": "Reclamacion de prestacion de vacunacion Fase 0 (trabajo)",
   "status": "draft",
-  "experimental": true,
+  "description": "Solo prestacion, sin registro clinico de vacuna, dosis o lote. Diagnostico no requerido.",
   "fhirVersion": "4.0.1",
   "kind": "resource",
   "abstract": false,
   "type": "Claim",
   "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Claim",
   "derivation": "constraint",
-  "description": "Solo prestacion sin dosis, lote o registro clinico. Sin diagnostico.",
   "differential": {
     "element": [
       {
-        "id": "Claim",
-        "path": "Claim"
-      },
-      {
         "id": "Claim.identifier",
         "path": "Claim.identifier",
-        "min": 1,
-        "max": "*"
-      },
-      {
-        "id": "Claim.use",
-        "path": "Claim.use",
-        "min": 1,
-        "max": "1",
-        "fixedCode": "claim"
+        "min": 1
       },
       {
         "id": "Claim.status",
         "path": "Claim.status",
-        "min": 1,
-        "max": "1",
-        "fixedCode": "active"
+        "patternCode": "active"
+      },
+      {
+        "id": "Claim.use",
+        "path": "Claim.use",
+        "patternCode": "claim"
       },
       {
         "id": "Claim.insurer",
         "path": "Claim.insurer",
-        "min": 0,
         "max": "0"
       },
       {
         "id": "Claim.supportingInfo",
         "path": "Claim.supportingInfo",
-        "min": 0,
         "max": "0"
       },
       {
         "id": "Claim.diagnosis",
         "path": "Claim.diagnosis",
-        "min": 0,
         "max": "0"
       },
       {
         "id": "Claim.item",
         "path": "Claim.item",
+        "min": 1
+      },
+      {
+        "id": "Claim.item.extension",
+        "path": "Claim.item.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        },
+        "min": 1
+      },
+      {
+        "id": "Claim.item.extension:serviceLineId",
+        "path": "Claim.item.extension",
+        "sliceName": "serviceLineId",
         "min": 1,
-        "max": "*"
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id"
+            ]
+          }
+        ]
       },
       {
         "id": "Claim.item.productOrService",
         "path": "Claim.item.productOrService",
-        "min": 1,
-        "max": "1",
         "binding": {
           "strength": "required",
           "valueSet": "https://fhir.sus-rda-mx.local/ValueSet/sus-fase0-service-working"
         }
       },
       {
+        "id": "Claim.item.productOrService.coding.code",
+        "path": "Claim.item.productOrService.coding.code",
+        "patternCode": "993106"
+      },
+      {
         "id": "Claim.item.serviced[x]",
         "path": "Claim.item.serviced[x]",
-        "min": 1,
-        "max": "1"
+        "min": 1
+      },
+      {
+        "id": "Claim.item.quantity",
+        "path": "Claim.item.quantity",
+        "min": 1
+      },
+      {
+        "id": "Claim.item.quantity.value",
+        "path": "Claim.item.quantity.value",
+        "min": 1
+      },
+      {
+        "id": "Claim.item.unitPrice",
+        "path": "Claim.item.unitPrice",
+        "max": "0"
+      },
+      {
+        "id": "Claim.item.net",
+        "path": "Claim.item.net",
+        "max": "0"
       },
       {
         "id": "Claim.item.encounter",
@@ -86,39 +125,9 @@
         "max": "1"
       },
       {
-        "id": "Claim.item.quantity",
-        "path": "Claim.item.quantity",
-        "min": 1,
-        "max": "1"
-      },
-      {
-        "id": "Claim.item.quantity.value",
-        "path": "Claim.item.quantity.value",
-        "min": 1,
-        "max": "1"
-      },
-      {
-        "id": "Claim.item.unitPrice",
-        "path": "Claim.item.unitPrice",
-        "min": 0,
-        "max": "0"
-      },
-      {
-        "id": "Claim.item.net",
-        "path": "Claim.item.net",
-        "min": 0,
-        "max": "0"
-      },
-      {
         "id": "Claim.total",
         "path": "Claim.total",
-        "min": 0,
         "max": "0"
-      },
-      {
-        "id": "Claim.item.productOrService.coding.code",
-        "path": "Claim.item.productOrService.coding.code",
-        "fixedCode": "993106"
       }
     ]
   }

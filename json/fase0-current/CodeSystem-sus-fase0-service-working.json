@@ -1,15 +1,13 @@
 {
   "resourceType": "CodeSystem",
-  "id": "sus-fase0-service-working",
-  "url": "https://fhir.sus-rda-mx.local/CodeSystem/sus-fase0-service-working",
-  "version": "2026-10-12-working",
-  "name": "SUSFase0ServiceWorkingCS",
-  "title": "Servicios Fase 0: extracto de trabajo CUBS",
   "status": "draft",
-  "experimental": true,
-  "caseSensitive": true,
   "content": "fragment",
-  "description": "Extracto CUBS de DGMOSS Listado de Terminologias - Acotado (1).xlsm, hoja CUBS - Servicios Ambulatorios, filas 2, 3 y 593. Derivado de CUPS; no aprobacion oficial mexicana.",
+  "name": "SUSFase0ServiceWorkingCS",
+  "id": "sus-fase0-service-working",
+  "title": "Servicios Fase 0: extracto de trabajo CUBS",
+  "description": "Extracto de la hoja CUBS compartida, derivada de CUPS proporcionados por el equipo. Namespace de trabajo, no catalogo oficial mexicano aprobado.",
+  "version": "2026-10-12-working",
+  "url": "https://fhir.sus-rda-mx.local/CodeSystem/sus-fase0-service-working",
   "concept": [
     {
       "code": "890201",
@@ -23,5 +21,7 @@
       "code": "993106",
       "display": "VACUNACION CONTRA NEUMOCOCO"
     }
-  ]
+  ],
+  "experimental": true,
+  "caseSensitive": true
 }

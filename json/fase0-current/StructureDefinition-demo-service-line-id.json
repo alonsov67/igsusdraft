@@ -1,0 +1,62 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "demo-service-line-id",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id",
+  "version": "0.0.1",
+  "name": "SUSFase0ServiceLineId",
+  "title": "Identificador de linea compensable Fase 0",
+  "status": "draft",
+  "description": "Identificador estable de la linea; referencia de trabajo ATE-005. No define la responsabilidad financiera.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Claim.item",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Identificador de linea compensable Fase 0",
+        "definition": "Identificador estable de la linea; referencia de trabajo ATE-005. No define la responsabilidad financiera."
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "min": 1,
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ]
+      },
+      {
+        "id": "Extension.value[x].system",
+        "path": "Extension.value[x].system",
+        "min": 1
+      },
+      {
+        "id": "Extension.value[x].value",
+        "path": "Extension.value[x].value",
+        "min": 1
+      }
+    ]
+  }
+}
