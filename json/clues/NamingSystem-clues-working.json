@@ -1,0 +1,16 @@
+{
+  "resourceType": "NamingSystem",
+  "id": "clues-working",
+  "name": "CLUESWorking",
+  "status": "draft",
+  "kind": "identifier",
+  "date": "2026-10-12",
+  "description": "URI de trabajo para CLUES, pendiente de confirmar con la Secretaria. No es un CodeSystem de establecimientos.",
+  "uniqueId": [
+    {
+      "type": "uri",
+      "value": "https://fhir.sus-rda-mx.local/NamingSystem/clues-working",
+      "preferred": true
+    }
+  ]
+}

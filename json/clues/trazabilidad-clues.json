@@ -1,0 +1,118 @@
+{
+  "source": "CLUES Copia de SINERHIAS_NAC_15092026_muestra.xlsx",
+  "downloadDate": "2026-09-15",
+  "sheet": "Orden1",
+  "sourceRow": 2177,
+  "records": 16959,
+  "uniqueCLUES": 16959,
+  "institutionCodes": {
+    "SSA": 5087,
+    "IMB": 10367,
+    "SME": 351,
+    "CIJ": 101,
+    "DIF": 694,
+    "HUN": 47,
+    "SMM": 145,
+    "FGE": 135,
+    "PJE": 7,
+    "PGR": 12,
+    "ICF": 9,
+    "FGJ": 4
+  },
+  "establishmentTypes": {
+    "HO": 875,
+    "AS": 406,
+    "EA": 1679,
+    "CE": 13999
+  },
+  "sourceStatus": {
+    "1": 16947,
+    "1P": 12
+  },
+  "sample": {
+    "CLUES": "NLHUN000043",
+    "INST": "HUN",
+    "unidad": "SERVICIOS MEDICOS DE LA UANL",
+    "tipoNombre": "DE CONSULTA EXTERNA",
+    "nivel": "PRIMER NIVEL",
+    "entidadCodigo": "19",
+    "entidad": "NUEVO LEON",
+    "municipioCodigo": "039",
+    "municipio": "MONTERREY",
+    "localidadCodigo": "0001",
+    "localidad": "MONTERREY",
+    "jurisdiccionCodigo": "01",
+    "jurisdiccion": "MONTERREY",
+    "tipoCodigo": "CE",
+    "tipologia": 99,
+    "tipologiaSINERHIAS": 99,
+    "estatus": 1
+  },
+  "sheets": [
+    {
+      "name": "Orden1",
+      "rows": 16967,
+      "columns": 67
+    },
+    {
+      "name": "Orden11-1",
+      "rows": 16967,
+      "columns": 108
+    },
+    {
+      "name": "Orden11-2",
+      "rows": 16967,
+      "columns": 108
+    },
+    {
+      "name": "Orden11-3",
+      "rows": 16967,
+      "columns": 108
+    },
+    {
+      "name": "Orden2-1",
+      "rows": 16967,
+      "columns": 108
+    },
+    {
+      "name": "Orden2-2",
+      "rows": 16967,
+      "columns": 108
+    },
+    {
+      "name": "Orden2-3",
+      "rows": 16967,
+      "columns": 168
+    },
+    {
+      "name": "Orden3",
+      "rows": 16967,
+      "columns": 38
+    },
+    {
+      "name": "Orden4",
+      "rows": 16967,
+      "columns": 45
+    },
+    {
+      "name": "Orden5",
+      "rows": 16967,
+      "columns": 25
+    },
+    {
+      "name": "Orden6",
+      "rows": 16967,
+      "columns": 30
+    },
+    {
+      "name": "Orden7",
+      "rows": 16967,
+      "columns": 21
+    },
+    {
+      "name": "Orden8",
+      "rows": 1679,
+      "columns": 24
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "resourceType": "Location",
+  "id": "unidad-clues-ambulatoria",
+  "identifier": [
+    {
+      "system": "https://fhir.sus-rda-mx.local/NamingSystem/clues-working",
+      "value": "NLHUN000043"
+    }
+  ],
+  "name": "SERVICIOS MEDICOS DE LA UANL",
+  "mode": "instance",
+  "description": "Unidad real del extracto; no acredita que una atencion sintetica haya ocurrido aqui. INST=HUN. Fuente Orden1, fila 2177.",
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "https://fhir.sus-rda-mx.local/CodeSystem/clues-establishment-type-working",
+          "version": "2026-09-15-working",
+          "code": "CE",
+          "display": "DE CONSULTA EXTERNA"
+        }
+      ]
+    }
+  ],
+  "address": {
+    "country": "MX",
+    "state": "NUEVO LEON",
+    "district": "MONTERREY",
+    "city": "MONTERREY"
+  }
+}

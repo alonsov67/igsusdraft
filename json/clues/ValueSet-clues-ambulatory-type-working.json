@@ -1,0 +1,22 @@
+{
+  "resourceType": "ValueSet",
+  "id": "clues-ambulatory-type-working",
+  "url": "https://fhir.sus-rda-mx.local/ValueSet/clues-ambulatory-type-working",
+  "name": "CLUESAmbulatoryTypeWorking",
+  "status": "draft",
+  "experimental": true,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.sus-rda-mx.local/CodeSystem/clues-establishment-type-working",
+        "version": "2026-09-15-working",
+        "concept": [
+          {
+            "code": "CE",
+            "display": "DE CONSULTA EXTERNA"
+          }
+        ]
+      }
+    ]
+  }
+}

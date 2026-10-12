@@ -1,0 +1,18 @@
+{
+  "resourceType": "CodeSystem",
+  "id": "clues-establishment-type-working",
+  "url": "https://fhir.sus-rda-mx.local/CodeSystem/clues-establishment-type-working",
+  "name": "CLUESEstablishmentTypeWorking",
+  "status": "draft",
+  "experimental": true,
+  "version": "2026-09-15-working",
+  "content": "fragment",
+  "caseSensitive": true,
+  "description": "Extracto observado de Orden1; no presume definiciones oficiales ni exhaustividad.",
+  "concept": [
+    {
+      "code": "CE",
+      "display": "DE CONSULTA EXTERNA"
+    }
+  ]
+}
