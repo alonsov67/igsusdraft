@@ -1,0 +1,40 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>diabetes-Encounter-atencion-diabetes.json</title><link rel="stylesheet" href="../../assets/styles.css"><style>pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f6f7;color:#202124;border:1px solid #ccc;line-height:1.6}main{max-width:1000px}</style></head><body><main><p><a href="../../ejemplos.html">Volver a ejemplos</a> · <a href="diabetes-Encounter-atencion-diabetes.json" download>Descargar JSON</a></p><h1>Encounter: atencion-diabetes</h1><pre>{
+  "resourceType": "Encounter",
+  "id": "atencion-diabetes",
+  "identifier": [
+    {
+      "system": "https://fhir.sus-rda-mx.local/NamingSystem/folio-atencion-demo",
+      "value": "FOLIO-diabetes"
+    }
+  ],
+  "status": "finished",
+  "class": {
+    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+    "code": "AMB"
+  },
+  "subject": {
+    "reference": "Patient/paciente-diabetes"
+  },
+  "serviceProvider": {
+    "reference": "Organization/prestador-diabetes"
+  },
+  "location": [
+    {
+      "location": {
+        "reference": "Location/unidad-diabetes"
+      }
+    }
+  ],
+  "period": {
+    "start": "2026-10-12T09:00:00-06:00",
+    "end": "2026-10-12T09:30:00-06:00"
+  },
+  "diagnosis": [
+    {
+      "condition": {
+        "reference": "Condition/diagnostico-diabetes"
+      },
+      "rank": 1
+    }
+  ]
+}</pre></main></body></html>

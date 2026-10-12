@@ -1,0 +1,9 @@
+{
+  "resourceType": "Location",
+  "id": "unidad-diabetes",
+  "status": "active",
+  "name": "Unidad ambulatoria sintética",
+  "managingOrganization": {
+    "reference": "Organization/prestador-diabetes"
+  }
+}

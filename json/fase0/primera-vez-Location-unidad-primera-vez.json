@@ -1,0 +1,9 @@
+{
+  "resourceType": "Location",
+  "id": "unidad-primera-vez",
+  "status": "active",
+  "name": "Unidad ambulatoria sintética",
+  "managingOrganization": {
+    "reference": "Organization/prestador-primera-vez"
+  }
+}

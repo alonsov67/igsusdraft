@@ -1,0 +1,9 @@
+{
+  "resourceType": "Location",
+  "id": "unidad-control-hta",
+  "status": "active",
+  "name": "Unidad ambulatoria sintética",
+  "managingOrganization": {
+    "reference": "Organization/prestador-control-hta"
+  }
+}

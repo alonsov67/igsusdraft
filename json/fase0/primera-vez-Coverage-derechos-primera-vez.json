@@ -1,0 +1,17 @@
+{
+  "resourceType": "Coverage",
+  "id": "derechos-primera-vez",
+  "status": "active",
+  "beneficiary": {
+    "reference": "Patient/paciente-primera-vez"
+  },
+  "payor": [
+    {
+      "reference": "Organization/pagador-primera-vez"
+    }
+  ],
+  "period": {
+    "start": "2026-01-01",
+    "end": "2026-12-31"
+  }
+}

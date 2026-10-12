@@ -1,0 +1,21 @@
+{
+  "resourceType": "Patient",
+  "id": "paciente-control-hta",
+  "active": true,
+  "identifier": [
+    {
+      "system": "https://fhir.sus-rda-mx.local/NamingSystem/curp",
+      "value": "GODE561231HDFABC09"
+    }
+  ],
+  "name": [
+    {
+      "use": "usual",
+      "family": "Perez",
+      "given": [
+        "Pedro"
+      ]
+    }
+  ],
+  "birthDate": "1956-12-31"
+}

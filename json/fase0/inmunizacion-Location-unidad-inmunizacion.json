@@ -1,0 +1,9 @@
+{
+  "resourceType": "Location",
+  "id": "unidad-inmunizacion",
+  "status": "active",
+  "name": "Unidad ambulatoria sintética",
+  "managingOrganization": {
+    "reference": "Organization/prestador-inmunizacion"
+  }
+}

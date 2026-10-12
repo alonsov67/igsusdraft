@@ -1,0 +1,10 @@
+{
+  "resourceType": "OperationOutcome",
+  "issue": [
+    {
+      "severity": "error",
+      "code": "business-rule",
+      "diagnostics": "Referencia al paciente no resuelta en el paquete"
+    }
+  ]
+}

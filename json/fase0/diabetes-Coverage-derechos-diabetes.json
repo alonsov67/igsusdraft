@@ -1,0 +1,17 @@
+{
+  "resourceType": "Coverage",
+  "id": "derechos-diabetes",
+  "status": "active",
+  "beneficiary": {
+    "reference": "Patient/paciente-diabetes"
+  },
+  "payor": [
+    {
+      "reference": "Organization/pagador-diabetes"
+    }
+  ],
+  "period": {
+    "start": "2026-01-01",
+    "end": "2026-12-31"
+  }
+}

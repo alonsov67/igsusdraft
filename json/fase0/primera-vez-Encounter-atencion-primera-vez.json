@@ -1,0 +1,40 @@
+{
+  "resourceType": "Encounter",
+  "id": "atencion-primera-vez",
+  "identifier": [
+    {
+      "system": "https://fhir.sus-rda-mx.local/NamingSystem/folio-atencion-demo",
+      "value": "FOLIO-primera-vez"
+    }
+  ],
+  "status": "finished",
+  "class": {
+    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+    "code": "AMB"
+  },
+  "subject": {
+    "reference": "Patient/paciente-primera-vez"
+  },
+  "serviceProvider": {
+    "reference": "Organization/prestador-primera-vez"
+  },
+  "location": [
+    {
+      "location": {
+        "reference": "Location/unidad-primera-vez"
+      }
+    }
+  ],
+  "period": {
+    "start": "2026-10-12T09:00:00-06:00",
+    "end": "2026-10-12T09:30:00-06:00"
+  },
+  "diagnosis": [
+    {
+      "condition": {
+        "reference": "Condition/diagnostico-primera-vez"
+      },
+      "rank": 1
+    }
+  ]
+}

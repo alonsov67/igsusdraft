@@ -1,0 +1,17 @@
+{
+  "resourceType": "Coverage",
+  "id": "derechos-inmunizacion",
+  "status": "active",
+  "beneficiary": {
+    "reference": "Patient/paciente-inmunizacion"
+  },
+  "payor": [
+    {
+      "reference": "Organization/pagador-inmunizacion"
+    }
+  ],
+  "period": {
+    "start": "2026-01-01",
+    "end": "2026-12-31"
+  }
+}

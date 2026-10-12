@@ -1,0 +1,40 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>primera-vez-Encounter-atencion-primera-vez.json</title><link rel="stylesheet" href="../../assets/styles.css"><style>pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f6f7;color:#202124;border:1px solid #ccc;line-height:1.6}main{max-width:1000px}</style></head><body><main><p><a href="../../ejemplos.html">Volver a ejemplos</a> · <a href="primera-vez-Encounter-atencion-primera-vez.json" download>Descargar JSON</a></p><h1>Encounter: atencion-primera-vez</h1><pre>{
+  "resourceType": "Encounter",
+  "id": "atencion-primera-vez",
+  "identifier": [
+    {
+      "system": "https://fhir.sus-rda-mx.local/NamingSystem/folio-atencion-demo",
+      "value": "FOLIO-primera-vez"
+    }
+  ],
+  "status": "finished",
+  "class": {
+    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+    "code": "AMB"
+  },
+  "subject": {
+    "reference": "Patient/paciente-primera-vez"
+  },
+  "serviceProvider": {
+    "reference": "Organization/prestador-primera-vez"
+  },
+  "location": [
+    {
+      "location": {
+        "reference": "Location/unidad-primera-vez"
+      }
+    }
+  ],
+  "period": {
+    "start": "2026-10-12T09:00:00-06:00",
+    "end": "2026-10-12T09:30:00-06:00"
+  },
+  "diagnosis": [
+    {
+      "condition": {
+        "reference": "Condition/diagnostico-primera-vez"
+      },
+      "rank": 1
+    }
+  ]
+}</pre></main></body></html>

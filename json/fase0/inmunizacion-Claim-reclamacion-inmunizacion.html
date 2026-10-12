@@ -1,0 +1,73 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>inmunizacion-Claim-reclamacion-inmunizacion.json</title><link rel="stylesheet" href="../../assets/styles.css"><style>pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f6f7;color:#202124;border:1px solid #ccc;line-height:1.6}main{max-width:1000px}</style></head><body><main><p><a href="../../ejemplos.html">Volver a ejemplos</a> · <a href="inmunizacion-Claim-reclamacion-inmunizacion.json" download>Descargar JSON</a></p><h1>Claim: reclamacion-inmunizacion</h1><pre>{
+  "resourceType": "Claim",
+  "id": "reclamacion-inmunizacion",
+  "identifier": [
+    {
+      "system": "https://fhir.sus-rda-mx.local/NamingSystem/transaccion-demo/prestador",
+      "value": "TX-inmunizacion-001"
+    }
+  ],
+  "status": "active",
+  "type": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+        "code": "professional"
+      }
+    ]
+  },
+  "use": "claim",
+  "patient": {
+    "reference": "Patient/paciente-inmunizacion"
+  },
+  "created": "2026-10-12T09:31:00-06:00",
+  "provider": {
+    "reference": "Organization/prestador-inmunizacion"
+  },
+  "insurer": {
+    "reference": "Organization/pagador-inmunizacion"
+  },
+  "priority": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/processpriority",
+        "code": "normal"
+      }
+    ]
+  },
+  "insurance": [
+    {
+      "sequence": 1,
+      "focal": true,
+      "coverage": {
+        "reference": "Coverage/derechos-inmunizacion"
+      }
+    }
+  ],
+  "item": [
+    {
+      "sequence": 1,
+      "extension": [
+        {
+          "url": "https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id",
+          "valueIdentifier": {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/linea-demo",
+            "value": "LINEA-inmunizacion-001"
+          }
+        }
+      ],
+      "productOrService": {
+        "text": "Inmunización ambulatoria"
+      },
+      "quantity": {
+        "value": 1
+      },
+      "servicedDate": "2026-10-12",
+      "encounter": [
+        {
+          "reference": "Encounter/atencion-inmunizacion"
+        }
+      ]
+    }
+  ]
+}</pre></main></body></html>

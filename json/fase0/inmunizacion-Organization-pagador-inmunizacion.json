@@ -1,0 +1,12 @@
+{
+  "resourceType": "Organization",
+  "id": "pagador-inmunizacion",
+  "active": true,
+  "identifier": [
+    {
+      "system": "https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo",
+      "value": "IMSS-DEMO"
+    }
+  ],
+  "name": "IMSS (ejemplo sintético)"
+}

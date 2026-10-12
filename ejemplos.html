@@ -1,7 +1,1100 @@
-<!doctype html><html lang="es-MX"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ejemplos Fase 0 · IG FHIR SUS-MX</title><link rel="stylesheet" href="assets/styles.css"><style>.json-example{background:#101722;border:1px solid #314057;border-radius:6px;padding:1rem;overflow:auto;white-space:pre;font:.82rem/1.45 ui-monospace,Consolas,monospace;color:#e8eef7}.example-card{margin:1.2rem 0}</style></head><body><a class="skip" href="#contenido">Saltar al contenido</a><header class="site-header"><div class="header-shell"><a class="brand" href="index.html"><img src="assets/gobmx-emblem-reference.png" alt="Emblema mexicano de referencia"><span>Referencia visual<br>Mexico</span></a><div class="guide-title"><strong>Guia de Implementacion FHIR SUS-MX</strong><span>Camara de Compensacion · Fase 0</span></div><div class="header-status">FHIR R4<br><strong>4.0.1</strong></div></div></header><nav class="site-nav" aria-label="Navegacion principal"><div><a href="index.html">Inicio</a><a href="indice.html">Indice</a><a href="sus-rda-mx.html">SUS-RDA-MX</a><a href="perfiles.html">Perfiles SUS</a><a href="bundles.html">Documentos SUS</a><a href="operaciones.html">Operaciones SUS</a><a href="camara-compensacion.html">Camara</a><a href="demo.html">Demostracion</a><a href="ejemplos.html" class="active">Ejemplos JSON</a><a href="terminologias.html">Terminologias</a><a href="conformidad.html">Conformidad</a></div></nav><div class="breadcrumb"><a href="indice.html">Indice</a><span>›</span><strong>Ejemplos JSON</strong></div><main id="contenido"><div class="publish-box">Alcance exclusivo: Fase 0 · atenciones ambulatorias · datos sinteticos.</div><div class="page-head"><h1>Ejemplo: control ambulatorio de EPOC</h1><p>Set minimo para registrar y valorar una atencion ambulatoria en la Camara.</p></div><aside class="notice"><strong>Fuera de alcance:</strong> urgencias, hospitalizacion, vacunacion, medicamentos, laboratorio, imagen y cualquier escenario distinto de atencion ambulatoria. Los codigos ATE/PAT/AFI/CST/TAR son referencias de trabajo del modelo canonico, no identificadores oficiales FHIR.</aside><section><h2>Set minimo y mapeo</h2><div class="table-wrap"><table><thead><tr><th>Referencia de trabajo</th><th>Dato</th><th>Representacion FHIR</th></tr></thead><tbody><tr><td>ATE-001</td><td>Folio de atencion</td><td><code>Encounter.identifier</code></td></tr><tr><td>ATE-005</td><td>Linea compensable</td><td>Extension en <code>Claim.item</code></td></tr><tr><td>PAT-002</td><td>CURP</td><td><code>Patient.identifier</code></td></tr><tr><td>AFI-003 + AFI-006:008</td><td>Derechohabiencia vigente deduplicada</td><td><code>Coverage</code> + elegibilidad</td></tr><tr><td>ATE-013</td><td>Verificacion de elegibilidad</td><td><code>CoverageEligibilityResponse</code></td></tr><tr><td>ATE-004 / ATE-007</td><td>Servicio y cantidad</td><td><code>Claim.item.productOrService</code> + <code>quantity</code></td></tr><tr><td>ATE-014 + ATE-015</td><td>Origen y transaccion</td><td><code>Claim.identifier</code>; par idempotente</td></tr><tr><td>ATE-011 / CST-016 / CST-017</td><td>Cruce, responsables y fraccion</td><td>Resultado de negocio conservado junto al Claim</td></tr><tr><td>TAR-* + CST-019 / CST-018</td><td>Tarifa, solicitado y reconocido</td><td><code>Claim</code> + <code>ClaimResponse</code></td></tr></tbody></table></div></section><section class="example-card"><h2>Patient</h2><pre class="json-example"><code>{"resourceType":"Patient","id":"patient-epoc-control-001","identifier":[{"system":"https://fhir.sus-rda-mx.local/NamingSystem/curp","value":"GODE561231HDFABC09"}],"name":[{"family":"Paciente Sintetico","given":["EPOC"]}],"birthDate":"1956-12-31"}</code></pre></section><section class="example-card"><h2>Coverage y elegibilidad</h2><pre class="json-example"><code>{"resourceType":"Coverage","id":"coverage-imss-epoc-001","status":"active","beneficiary":{"reference":"Patient/patient-epoc-control-001"},"payor":[{"display":"IMSS"}],"period":{"start":"2026-01-01","end":"2026-12-31"}}
-
-{"resourceType":"CoverageEligibilityResponse","id":"eligibility-response-epoc-001","status":"active","outcome":"complete","insurance":[{"coverage":{"reference":"Coverage/coverage-imss-epoc-001"},"inforce":true}]}</code></pre></section><section class="example-card"><h2>Encounter y Condition</h2><pre class="json-example"><code>{"resourceType":"Encounter","id":"encounter-epoc-control-001","identifier":[{"system":"https://fhir.sus-rda-mx.local/NamingSystem/attention-id","value":"ATE-EPOC-0001"}],"status":"finished","class":{"code":"AMB","display":"Atencion ambulatoria"},"subject":{"reference":"Patient/patient-epoc-control-001"},"serviceProvider":{"display":"Clinica ISTEE"}}
-
-{"resourceType":"Condition","id":"condition-epoc-001","code":{"coding":[{"system":"https://icd.who.int/browse10/2019/en","code":"J44.9","display":"Enfermedad pulmonar obstructiva cronica, no especificada"}]},"subject":{"reference":"Patient/patient-epoc-control-001"}}</code></pre></section><section class="example-card"><h2>Claim de radicacion</h2><pre class="json-example"><code>{"resourceType":"Claim","id":"claim-epoc-control-0001","identifier":[{"system":"https://fhir.sus-rda-mx.local/NamingSystem/source-transaction","value":"ISTEE-ATE-EPOC-0001-V1"}],"status":"active","use":"claim","patient":{"reference":"Patient/patient-epoc-control-001"},"provider":{"display":"Clinica ISTEE"},"insurer":{"display":"IMSS"},"item":[{"sequence":1,"extension":[{"url":"https://fhir.sus-rda-mx.local/StructureDefinition/sus-service-line-id","valueIdentifier":{"value":"LINE-EPOC-0001"}}],"productOrService":{"coding":[{"system":"https://fhir.sus-rda-mx.local/CodeSystem/sus-service-catalog","code":"SUS-AMB-EPOC-CONTROL","display":"Control ambulatorio de EPOC"}]},"quantity":{"value":1},"unitPrice":{"value":850,"currency":"MXN"}}]}</code></pre></section><section class="example-card"><h2>Respuesta y liquidacion</h2><pre class="json-example"><code>{"resourceType":"ClaimResponse","id":"claim-response-epoc-0001","status":"active","request":{"reference":"Claim/claim-epoc-control-0001"},"outcome":"complete","item":[{"itemSequence":1,"adjudication":[{"amount":{"value":850,"currency":"MXN"}}]}]}
-
-{"resourceType":"PaymentReconciliation","id":"payment-reconciliation-epoc-0001","status":"active","detail":[{"request":{"reference":"ClaimResponse/claim-response-epoc-0001"},"amount":{"value":850,"currency":"MXN"}}]}</code></pre></section><section><h2>Regla de trazabilidad</h2><p>La Camara deduplica con <code>source_system + source_transaction_id</code>, conserva la fecha de recepcion y congela la version de catalogo aplicable. Todos los valores son de demostracion.</p></section></main><footer>IG FHIR SUS-MX · Fase 0 · solo atenciones ambulatorias · datos sinteticos.</footer></body></html>
+<!doctype html><html lang="es-MX"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ejemplos JSON · IG FHIR SUS Mexico</title><link rel="stylesheet" href="assets/styles.css"><style>.json-example{background:#101722;border:1px solid #314057;border-radius:6px;padding:1rem;overflow:auto;white-space:pre;font:.82rem/1.45 ui-monospace,Consolas,monospace;color:#e8eef7}.example-card{margin:1.2rem 0}</style></head><body><a class="skip" href="#contenido">Saltar al contenido</a><header class="site-header"><div class="header-shell"><a class="brand" href="index.html"><img src="assets/gobmx-emblem-reference.png" alt="Emblema mexicano de referencia"><span>Referencia visual<br>Mexico</span></a><div class="guide-title"><strong>Guia de Implementacion FHIR SUS-MX</strong><span>Camara de Compensacion · Fase 0</span></div><div class="header-status">FHIR R4<br><strong>4.0.1</strong></div></div></header><nav class="site-nav" aria-label="Navegacion principal"><div><a href="index.html">Inicio</a><a href="indice.html">Indice</a><a href="sus-rda-mx.html">SUS-RDA-MX</a><a href="perfiles.html">Perfiles SUS</a><a href="bundles.html">Documentos SUS</a><a href="operaciones.html">Operaciones SUS</a><a href="camara-compensacion.html">Camara</a><a href="demo.html">Demostracion</a><a href="ejemplos.html" class="active">Ejemplos JSON</a><a href="terminologias.html">Terminologias</a><a href="conformidad.html">Conformidad</a></div></nav><div class="breadcrumb"><a href="indice.html">Indice</a><span>›</span><strong>Ejemplos JSON</strong></div><main id="contenido"><div class="page-head"><h1>Artefactos y ejemplos JSON: Fase 0 ambulatoria</h1><p>Inmunización, primera consulta, control de HTA y atención de diabetes.</p></div><aside class="notice">ATE/PAT/AFI/CST/TAR son referencias de trabajo. Los códigos oficiales mexicanos de servicio están pendientes: los ejemplos utilizan texto, sin inventar códigos oficiales. ICD-10 se emplea para diagnóstico. Los códigos técnicos propios de FHIR conservan sus sistemas HL7. Los archivos se consultan en este sitio estático; no se envían al Firely local.</aside><p>La inmunización representa una prestación ambulatoria en Encounter y Claim; no incorpora un registro clínico Immunization con vacuna, lote o dosis que aún no se han definido. Los ejemplos son candidatos de contrato y no declaran conformidad con perfiles históricos.</p><section id="inmunizacion"><h2>Inmunización ambulatoria</h2><p>Sin diagnóstico: excepción para vacunación. Sin Observation ni soportes clínicos adicionales.</p><p><a target="_blank" rel="noopener" href="json/fase0/inmunizacion.html">Abrir Bundle JSON en otra pestaña</a> · <a target="_blank" rel="noopener" href="json/fase0/inmunizacion.json">Archivo JSON</a></p><details><summary>Ver paquete completo</summary><pre>{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "identifier": {
+    "system": "https://fhir.sus-rda-mx.local/NamingSystem/transaccion-demo/prestador",
+    "value": "TX-inmunizacion-001"
+  },
+  "timestamp": "2026-10-12T09:31:00-06:00",
+  "entry": [
+    {
+      "fullUrl": "https://example.invalid/fhir/Patient/paciente-inmunizacion",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "paciente-inmunizacion",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/curp",
+            "value": "GODE561231HDFABC09"
+          }
+        ],
+        "name": [
+          {
+            "use": "usual",
+            "family": "Perez",
+            "given": [
+              "Pedro"
+            ]
+          }
+        ],
+        "birthDate": "1956-12-31"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/paciente-inmunizacion"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Organization/prestador-inmunizacion",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "prestador-inmunizacion",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo",
+            "value": "PRESTADOR-DEMO"
+          }
+        ],
+        "name": "Institución prestadora sintética"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/prestador-inmunizacion"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Organization/pagador-inmunizacion",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "pagador-inmunizacion",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo",
+            "value": "IMSS-DEMO"
+          }
+        ],
+        "name": "IMSS (ejemplo sintético)"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/pagador-inmunizacion"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Location/unidad-inmunizacion",
+      "resource": {
+        "resourceType": "Location",
+        "id": "unidad-inmunizacion",
+        "status": "active",
+        "name": "Unidad ambulatoria sintética",
+        "managingOrganization": {
+          "reference": "Organization/prestador-inmunizacion"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/unidad-inmunizacion"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Coverage/derechos-inmunizacion",
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "derechos-inmunizacion",
+        "status": "active",
+        "beneficiary": {
+          "reference": "Patient/paciente-inmunizacion"
+        },
+        "payor": [
+          {
+            "reference": "Organization/pagador-inmunizacion"
+          }
+        ],
+        "period": {
+          "start": "2026-01-01",
+          "end": "2026-12-31"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Coverage/derechos-inmunizacion"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Encounter/atencion-inmunizacion",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "atencion-inmunizacion",
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/folio-atencion-demo",
+            "value": "FOLIO-inmunizacion"
+          }
+        ],
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB"
+        },
+        "subject": {
+          "reference": "Patient/paciente-inmunizacion"
+        },
+        "serviceProvider": {
+          "reference": "Organization/prestador-inmunizacion"
+        },
+        "location": [
+          {
+            "location": {
+              "reference": "Location/unidad-inmunizacion"
+            }
+          }
+        ],
+        "period": {
+          "start": "2026-10-12T09:00:00-06:00",
+          "end": "2026-10-12T09:30:00-06:00"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Encounter/atencion-inmunizacion"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Claim/reclamacion-inmunizacion",
+      "resource": {
+        "resourceType": "Claim",
+        "id": "reclamacion-inmunizacion",
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/transaccion-demo/prestador",
+            "value": "TX-inmunizacion-001"
+          }
+        ],
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional"
+            }
+          ]
+        },
+        "use": "claim",
+        "patient": {
+          "reference": "Patient/paciente-inmunizacion"
+        },
+        "created": "2026-10-12T09:31:00-06:00",
+        "provider": {
+          "reference": "Organization/prestador-inmunizacion"
+        },
+        "insurer": {
+          "reference": "Organization/pagador-inmunizacion"
+        },
+        "priority": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/processpriority",
+              "code": "normal"
+            }
+          ]
+        },
+        "insurance": [
+          {
+            "sequence": 1,
+            "focal": true,
+            "coverage": {
+              "reference": "Coverage/derechos-inmunizacion"
+            }
+          }
+        ],
+        "item": [
+          {
+            "sequence": 1,
+            "extension": [
+              {
+                "url": "https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id",
+                "valueIdentifier": {
+                  "system": "https://fhir.sus-rda-mx.local/NamingSystem/linea-demo",
+                  "value": "LINEA-inmunizacion-001"
+                }
+              }
+            ],
+            "productOrService": {
+              "text": "Inmunización ambulatoria"
+            },
+            "quantity": {
+              "value": 1
+            },
+            "servicedDate": "2026-10-12",
+            "encounter": [
+              {
+                "reference": "Encounter/atencion-inmunizacion"
+              }
+            ]
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Claim/reclamacion-inmunizacion"
+      }
+    }
+  ]
+}</pre></details><div class="table-wrap"><table><thead><tr><th>Artefacto</th><th>Visualización</th><th>JSON</th></tr></thead><tbody><tr><td>Patient</td><td><a target="_blank" rel="noopener" href="json/fase0/inmunizacion-Patient-paciente-inmunizacion.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/inmunizacion-Patient-paciente-inmunizacion.json">JSON</a></td></tr><tr><td>Organization</td><td><a target="_blank" rel="noopener" href="json/fase0/inmunizacion-Organization-prestador-inmunizacion.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/inmunizacion-Organization-prestador-inmunizacion.json">JSON</a></td></tr><tr><td>Organization</td><td><a target="_blank" rel="noopener" href="json/fase0/inmunizacion-Organization-pagador-inmunizacion.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/inmunizacion-Organization-pagador-inmunizacion.json">JSON</a></td></tr><tr><td>Location</td><td><a target="_blank" rel="noopener" href="json/fase0/inmunizacion-Location-unidad-inmunizacion.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/inmunizacion-Location-unidad-inmunizacion.json">JSON</a></td></tr><tr><td>Coverage</td><td><a target="_blank" rel="noopener" href="json/fase0/inmunizacion-Coverage-derechos-inmunizacion.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/inmunizacion-Coverage-derechos-inmunizacion.json">JSON</a></td></tr><tr><td>Encounter</td><td><a target="_blank" rel="noopener" href="json/fase0/inmunizacion-Encounter-atencion-inmunizacion.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/inmunizacion-Encounter-atencion-inmunizacion.json">JSON</a></td></tr><tr><td>Claim</td><td><a target="_blank" rel="noopener" href="json/fase0/inmunizacion-Claim-reclamacion-inmunizacion.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/inmunizacion-Claim-reclamacion-inmunizacion.json">JSON</a></td></tr></tbody></table></div></section><section id="primera-vez"><h2>Consulta ambulatoria de primera vez</h2><p>Diagnóstico ICD-10: J44.9. Sin Observation ni soportes clínicos adicionales.</p><p><a target="_blank" rel="noopener" href="json/fase0/primera-vez.html">Abrir Bundle JSON en otra pestaña</a> · <a target="_blank" rel="noopener" href="json/fase0/primera-vez.json">Archivo JSON</a></p><details><summary>Ver paquete completo</summary><pre>{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "identifier": {
+    "system": "https://fhir.sus-rda-mx.local/NamingSystem/transaccion-demo/prestador",
+    "value": "TX-primera-vez-001"
+  },
+  "timestamp": "2026-10-12T09:31:00-06:00",
+  "entry": [
+    {
+      "fullUrl": "https://example.invalid/fhir/Patient/paciente-primera-vez",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "paciente-primera-vez",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/curp",
+            "value": "GODE561231HDFABC09"
+          }
+        ],
+        "name": [
+          {
+            "use": "usual",
+            "family": "Perez",
+            "given": [
+              "Pedro"
+            ]
+          }
+        ],
+        "birthDate": "1956-12-31"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/paciente-primera-vez"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Organization/prestador-primera-vez",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "prestador-primera-vez",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo",
+            "value": "PRESTADOR-DEMO"
+          }
+        ],
+        "name": "Institución prestadora sintética"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/prestador-primera-vez"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Organization/pagador-primera-vez",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "pagador-primera-vez",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo",
+            "value": "IMSS-DEMO"
+          }
+        ],
+        "name": "IMSS (ejemplo sintético)"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/pagador-primera-vez"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Location/unidad-primera-vez",
+      "resource": {
+        "resourceType": "Location",
+        "id": "unidad-primera-vez",
+        "status": "active",
+        "name": "Unidad ambulatoria sintética",
+        "managingOrganization": {
+          "reference": "Organization/prestador-primera-vez"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/unidad-primera-vez"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Coverage/derechos-primera-vez",
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "derechos-primera-vez",
+        "status": "active",
+        "beneficiary": {
+          "reference": "Patient/paciente-primera-vez"
+        },
+        "payor": [
+          {
+            "reference": "Organization/pagador-primera-vez"
+          }
+        ],
+        "period": {
+          "start": "2026-01-01",
+          "end": "2026-12-31"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Coverage/derechos-primera-vez"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Encounter/atencion-primera-vez",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "atencion-primera-vez",
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/folio-atencion-demo",
+            "value": "FOLIO-primera-vez"
+          }
+        ],
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB"
+        },
+        "subject": {
+          "reference": "Patient/paciente-primera-vez"
+        },
+        "serviceProvider": {
+          "reference": "Organization/prestador-primera-vez"
+        },
+        "location": [
+          {
+            "location": {
+              "reference": "Location/unidad-primera-vez"
+            }
+          }
+        ],
+        "period": {
+          "start": "2026-10-12T09:00:00-06:00",
+          "end": "2026-10-12T09:30:00-06:00"
+        },
+        "diagnosis": [
+          {
+            "condition": {
+              "reference": "Condition/diagnostico-primera-vez"
+            },
+            "rank": 1
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Encounter/atencion-primera-vez"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Condition/diagnostico-primera-vez",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "diagnostico-primera-vez",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10",
+              "code": "J44.9"
+            }
+          ],
+          "text": "EPOC no especificada"
+        },
+        "subject": {
+          "reference": "Patient/paciente-primera-vez"
+        },
+        "encounter": {
+          "reference": "Encounter/atencion-primera-vez"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/diagnostico-primera-vez"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Claim/reclamacion-primera-vez",
+      "resource": {
+        "resourceType": "Claim",
+        "id": "reclamacion-primera-vez",
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/transaccion-demo/prestador",
+            "value": "TX-primera-vez-001"
+          }
+        ],
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional"
+            }
+          ]
+        },
+        "use": "claim",
+        "patient": {
+          "reference": "Patient/paciente-primera-vez"
+        },
+        "created": "2026-10-12T09:31:00-06:00",
+        "provider": {
+          "reference": "Organization/prestador-primera-vez"
+        },
+        "insurer": {
+          "reference": "Organization/pagador-primera-vez"
+        },
+        "priority": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/processpriority",
+              "code": "normal"
+            }
+          ]
+        },
+        "insurance": [
+          {
+            "sequence": 1,
+            "focal": true,
+            "coverage": {
+              "reference": "Coverage/derechos-primera-vez"
+            }
+          }
+        ],
+        "item": [
+          {
+            "sequence": 1,
+            "extension": [
+              {
+                "url": "https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id",
+                "valueIdentifier": {
+                  "system": "https://fhir.sus-rda-mx.local/NamingSystem/linea-demo",
+                  "value": "LINEA-primera-vez-001"
+                }
+              }
+            ],
+            "productOrService": {
+              "text": "Consulta ambulatoria de primera vez"
+            },
+            "quantity": {
+              "value": 1
+            },
+            "servicedDate": "2026-10-12",
+            "encounter": [
+              {
+                "reference": "Encounter/atencion-primera-vez"
+              }
+            ],
+            "diagnosisSequence": [
+              1
+            ]
+          }
+        ],
+        "diagnosis": [
+          {
+            "sequence": 1,
+            "diagnosisReference": {
+              "reference": "Condition/diagnostico-primera-vez"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Claim/reclamacion-primera-vez"
+      }
+    }
+  ]
+}</pre></details><div class="table-wrap"><table><thead><tr><th>Artefacto</th><th>Visualización</th><th>JSON</th></tr></thead><tbody><tr><td>Patient</td><td><a target="_blank" rel="noopener" href="json/fase0/primera-vez-Patient-paciente-primera-vez.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/primera-vez-Patient-paciente-primera-vez.json">JSON</a></td></tr><tr><td>Organization</td><td><a target="_blank" rel="noopener" href="json/fase0/primera-vez-Organization-prestador-primera-vez.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/primera-vez-Organization-prestador-primera-vez.json">JSON</a></td></tr><tr><td>Organization</td><td><a target="_blank" rel="noopener" href="json/fase0/primera-vez-Organization-pagador-primera-vez.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/primera-vez-Organization-pagador-primera-vez.json">JSON</a></td></tr><tr><td>Location</td><td><a target="_blank" rel="noopener" href="json/fase0/primera-vez-Location-unidad-primera-vez.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/primera-vez-Location-unidad-primera-vez.json">JSON</a></td></tr><tr><td>Coverage</td><td><a target="_blank" rel="noopener" href="json/fase0/primera-vez-Coverage-derechos-primera-vez.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/primera-vez-Coverage-derechos-primera-vez.json">JSON</a></td></tr><tr><td>Encounter</td><td><a target="_blank" rel="noopener" href="json/fase0/primera-vez-Encounter-atencion-primera-vez.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/primera-vez-Encounter-atencion-primera-vez.json">JSON</a></td></tr><tr><td>Condition</td><td><a target="_blank" rel="noopener" href="json/fase0/primera-vez-Condition-diagnostico-primera-vez.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/primera-vez-Condition-diagnostico-primera-vez.json">JSON</a></td></tr><tr><td>Claim</td><td><a target="_blank" rel="noopener" href="json/fase0/primera-vez-Claim-reclamacion-primera-vez.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/primera-vez-Claim-reclamacion-primera-vez.json">JSON</a></td></tr></tbody></table></div></section><section id="control-hta"><h2>Control ambulatorio de hipertensión</h2><p>Diagnóstico ICD-10: I10. Sin Observation ni soportes clínicos adicionales.</p><p><a target="_blank" rel="noopener" href="json/fase0/control-hta.html">Abrir Bundle JSON en otra pestaña</a> · <a target="_blank" rel="noopener" href="json/fase0/control-hta.json">Archivo JSON</a></p><details><summary>Ver paquete completo</summary><pre>{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "identifier": {
+    "system": "https://fhir.sus-rda-mx.local/NamingSystem/transaccion-demo/prestador",
+    "value": "TX-control-hta-001"
+  },
+  "timestamp": "2026-10-12T09:31:00-06:00",
+  "entry": [
+    {
+      "fullUrl": "https://example.invalid/fhir/Patient/paciente-control-hta",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "paciente-control-hta",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/curp",
+            "value": "GODE561231HDFABC09"
+          }
+        ],
+        "name": [
+          {
+            "use": "usual",
+            "family": "Perez",
+            "given": [
+              "Pedro"
+            ]
+          }
+        ],
+        "birthDate": "1956-12-31"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/paciente-control-hta"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Organization/prestador-control-hta",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "prestador-control-hta",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo",
+            "value": "PRESTADOR-DEMO"
+          }
+        ],
+        "name": "Institución prestadora sintética"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/prestador-control-hta"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Organization/pagador-control-hta",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "pagador-control-hta",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo",
+            "value": "IMSS-DEMO"
+          }
+        ],
+        "name": "IMSS (ejemplo sintético)"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/pagador-control-hta"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Location/unidad-control-hta",
+      "resource": {
+        "resourceType": "Location",
+        "id": "unidad-control-hta",
+        "status": "active",
+        "name": "Unidad ambulatoria sintética",
+        "managingOrganization": {
+          "reference": "Organization/prestador-control-hta"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/unidad-control-hta"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Coverage/derechos-control-hta",
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "derechos-control-hta",
+        "status": "active",
+        "beneficiary": {
+          "reference": "Patient/paciente-control-hta"
+        },
+        "payor": [
+          {
+            "reference": "Organization/pagador-control-hta"
+          }
+        ],
+        "period": {
+          "start": "2026-01-01",
+          "end": "2026-12-31"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Coverage/derechos-control-hta"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Encounter/atencion-control-hta",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "atencion-control-hta",
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/folio-atencion-demo",
+            "value": "FOLIO-control-hta"
+          }
+        ],
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB"
+        },
+        "subject": {
+          "reference": "Patient/paciente-control-hta"
+        },
+        "serviceProvider": {
+          "reference": "Organization/prestador-control-hta"
+        },
+        "location": [
+          {
+            "location": {
+              "reference": "Location/unidad-control-hta"
+            }
+          }
+        ],
+        "period": {
+          "start": "2026-10-12T09:00:00-06:00",
+          "end": "2026-10-12T09:30:00-06:00"
+        },
+        "diagnosis": [
+          {
+            "condition": {
+              "reference": "Condition/diagnostico-control-hta"
+            },
+            "rank": 1
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Encounter/atencion-control-hta"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Condition/diagnostico-control-hta",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "diagnostico-control-hta",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10",
+              "code": "I10"
+            }
+          ],
+          "text": "Hipertensión esencial"
+        },
+        "subject": {
+          "reference": "Patient/paciente-control-hta"
+        },
+        "encounter": {
+          "reference": "Encounter/atencion-control-hta"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/diagnostico-control-hta"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Claim/reclamacion-control-hta",
+      "resource": {
+        "resourceType": "Claim",
+        "id": "reclamacion-control-hta",
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/transaccion-demo/prestador",
+            "value": "TX-control-hta-001"
+          }
+        ],
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional"
+            }
+          ]
+        },
+        "use": "claim",
+        "patient": {
+          "reference": "Patient/paciente-control-hta"
+        },
+        "created": "2026-10-12T09:31:00-06:00",
+        "provider": {
+          "reference": "Organization/prestador-control-hta"
+        },
+        "insurer": {
+          "reference": "Organization/pagador-control-hta"
+        },
+        "priority": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/processpriority",
+              "code": "normal"
+            }
+          ]
+        },
+        "insurance": [
+          {
+            "sequence": 1,
+            "focal": true,
+            "coverage": {
+              "reference": "Coverage/derechos-control-hta"
+            }
+          }
+        ],
+        "item": [
+          {
+            "sequence": 1,
+            "extension": [
+              {
+                "url": "https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id",
+                "valueIdentifier": {
+                  "system": "https://fhir.sus-rda-mx.local/NamingSystem/linea-demo",
+                  "value": "LINEA-control-hta-001"
+                }
+              }
+            ],
+            "productOrService": {
+              "text": "Control ambulatorio de hipertensión"
+            },
+            "quantity": {
+              "value": 1
+            },
+            "servicedDate": "2026-10-12",
+            "encounter": [
+              {
+                "reference": "Encounter/atencion-control-hta"
+              }
+            ],
+            "diagnosisSequence": [
+              1
+            ]
+          }
+        ],
+        "diagnosis": [
+          {
+            "sequence": 1,
+            "diagnosisReference": {
+              "reference": "Condition/diagnostico-control-hta"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Claim/reclamacion-control-hta"
+      }
+    }
+  ]
+}</pre></details><div class="table-wrap"><table><thead><tr><th>Artefacto</th><th>Visualización</th><th>JSON</th></tr></thead><tbody><tr><td>Patient</td><td><a target="_blank" rel="noopener" href="json/fase0/control-hta-Patient-paciente-control-hta.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/control-hta-Patient-paciente-control-hta.json">JSON</a></td></tr><tr><td>Organization</td><td><a target="_blank" rel="noopener" href="json/fase0/control-hta-Organization-prestador-control-hta.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/control-hta-Organization-prestador-control-hta.json">JSON</a></td></tr><tr><td>Organization</td><td><a target="_blank" rel="noopener" href="json/fase0/control-hta-Organization-pagador-control-hta.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/control-hta-Organization-pagador-control-hta.json">JSON</a></td></tr><tr><td>Location</td><td><a target="_blank" rel="noopener" href="json/fase0/control-hta-Location-unidad-control-hta.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/control-hta-Location-unidad-control-hta.json">JSON</a></td></tr><tr><td>Coverage</td><td><a target="_blank" rel="noopener" href="json/fase0/control-hta-Coverage-derechos-control-hta.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/control-hta-Coverage-derechos-control-hta.json">JSON</a></td></tr><tr><td>Encounter</td><td><a target="_blank" rel="noopener" href="json/fase0/control-hta-Encounter-atencion-control-hta.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/control-hta-Encounter-atencion-control-hta.json">JSON</a></td></tr><tr><td>Condition</td><td><a target="_blank" rel="noopener" href="json/fase0/control-hta-Condition-diagnostico-control-hta.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/control-hta-Condition-diagnostico-control-hta.json">JSON</a></td></tr><tr><td>Claim</td><td><a target="_blank" rel="noopener" href="json/fase0/control-hta-Claim-reclamacion-control-hta.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/control-hta-Claim-reclamacion-control-hta.json">JSON</a></td></tr></tbody></table></div></section><section id="diabetes"><h2>Atención ambulatoria de diabetes</h2><p>Diagnóstico ICD-10: E11.9. Sin Observation ni soportes clínicos adicionales.</p><p><a target="_blank" rel="noopener" href="json/fase0/diabetes.html">Abrir Bundle JSON en otra pestaña</a> · <a target="_blank" rel="noopener" href="json/fase0/diabetes.json">Archivo JSON</a></p><details><summary>Ver paquete completo</summary><pre>{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "identifier": {
+    "system": "https://fhir.sus-rda-mx.local/NamingSystem/transaccion-demo/prestador",
+    "value": "TX-diabetes-001"
+  },
+  "timestamp": "2026-10-12T09:31:00-06:00",
+  "entry": [
+    {
+      "fullUrl": "https://example.invalid/fhir/Patient/paciente-diabetes",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "paciente-diabetes",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/curp",
+            "value": "GODE561231HDFABC09"
+          }
+        ],
+        "name": [
+          {
+            "use": "usual",
+            "family": "Perez",
+            "given": [
+              "Pedro"
+            ]
+          }
+        ],
+        "birthDate": "1956-12-31"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/paciente-diabetes"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Organization/prestador-diabetes",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "prestador-diabetes",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo",
+            "value": "PRESTADOR-DEMO"
+          }
+        ],
+        "name": "Institución prestadora sintética"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/prestador-diabetes"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Organization/pagador-diabetes",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "pagador-diabetes",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo",
+            "value": "IMSS-DEMO"
+          }
+        ],
+        "name": "IMSS (ejemplo sintético)"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/pagador-diabetes"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Location/unidad-diabetes",
+      "resource": {
+        "resourceType": "Location",
+        "id": "unidad-diabetes",
+        "status": "active",
+        "name": "Unidad ambulatoria sintética",
+        "managingOrganization": {
+          "reference": "Organization/prestador-diabetes"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/unidad-diabetes"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Coverage/derechos-diabetes",
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "derechos-diabetes",
+        "status": "active",
+        "beneficiary": {
+          "reference": "Patient/paciente-diabetes"
+        },
+        "payor": [
+          {
+            "reference": "Organization/pagador-diabetes"
+          }
+        ],
+        "period": {
+          "start": "2026-01-01",
+          "end": "2026-12-31"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Coverage/derechos-diabetes"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Encounter/atencion-diabetes",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "atencion-diabetes",
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/folio-atencion-demo",
+            "value": "FOLIO-diabetes"
+          }
+        ],
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB"
+        },
+        "subject": {
+          "reference": "Patient/paciente-diabetes"
+        },
+        "serviceProvider": {
+          "reference": "Organization/prestador-diabetes"
+        },
+        "location": [
+          {
+            "location": {
+              "reference": "Location/unidad-diabetes"
+            }
+          }
+        ],
+        "period": {
+          "start": "2026-10-12T09:00:00-06:00",
+          "end": "2026-10-12T09:30:00-06:00"
+        },
+        "diagnosis": [
+          {
+            "condition": {
+              "reference": "Condition/diagnostico-diabetes"
+            },
+            "rank": 1
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Encounter/atencion-diabetes"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Condition/diagnostico-diabetes",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "diagnostico-diabetes",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10",
+              "code": "E11.9"
+            }
+          ],
+          "text": "Diabetes mellitus tipo 2 sin complicaciones"
+        },
+        "subject": {
+          "reference": "Patient/paciente-diabetes"
+        },
+        "encounter": {
+          "reference": "Encounter/atencion-diabetes"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/diagnostico-diabetes"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Claim/reclamacion-diabetes",
+      "resource": {
+        "resourceType": "Claim",
+        "id": "reclamacion-diabetes",
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/transaccion-demo/prestador",
+            "value": "TX-diabetes-001"
+          }
+        ],
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional"
+            }
+          ]
+        },
+        "use": "claim",
+        "patient": {
+          "reference": "Patient/paciente-diabetes"
+        },
+        "created": "2026-10-12T09:31:00-06:00",
+        "provider": {
+          "reference": "Organization/prestador-diabetes"
+        },
+        "insurer": {
+          "reference": "Organization/pagador-diabetes"
+        },
+        "priority": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/processpriority",
+              "code": "normal"
+            }
+          ]
+        },
+        "insurance": [
+          {
+            "sequence": 1,
+            "focal": true,
+            "coverage": {
+              "reference": "Coverage/derechos-diabetes"
+            }
+          }
+        ],
+        "item": [
+          {
+            "sequence": 1,
+            "extension": [
+              {
+                "url": "https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id",
+                "valueIdentifier": {
+                  "system": "https://fhir.sus-rda-mx.local/NamingSystem/linea-demo",
+                  "value": "LINEA-diabetes-001"
+                }
+              }
+            ],
+            "productOrService": {
+              "text": "Atención ambulatoria de diabetes"
+            },
+            "quantity": {
+              "value": 1
+            },
+            "servicedDate": "2026-10-12",
+            "encounter": [
+              {
+                "reference": "Encounter/atencion-diabetes"
+              }
+            ],
+            "diagnosisSequence": [
+              1
+            ]
+          }
+        ],
+        "diagnosis": [
+          {
+            "sequence": 1,
+            "diagnosisReference": {
+              "reference": "Condition/diagnostico-diabetes"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Claim/reclamacion-diabetes"
+      }
+    }
+  ]
+}</pre></details><div class="table-wrap"><table><thead><tr><th>Artefacto</th><th>Visualización</th><th>JSON</th></tr></thead><tbody><tr><td>Patient</td><td><a target="_blank" rel="noopener" href="json/fase0/diabetes-Patient-paciente-diabetes.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/diabetes-Patient-paciente-diabetes.json">JSON</a></td></tr><tr><td>Organization</td><td><a target="_blank" rel="noopener" href="json/fase0/diabetes-Organization-prestador-diabetes.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/diabetes-Organization-prestador-diabetes.json">JSON</a></td></tr><tr><td>Organization</td><td><a target="_blank" rel="noopener" href="json/fase0/diabetes-Organization-pagador-diabetes.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/diabetes-Organization-pagador-diabetes.json">JSON</a></td></tr><tr><td>Location</td><td><a target="_blank" rel="noopener" href="json/fase0/diabetes-Location-unidad-diabetes.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/diabetes-Location-unidad-diabetes.json">JSON</a></td></tr><tr><td>Coverage</td><td><a target="_blank" rel="noopener" href="json/fase0/diabetes-Coverage-derechos-diabetes.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/diabetes-Coverage-derechos-diabetes.json">JSON</a></td></tr><tr><td>Encounter</td><td><a target="_blank" rel="noopener" href="json/fase0/diabetes-Encounter-atencion-diabetes.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/diabetes-Encounter-atencion-diabetes.json">JSON</a></td></tr><tr><td>Condition</td><td><a target="_blank" rel="noopener" href="json/fase0/diabetes-Condition-diagnostico-diabetes.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/diabetes-Condition-diagnostico-diabetes.json">JSON</a></td></tr><tr><td>Claim</td><td><a target="_blank" rel="noopener" href="json/fase0/diabetes-Claim-reclamacion-diabetes.html">Abrir artefacto</a></td><td><a target="_blank" rel="noopener" href="json/fase0/diabetes-Claim-reclamacion-diabetes.json">JSON</a></td></tr></tbody></table></div></section><section><h2>Casos inválidos</h2><p>Fallos esperados del contrato propuesto de Fase 0. No son resultados de una ejecución remota de Firely.</p><table><thead><tr><th>Caso</th><th>Causa esperada</th><th>Artefacto</th></tr></thead><tbody><tr><td>sin-curp</td><td>CURP ausente</td><td><a target="_blank" rel="noopener" href="json/fase0/invalido-sin-curp.html">Bundle inválido</a> · <a target="_blank" rel="noopener" href="json/fase0/resultado-sin-curp.html">Resultado esperado</a></td></tr><tr><td>sin-diagnostico</td><td>Diagnóstico ausente en atención distinta de vacunación</td><td><a target="_blank" rel="noopener" href="json/fase0/invalido-sin-diagnostico.html">Bundle inválido</a> · <a target="_blank" rel="noopener" href="json/fase0/resultado-sin-diagnostico.html">Resultado esperado</a></td></tr><tr><td>cantidad-cero</td><td>Cantidad de servicio igual a cero</td><td><a target="_blank" rel="noopener" href="json/fase0/invalido-cantidad-cero.html">Bundle inválido</a> · <a target="_blank" rel="noopener" href="json/fase0/resultado-cantidad-cero.html">Resultado esperado</a></td></tr><tr><td>referencia-rota</td><td>Referencia al paciente no resuelta en el paquete</td><td><a target="_blank" rel="noopener" href="json/fase0/invalido-referencia-rota.html">Bundle inválido</a> · <a target="_blank" rel="noopener" href="json/fase0/resultado-referencia-rota.html">Resultado esperado</a></td></tr></tbody></table></section></main><footer>FHIR R4 · Fase 0 ambulatoria · ejemplos sintéticos</footer></body></html>

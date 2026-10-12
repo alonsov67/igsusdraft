@@ -1,0 +1,17 @@
+{
+  "resourceType": "Coverage",
+  "id": "derechos-control-hta",
+  "status": "active",
+  "beneficiary": {
+    "reference": "Patient/paciente-control-hta"
+  },
+  "payor": [
+    {
+      "reference": "Organization/pagador-control-hta"
+    }
+  ],
+  "period": {
+    "start": "2026-01-01",
+    "end": "2026-12-31"
+  }
+}

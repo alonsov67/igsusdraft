@@ -1,0 +1,289 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>diabetes.json</title><link rel="stylesheet" href="../../assets/styles.css"><style>pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f6f7;color:#202124;border:1px solid #ccc;line-height:1.6}main{max-width:1000px}</style></head><body><main><p><a href="../../ejemplos.html">Volver a ejemplos</a> · <a href="diabetes.json" download>Descargar JSON</a></p><h1>Bundle: diabetes</h1><pre>{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "identifier": {
+    "system": "https://fhir.sus-rda-mx.local/NamingSystem/transaccion-demo/prestador",
+    "value": "TX-diabetes-001"
+  },
+  "timestamp": "2026-10-12T09:31:00-06:00",
+  "entry": [
+    {
+      "fullUrl": "https://example.invalid/fhir/Patient/paciente-diabetes",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "paciente-diabetes",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/curp",
+            "value": "GODE561231HDFABC09"
+          }
+        ],
+        "name": [
+          {
+            "use": "usual",
+            "family": "Perez",
+            "given": [
+              "Pedro"
+            ]
+          }
+        ],
+        "birthDate": "1956-12-31"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/paciente-diabetes"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Organization/prestador-diabetes",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "prestador-diabetes",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo",
+            "value": "PRESTADOR-DEMO"
+          }
+        ],
+        "name": "Institución prestadora sintética"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/prestador-diabetes"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Organization/pagador-diabetes",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "pagador-diabetes",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo",
+            "value": "IMSS-DEMO"
+          }
+        ],
+        "name": "IMSS (ejemplo sintético)"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/pagador-diabetes"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Location/unidad-diabetes",
+      "resource": {
+        "resourceType": "Location",
+        "id": "unidad-diabetes",
+        "status": "active",
+        "name": "Unidad ambulatoria sintética",
+        "managingOrganization": {
+          "reference": "Organization/prestador-diabetes"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/unidad-diabetes"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Coverage/derechos-diabetes",
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "derechos-diabetes",
+        "status": "active",
+        "beneficiary": {
+          "reference": "Patient/paciente-diabetes"
+        },
+        "payor": [
+          {
+            "reference": "Organization/pagador-diabetes"
+          }
+        ],
+        "period": {
+          "start": "2026-01-01",
+          "end": "2026-12-31"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Coverage/derechos-diabetes"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Encounter/atencion-diabetes",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "atencion-diabetes",
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/folio-atencion-demo",
+            "value": "FOLIO-diabetes"
+          }
+        ],
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB"
+        },
+        "subject": {
+          "reference": "Patient/paciente-diabetes"
+        },
+        "serviceProvider": {
+          "reference": "Organization/prestador-diabetes"
+        },
+        "location": [
+          {
+            "location": {
+              "reference": "Location/unidad-diabetes"
+            }
+          }
+        ],
+        "period": {
+          "start": "2026-10-12T09:00:00-06:00",
+          "end": "2026-10-12T09:30:00-06:00"
+        },
+        "diagnosis": [
+          {
+            "condition": {
+              "reference": "Condition/diagnostico-diabetes"
+            },
+            "rank": 1
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Encounter/atencion-diabetes"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Condition/diagnostico-diabetes",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "diagnostico-diabetes",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10",
+              "code": "E11.9"
+            }
+          ],
+          "text": "Diabetes mellitus tipo 2 sin complicaciones"
+        },
+        "subject": {
+          "reference": "Patient/paciente-diabetes"
+        },
+        "encounter": {
+          "reference": "Encounter/atencion-diabetes"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/diagnostico-diabetes"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Claim/reclamacion-diabetes",
+      "resource": {
+        "resourceType": "Claim",
+        "id": "reclamacion-diabetes",
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/transaccion-demo/prestador",
+            "value": "TX-diabetes-001"
+          }
+        ],
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional"
+            }
+          ]
+        },
+        "use": "claim",
+        "patient": {
+          "reference": "Patient/paciente-diabetes"
+        },
+        "created": "2026-10-12T09:31:00-06:00",
+        "provider": {
+          "reference": "Organization/prestador-diabetes"
+        },
+        "insurer": {
+          "reference": "Organization/pagador-diabetes"
+        },
+        "priority": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/processpriority",
+              "code": "normal"
+            }
+          ]
+        },
+        "insurance": [
+          {
+            "sequence": 1,
+            "focal": true,
+            "coverage": {
+              "reference": "Coverage/derechos-diabetes"
+            }
+          }
+        ],
+        "item": [
+          {
+            "sequence": 1,
+            "extension": [
+              {
+                "url": "https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id",
+                "valueIdentifier": {
+                  "system": "https://fhir.sus-rda-mx.local/NamingSystem/linea-demo",
+                  "value": "LINEA-diabetes-001"
+                }
+              }
+            ],
+            "productOrService": {
+              "text": "Atención ambulatoria de diabetes"
+            },
+            "quantity": {
+              "value": 1
+            },
+            "servicedDate": "2026-10-12",
+            "encounter": [
+              {
+                "reference": "Encounter/atencion-diabetes"
+              }
+            ],
+            "diagnosisSequence": [
+              1
+            ]
+          }
+        ],
+        "diagnosis": [
+          {
+            "sequence": 1,
+            "diagnosisReference": {
+              "reference": "Condition/diagnostico-diabetes"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Claim/reclamacion-diabetes"
+      }
+    }
+  ]
+}</pre></main></body></html>
