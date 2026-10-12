@@ -255,7 +255,7 @@
               "coding": [
                 {
                   "system": "https://fhir.sus-rda-mx.local/CodeSystem/sus-fase0-service-working",
-                  "version": "2026-10-09-working",
+                  "version": "2026-10-12-working",
                   "code": "890201",
                   "display": "CONSULTA DE PRIMERA VEZ POR MEDICINA GENERAL"
                 }

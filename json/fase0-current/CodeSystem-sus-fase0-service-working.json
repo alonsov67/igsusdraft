@@ -2,7 +2,7 @@
   "resourceType": "CodeSystem",
   "id": "sus-fase0-service-working",
   "url": "https://fhir.sus-rda-mx.local/CodeSystem/sus-fase0-service-working",
-  "version": "2026-10-09-working",
+  "version": "2026-10-12-working",
   "name": "SUSFase0ServiceWorkingCS",
   "title": "Servicios Fase 0: extracto de trabajo CUBS",
   "status": "draft",
