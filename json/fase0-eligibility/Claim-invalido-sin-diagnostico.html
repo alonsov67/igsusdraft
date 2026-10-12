@@ -1,0 +1,150 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../../assets/styles.css"><main><a href="../../ejemplos.html#verificacion-derechohabiencia">Volver</a> | <a download href="Claim-invalido-sin-diagnostico.json">Descargar JSON</a><h1>Claim-invalido-sin-diagnostico</h1><p>Evidencia administrativa sintetica; hash no verificable. Version 2026-10-12-eligibility.</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere;background:#f6f6f6;color:#222;padding:20px">{
+  &quot;resourceType&quot;: &quot;Claim&quot;,
+  &quot;id&quot;: &quot;reclamacion-control-hta&quot;,
+  &quot;identifier&quot;: [
+    {
+      &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/NamingSystem/transaccion-demo/prestador&quot;,
+      &quot;value&quot;: &quot;TX-control-hta-001&quot;
+    }
+  ],
+  &quot;status&quot;: &quot;active&quot;,
+  &quot;type&quot;: {
+    &quot;coding&quot;: [
+      {
+        &quot;system&quot;: &quot;http://terminology.hl7.org/CodeSystem/claim-type&quot;,
+        &quot;code&quot;: &quot;professional&quot;
+      }
+    ]
+  },
+  &quot;use&quot;: &quot;claim&quot;,
+  &quot;patient&quot;: {
+    &quot;reference&quot;: &quot;Patient/paciente-control-hta&quot;
+  },
+  &quot;created&quot;: &quot;2026-10-12T09:31:00-06:00&quot;,
+  &quot;provider&quot;: {
+    &quot;reference&quot;: &quot;Organization/prestador-control-hta&quot;
+  },
+  &quot;priority&quot;: {
+    &quot;coding&quot;: [
+      {
+        &quot;system&quot;: &quot;http://terminology.hl7.org/CodeSystem/processpriority&quot;,
+        &quot;code&quot;: &quot;normal&quot;
+      }
+    ]
+  },
+  &quot;insurance&quot;: [
+    {
+      &quot;sequence&quot;: 1,
+      &quot;focal&quot;: true,
+      &quot;coverage&quot;: {
+        &quot;reference&quot;: &quot;Coverage/derechos-control-hta&quot;
+      }
+    }
+  ],
+  &quot;item&quot;: [
+    {
+      &quot;sequence&quot;: 1,
+      &quot;extension&quot;: [
+        {
+          &quot;url&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id&quot;,
+          &quot;valueIdentifier&quot;: {
+            &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/NamingSystem/linea-demo&quot;,
+            &quot;value&quot;: &quot;LINEA-control-hta-001&quot;
+          }
+        }
+      ],
+      &quot;productOrService&quot;: {
+        &quot;coding&quot;: [
+          {
+            &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/CodeSystem/sus-fase0-service-working&quot;,
+            &quot;version&quot;: &quot;2026-10-12-working&quot;,
+            &quot;code&quot;: &quot;890301&quot;,
+            &quot;display&quot;: &quot;CONSULTA DE CONTROL O DE SEGUIMIENTO POR MEDICINA GENERAL&quot;
+          }
+        ],
+        &quot;text&quot;: &quot;CONSULTA DE CONTROL O DE SEGUIMIENTO POR MEDICINA GENERAL&quot;
+      },
+      &quot;quantity&quot;: {
+        &quot;value&quot;: 1
+      },
+      &quot;servicedDate&quot;: &quot;2026-10-12&quot;,
+      &quot;encounter&quot;: [
+        {
+          &quot;reference&quot;: &quot;Encounter/atencion-control-hta&quot;
+        }
+      ]
+    }
+  ],
+  &quot;meta&quot;: {
+    &quot;profile&quot;: [
+      &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-ambulatory-claim|2026-10-12-eligibility&quot;
+    ]
+  },
+  &quot;extension&quot;: [
+    {
+      &quot;url&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence&quot;,
+      &quot;extension&quot;: [
+        {
+          &quot;url&quot;: &quot;curp&quot;,
+          &quot;valueString&quot;: &quot;LOPA700101MDFXXX01&quot;
+        },
+        {
+          &quot;url&quot;: &quot;curpValidated&quot;,
+          &quot;valueBoolean&quot;: true
+        },
+        {
+          &quot;url&quot;: &quot;queryStatus&quot;,
+          &quot;valueCode&quot;: &quot;complete&quot;
+        },
+        {
+          &quot;url&quot;: &quot;sourceSystem&quot;,
+          &quot;valueUri&quot;: &quot;https://example.invalid/consulta-curp-derechohabiencia&quot;
+        },
+        {
+          &quot;url&quot;: &quot;queriedAt&quot;,
+          &quot;valueDateTime&quot;: &quot;2026-10-12T08:30:00-06:00&quot;
+        },
+        {
+          &quot;url&quot;: &quot;consultationHash&quot;,
+          &quot;valueString&quot;: &quot;HASH-DEMO-NO-VERIFICABLE-LOPA700101MDFXXX01&quot;
+        },
+        {
+          &quot;url&quot;: &quot;response&quot;,
+          &quot;valueAttachment&quot;: {
+            &quot;contentType&quot;: &quot;application/json&quot;,
+            &quot;data&quot;: &quot;eyJzeW50aGV0aWMiOnRydWUsImN1cnAiOiJMT1BBNzAwMTAxTURGWFhYMDEiLCJjdXJwVmFsaWRhdGVkIjp0cnVlLCJxdWVyeVN0YXR1cyI6ImNvbXBsZXRlIiwiaW5zdGl0dXRpb25zIjpbIklNU1MiXSwiY29uc3VsdGF0aW9uSGFzaCI6IkhBU0gtREVNTy1OTy1WRVJJRklDQUJMRS1MT1BBNzAwMTAxTURGWFhYMDEifQ==&quot;,
+            &quot;title&quot;: &quot;Respuesta sintetica de consulta; no esquema oficial&quot;
+          }
+        },
+        {
+          &quot;url&quot;: &quot;defaultApplied&quot;,
+          &quot;valueBoolean&quot;: false
+        },
+        {
+          &quot;url&quot;: &quot;returnedInstitution&quot;,
+          &quot;valueCodeableConcept&quot;: {
+            &quot;coding&quot;: [
+              {
+                &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/CodeSystem/instituciones-fase0-working&quot;,
+                &quot;code&quot;: &quot;IMSS&quot;,
+                &quot;display&quot;: &quot;IMSS&quot;
+              }
+            ]
+          }
+        },
+        {
+          &quot;url&quot;: &quot;effectiveInstitution&quot;,
+          &quot;valueCodeableConcept&quot;: {
+            &quot;coding&quot;: [
+              {
+                &quot;system&quot;: &quot;https://fhir.sus-rda-mx.local/CodeSystem/instituciones-fase0-working&quot;,
+                &quot;code&quot;: &quot;IMSS&quot;,
+                &quot;display&quot;: &quot;IMSS&quot;
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}</pre></main></html>

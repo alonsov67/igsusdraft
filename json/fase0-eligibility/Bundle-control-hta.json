@@ -1,0 +1,366 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "identifier": {
+    "system": "https://fhir.sus-rda-mx.local/NamingSystem/transaccion-demo/prestador",
+    "value": "TX-control-hta-001"
+  },
+  "timestamp": "2026-10-12T09:31:00-06:00",
+  "entry": [
+    {
+      "fullUrl": "https://example.invalid/fhir/Patient/paciente-control-hta",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "paciente-control-hta",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/curp",
+            "value": "LOPA700101MDFXXX01"
+          }
+        ],
+        "name": [
+          {
+            "use": "usual",
+            "given": [
+              "Ana"
+            ],
+            "family": "Lopez"
+          }
+        ],
+        "birthDate": "1970-01-01"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/paciente-control-hta"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Organization/prestador-control-hta",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "prestador-control-hta",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo",
+            "value": "PRESTADOR-DEMO"
+          }
+        ],
+        "name": "Institución prestadora sintética"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/prestador-control-hta"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Organization/pagador-control-hta",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "pagador-control-hta",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo",
+            "value": "IMSS-DEMO"
+          }
+        ],
+        "name": "IMSS (ejemplo sintético)"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/pagador-control-hta"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Location/unidad-control-hta",
+      "resource": {
+        "resourceType": "Location",
+        "id": "unidad-control-hta",
+        "status": "active",
+        "name": "Unidad ambulatoria sintética",
+        "managingOrganization": {
+          "reference": "Organization/prestador-control-hta"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/unidad-control-hta"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Coverage/derechos-control-hta",
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "derechos-control-hta",
+        "status": "active",
+        "beneficiary": {
+          "reference": "Patient/paciente-control-hta"
+        },
+        "payor": [
+          {
+            "reference": "Organization/pagador-control-hta"
+          }
+        ],
+        "period": {
+          "start": "2026-01-01",
+          "end": "2026-12-31"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Coverage/derechos-control-hta"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Encounter/atencion-control-hta",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "atencion-control-hta",
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/folio-atencion-demo",
+            "value": "FOLIO-control-hta"
+          }
+        ],
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB"
+        },
+        "subject": {
+          "reference": "Patient/paciente-control-hta"
+        },
+        "serviceProvider": {
+          "reference": "Organization/prestador-control-hta"
+        },
+        "location": [
+          {
+            "location": {
+              "reference": "Location/unidad-control-hta"
+            }
+          }
+        ],
+        "period": {
+          "start": "2026-10-12T09:00:00-06:00",
+          "end": "2026-10-12T09:30:00-06:00"
+        },
+        "diagnosis": [
+          {
+            "condition": {
+              "reference": "Condition/diagnostico-control-hta"
+            },
+            "rank": 1
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Encounter/atencion-control-hta"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Condition/diagnostico-control-hta",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "diagnostico-control-hta",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10",
+              "code": "I10"
+            }
+          ],
+          "text": "Hipertensión esencial"
+        },
+        "subject": {
+          "reference": "Patient/paciente-control-hta"
+        },
+        "encounter": {
+          "reference": "Encounter/atencion-control-hta"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/diagnostico-control-hta"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Claim/reclamacion-control-hta",
+      "resource": {
+        "resourceType": "Claim",
+        "id": "reclamacion-control-hta",
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/transaccion-demo/prestador",
+            "value": "TX-control-hta-001"
+          }
+        ],
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional"
+            }
+          ]
+        },
+        "use": "claim",
+        "patient": {
+          "reference": "Patient/paciente-control-hta"
+        },
+        "created": "2026-10-12T09:31:00-06:00",
+        "provider": {
+          "reference": "Organization/prestador-control-hta"
+        },
+        "priority": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/processpriority",
+              "code": "normal"
+            }
+          ]
+        },
+        "insurance": [
+          {
+            "sequence": 1,
+            "focal": true,
+            "coverage": {
+              "reference": "Coverage/derechos-control-hta"
+            }
+          }
+        ],
+        "item": [
+          {
+            "sequence": 1,
+            "extension": [
+              {
+                "url": "https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id",
+                "valueIdentifier": {
+                  "system": "https://fhir.sus-rda-mx.local/NamingSystem/linea-demo",
+                  "value": "LINEA-control-hta-001"
+                }
+              }
+            ],
+            "productOrService": {
+              "coding": [
+                {
+                  "system": "https://fhir.sus-rda-mx.local/CodeSystem/sus-fase0-service-working",
+                  "version": "2026-10-12-working",
+                  "code": "890301",
+                  "display": "CONSULTA DE CONTROL O DE SEGUIMIENTO POR MEDICINA GENERAL"
+                }
+              ],
+              "text": "CONSULTA DE CONTROL O DE SEGUIMIENTO POR MEDICINA GENERAL"
+            },
+            "quantity": {
+              "value": 1
+            },
+            "servicedDate": "2026-10-12",
+            "encounter": [
+              {
+                "reference": "Encounter/atencion-control-hta"
+              }
+            ],
+            "diagnosisSequence": [
+              1
+            ]
+          }
+        ],
+        "diagnosis": [
+          {
+            "sequence": 1,
+            "diagnosisReference": {
+              "reference": "Condition/diagnostico-control-hta"
+            }
+          }
+        ],
+        "meta": {
+          "profile": [
+            "https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-ambulatory-claim|2026-10-12-eligibility"
+          ]
+        },
+        "extension": [
+          {
+            "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence",
+            "extension": [
+              {
+                "url": "curp",
+                "valueString": "LOPA700101MDFXXX01"
+              },
+              {
+                "url": "curpValidated",
+                "valueBoolean": true
+              },
+              {
+                "url": "queryStatus",
+                "valueCode": "complete"
+              },
+              {
+                "url": "sourceSystem",
+                "valueUri": "https://example.invalid/consulta-curp-derechohabiencia"
+              },
+              {
+                "url": "queriedAt",
+                "valueDateTime": "2026-10-12T08:30:00-06:00"
+              },
+              {
+                "url": "consultationHash",
+                "valueString": "HASH-DEMO-NO-VERIFICABLE-LOPA700101MDFXXX01"
+              },
+              {
+                "url": "response",
+                "valueAttachment": {
+                  "contentType": "application/json",
+                  "data": "eyJzeW50aGV0aWMiOnRydWUsImN1cnAiOiJMT1BBNzAwMTAxTURGWFhYMDEiLCJjdXJwVmFsaWRhdGVkIjp0cnVlLCJxdWVyeVN0YXR1cyI6ImNvbXBsZXRlIiwiaW5zdGl0dXRpb25zIjpbIklNU1MiXSwiY29uc3VsdGF0aW9uSGFzaCI6IkhBU0gtREVNTy1OTy1WRVJJRklDQUJMRS1MT1BBNzAwMTAxTURGWFhYMDEifQ==",
+                  "title": "Respuesta sintetica de consulta; no esquema oficial"
+                }
+              },
+              {
+                "url": "defaultApplied",
+                "valueBoolean": false
+              },
+              {
+                "url": "returnedInstitution",
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "https://fhir.sus-rda-mx.local/CodeSystem/instituciones-fase0-working",
+                      "code": "IMSS",
+                      "display": "IMSS"
+                    }
+                  ]
+                }
+              },
+              {
+                "url": "effectiveInstitution",
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "https://fhir.sus-rda-mx.local/CodeSystem/instituciones-fase0-working",
+                      "code": "IMSS",
+                      "display": "IMSS"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Claim/reclamacion-control-hta"
+      }
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "sus-fase0-ambulatory-claim",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-ambulatory-claim",
+  "version": "2026-10-12-eligibility",
+  "name": "SUSFase0AmbulatoryClaim",
+  "title": "Reclamacion inicial ambulatoria Fase 0 (trabajo)",
+  "status": "draft",
+  "description": "Recepcion inicial sin institucion responsable resuelta ni soportes clinicos adicionales. Requiere diagnostico en consulta; inmunizacion se define en otro perfil.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Claim",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Claim",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Claim.extension",
+        "path": "Claim.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        },
+        "min": 1
+      },
+      {
+        "id": "Claim.extension:eligibilityEvidence",
+        "path": "Claim.extension",
+        "sliceName": "eligibilityEvidence",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Claim.identifier",
+        "path": "Claim.identifier",
+        "min": 1
+      },
+      {
+        "id": "Claim.status",
+        "path": "Claim.status",
+        "patternCode": "active"
+      },
+      {
+        "id": "Claim.use",
+        "path": "Claim.use",
+        "patternCode": "claim"
+      },
+      {
+        "id": "Claim.insurer",
+        "path": "Claim.insurer",
+        "max": "0"
+      },
+      {
+        "id": "Claim.supportingInfo",
+        "path": "Claim.supportingInfo",
+        "max": "0"
+      },
+      {
+        "id": "Claim.diagnosis",
+        "path": "Claim.diagnosis",
+        "min": 1
+      },
+      {
+        "id": "Claim.diagnosis.diagnosis[x]",
+        "path": "Claim.diagnosis.diagnosis[x]",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Condition"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Claim.item",
+        "path": "Claim.item",
+        "min": 1
+      },
+      {
+        "id": "Claim.item.extension",
+        "path": "Claim.item.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        },
+        "min": 1
+      },
+      {
+        "id": "Claim.item.extension:serviceLineId",
+        "path": "Claim.item.extension",
+        "sliceName": "serviceLineId",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Claim.item.productOrService",
+        "path": "Claim.item.productOrService",
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.sus-rda-mx.local/ValueSet/sus-fase0-service-working"
+        }
+      },
+      {
+        "id": "Claim.item.serviced[x]",
+        "path": "Claim.item.serviced[x]",
+        "min": 1
+      },
+      {
+        "id": "Claim.item.quantity",
+        "path": "Claim.item.quantity",
+        "min": 1
+      },
+      {
+        "id": "Claim.item.quantity.value",
+        "path": "Claim.item.quantity.value",
+        "min": 1
+      },
+      {
+        "id": "Claim.item.unitPrice",
+        "path": "Claim.item.unitPrice",
+        "max": "0"
+      },
+      {
+        "id": "Claim.item.net",
+        "path": "Claim.item.net",
+        "max": "0"
+      },
+      {
+        "id": "Claim.item.encounter",
+        "path": "Claim.item.encounter",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Claim.total",
+        "path": "Claim.total",
+        "max": "0"
+      }
+    ]
+  }
+}

@@ -1,0 +1,164 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../../assets/styles.css"><main><a href="../../ejemplos.html#verificacion-derechohabiencia">Volver</a> | <a download href="StructureDefinition-sus-fase0-vaccination-claim.json">Descargar JSON</a><h1>StructureDefinition-sus-fase0-vaccination-claim</h1><p>Evidencia administrativa sintetica; hash no verificable. Version 2026-10-12-eligibility.</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere;background:#f6f6f6;color:#222;padding:20px">{
+  &quot;resourceType&quot;: &quot;StructureDefinition&quot;,
+  &quot;id&quot;: &quot;sus-fase0-vaccination-claim&quot;,
+  &quot;url&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-vaccination-claim&quot;,
+  &quot;version&quot;: &quot;2026-10-12-eligibility&quot;,
+  &quot;name&quot;: &quot;SUSFase0VaccinationClaim&quot;,
+  &quot;title&quot;: &quot;Reclamacion de prestacion de vacunacion Fase 0 (trabajo)&quot;,
+  &quot;status&quot;: &quot;draft&quot;,
+  &quot;description&quot;: &quot;Solo prestacion, sin registro clinico de vacuna, dosis o lote. Diagnostico no requerido.&quot;,
+  &quot;fhirVersion&quot;: &quot;4.0.1&quot;,
+  &quot;kind&quot;: &quot;resource&quot;,
+  &quot;abstract&quot;: false,
+  &quot;type&quot;: &quot;Claim&quot;,
+  &quot;baseDefinition&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Claim&quot;,
+  &quot;derivation&quot;: &quot;constraint&quot;,
+  &quot;differential&quot;: {
+    &quot;element&quot;: [
+      {
+        &quot;id&quot;: &quot;Claim.extension&quot;,
+        &quot;path&quot;: &quot;Claim.extension&quot;,
+        &quot;slicing&quot;: {
+          &quot;discriminator&quot;: [
+            {
+              &quot;type&quot;: &quot;value&quot;,
+              &quot;path&quot;: &quot;url&quot;
+            }
+          ],
+          &quot;ordered&quot;: false,
+          &quot;rules&quot;: &quot;open&quot;
+        },
+        &quot;min&quot;: 1
+      },
+      {
+        &quot;id&quot;: &quot;Claim.extension:eligibilityEvidence&quot;,
+        &quot;path&quot;: &quot;Claim.extension&quot;,
+        &quot;sliceName&quot;: &quot;eligibilityEvidence&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;,
+            &quot;profile&quot;: [
+              &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence&quot;
+            ]
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Claim.identifier&quot;,
+        &quot;path&quot;: &quot;Claim.identifier&quot;,
+        &quot;min&quot;: 1
+      },
+      {
+        &quot;id&quot;: &quot;Claim.status&quot;,
+        &quot;path&quot;: &quot;Claim.status&quot;,
+        &quot;patternCode&quot;: &quot;active&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Claim.use&quot;,
+        &quot;path&quot;: &quot;Claim.use&quot;,
+        &quot;patternCode&quot;: &quot;claim&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Claim.insurer&quot;,
+        &quot;path&quot;: &quot;Claim.insurer&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Claim.supportingInfo&quot;,
+        &quot;path&quot;: &quot;Claim.supportingInfo&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Claim.diagnosis&quot;,
+        &quot;path&quot;: &quot;Claim.diagnosis&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Claim.item&quot;,
+        &quot;path&quot;: &quot;Claim.item&quot;,
+        &quot;min&quot;: 1
+      },
+      {
+        &quot;id&quot;: &quot;Claim.item.extension&quot;,
+        &quot;path&quot;: &quot;Claim.item.extension&quot;,
+        &quot;slicing&quot;: {
+          &quot;discriminator&quot;: [
+            {
+              &quot;type&quot;: &quot;value&quot;,
+              &quot;path&quot;: &quot;url&quot;
+            }
+          ],
+          &quot;ordered&quot;: false,
+          &quot;rules&quot;: &quot;open&quot;
+        },
+        &quot;min&quot;: 1
+      },
+      {
+        &quot;id&quot;: &quot;Claim.item.extension:serviceLineId&quot;,
+        &quot;path&quot;: &quot;Claim.item.extension&quot;,
+        &quot;sliceName&quot;: &quot;serviceLineId&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Extension&quot;,
+            &quot;profile&quot;: [
+              &quot;https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id&quot;
+            ]
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Claim.item.productOrService&quot;,
+        &quot;path&quot;: &quot;Claim.item.productOrService&quot;,
+        &quot;binding&quot;: {
+          &quot;strength&quot;: &quot;required&quot;,
+          &quot;valueSet&quot;: &quot;https://fhir.sus-rda-mx.local/ValueSet/sus-fase0-service-working&quot;
+        }
+      },
+      {
+        &quot;id&quot;: &quot;Claim.item.productOrService.coding.code&quot;,
+        &quot;path&quot;: &quot;Claim.item.productOrService.coding.code&quot;,
+        &quot;patternCode&quot;: &quot;993106&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Claim.item.serviced[x]&quot;,
+        &quot;path&quot;: &quot;Claim.item.serviced[x]&quot;,
+        &quot;min&quot;: 1
+      },
+      {
+        &quot;id&quot;: &quot;Claim.item.quantity&quot;,
+        &quot;path&quot;: &quot;Claim.item.quantity&quot;,
+        &quot;min&quot;: 1
+      },
+      {
+        &quot;id&quot;: &quot;Claim.item.quantity.value&quot;,
+        &quot;path&quot;: &quot;Claim.item.quantity.value&quot;,
+        &quot;min&quot;: 1
+      },
+      {
+        &quot;id&quot;: &quot;Claim.item.unitPrice&quot;,
+        &quot;path&quot;: &quot;Claim.item.unitPrice&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Claim.item.net&quot;,
+        &quot;path&quot;: &quot;Claim.item.net&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Claim.item.encounter&quot;,
+        &quot;path&quot;: &quot;Claim.item.encounter&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Claim.total&quot;,
+        &quot;path&quot;: &quot;Claim.total&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      }
+    ]
+  }
+}</pre></main></html>

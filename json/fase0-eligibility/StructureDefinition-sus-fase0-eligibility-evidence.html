@@ -1,0 +1,345 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../../assets/styles.css"><main><a href="../../ejemplos.html#verificacion-derechohabiencia">Volver</a> | <a download href="StructureDefinition-sus-fase0-eligibility-evidence.json">Descargar JSON</a><h1>StructureDefinition-sus-fase0-eligibility-evidence</h1><p>Evidencia administrativa sintetica; hash no verificable. Version 2026-10-12-eligibility.</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere;background:#f6f6f6;color:#222;padding:20px">{
+  &quot;resourceType&quot;: &quot;StructureDefinition&quot;,
+  &quot;id&quot;: &quot;sus-fase0-eligibility-evidence&quot;,
+  &quot;url&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence&quot;,
+  &quot;version&quot;: &quot;2026-10-12-eligibility&quot;,
+  &quot;name&quot;: &quot;SUSFase0EligibilityEvidence&quot;,
+  &quot;title&quot;: &quot;Evidencia de validacion de CURP y derechohabiencia en la reclamacion&quot;,
+  &quot;status&quot;: &quot;draft&quot;,
+  &quot;description&quot;: &quot;El prestador consulta el sistema de origen y envia su respuesta y hash. La Camara verifica la autenticidad contra ese sistema; validar estructura no verifica el hash. Namespace de trabajo.&quot;,
+  &quot;fhirVersion&quot;: &quot;4.0.1&quot;,
+  &quot;kind&quot;: &quot;complex-type&quot;,
+  &quot;abstract&quot;: false,
+  &quot;context&quot;: [
+    {
+      &quot;expression&quot;: &quot;Claim&quot;,
+      &quot;type&quot;: &quot;element&quot;
+    }
+  ],
+  &quot;type&quot;: &quot;Extension&quot;,
+  &quot;baseDefinition&quot;: &quot;http://hl7.org/fhir/StructureDefinition/Extension&quot;,
+  &quot;derivation&quot;: &quot;constraint&quot;,
+  &quot;differential&quot;: {
+    &quot;element&quot;: [
+      {
+        &quot;id&quot;: &quot;Extension&quot;,
+        &quot;path&quot;: &quot;Extension&quot;,
+        &quot;short&quot;: &quot;Evidencia de validacion de CURP y derechohabiencia en la reclamacion&quot;,
+        &quot;definition&quot;: &quot;El prestador consulta el sistema de origen y envia su respuesta y hash. La Camara verifica la autenticidad contra ese sistema; validar estructura no verifica el hash. Namespace de trabajo.&quot;,
+        &quot;constraint&quot;: [
+          {
+            &quot;key&quot;: &quot;sus-dh-default&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Sin instituciones retornadas se conserva el conjunto vacio y se aplica IMSS-Bienestar por defecto.&quot;,
+            &quot;expression&quot;: &quot;extension.where(url=&#x27;returnedInstitution&#x27;).empty() implies (extension.where(url=&#x27;defaultApplied&#x27;).value = true and extension.where(url=&#x27;effectiveInstitution&#x27;).count() = 1 and extension.where(url=&#x27;effectiveInstitution&#x27;).value.coding.where(system=&#x27;https://fhir.sus-rda-mx.local/CodeSystem/instituciones-fase0-working&#x27; and code=&#x27;IMSS-BIENESTAR&#x27;).exists())&quot;,
+            &quot;source&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence&quot;
+          },
+          {
+            &quot;key&quot;: &quot;sus-dh-no-default&quot;,
+            &quot;severity&quot;: &quot;error&quot;,
+            &quot;human&quot;: &quot;Con instituciones retornadas no se aplica el valor por defecto.&quot;,
+            &quot;expression&quot;: &quot;extension.where(url=&#x27;returnedInstitution&#x27;).exists() implies (extension.where(url=&#x27;defaultApplied&#x27;).value = false)&quot;,
+            &quot;source&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;min&quot;: 9
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curp&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;curp&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curp.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curp.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;curp&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curp.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;string&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curpValidated&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;curpValidated&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curpValidated.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curpValidated.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;curpValidated&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:curpValidated.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;boolean&quot;
+          }
+        ],
+        &quot;patternBoolean&quot;: true
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queryStatus&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;queryStatus&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queryStatus.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queryStatus.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;queryStatus&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queryStatus.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;code&quot;
+          }
+        ],
+        &quot;patternCode&quot;: &quot;complete&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:sourceSystem&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;sourceSystem&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:sourceSystem.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:sourceSystem.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;sourceSystem&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:sourceSystem.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;uri&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queriedAt&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;queriedAt&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queriedAt.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queriedAt.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;queriedAt&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:queriedAt.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;dateTime&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:consultationHash&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;consultationHash&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:consultationHash.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:consultationHash.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;consultationHash&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:consultationHash.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;string&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;response&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;response&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;Attachment&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.value[x].contentType&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x].contentType&quot;,
+        &quot;min&quot;: 1
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:response.value[x].data&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x].data&quot;,
+        &quot;min&quot;: 1
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:returnedInstitution&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;returnedInstitution&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: &quot;*&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:returnedInstitution.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:returnedInstitution.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;returnedInstitution&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:returnedInstitution.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;CodeableConcept&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:effectiveInstitution&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;effectiveInstitution&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;*&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:effectiveInstitution.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:effectiveInstitution.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;effectiveInstitution&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:effectiveInstitution.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;CodeableConcept&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:defaultApplied&quot;,
+        &quot;path&quot;: &quot;Extension.extension&quot;,
+        &quot;sliceName&quot;: &quot;defaultApplied&quot;,
+        &quot;min&quot;: 1,
+        &quot;max&quot;: &quot;1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:defaultApplied.extension&quot;,
+        &quot;path&quot;: &quot;Extension.extension.extension&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:defaultApplied.url&quot;,
+        &quot;path&quot;: &quot;Extension.extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;defaultApplied&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.extension:defaultApplied.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.extension.value[x]&quot;,
+        &quot;min&quot;: 1,
+        &quot;type&quot;: [
+          {
+            &quot;code&quot;: &quot;boolean&quot;
+          }
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Extension.url&quot;,
+        &quot;path&quot;: &quot;Extension.url&quot;,
+        &quot;fixedUri&quot;: &quot;https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Extension.value[x]&quot;,
+        &quot;path&quot;: &quot;Extension.value[x]&quot;,
+        &quot;max&quot;: &quot;0&quot;
+      }
+    ]
+  }
+}</pre></main></html>

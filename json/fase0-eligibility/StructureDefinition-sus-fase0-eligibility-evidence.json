@@ -1,0 +1,345 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "sus-fase0-eligibility-evidence",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence",
+  "version": "2026-10-12-eligibility",
+  "name": "SUSFase0EligibilityEvidence",
+  "title": "Evidencia de validacion de CURP y derechohabiencia en la reclamacion",
+  "status": "draft",
+  "description": "El prestador consulta el sistema de origen y envia su respuesta y hash. La Camara verifica la autenticidad contra ese sistema; validar estructura no verifica el hash. Namespace de trabajo.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Claim",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Evidencia de validacion de CURP y derechohabiencia en la reclamacion",
+        "definition": "El prestador consulta el sistema de origen y envia su respuesta y hash. La Camara verifica la autenticidad contra ese sistema; validar estructura no verifica el hash. Namespace de trabajo.",
+        "constraint": [
+          {
+            "key": "sus-dh-default",
+            "severity": "error",
+            "human": "Sin instituciones retornadas se conserva el conjunto vacio y se aplica IMSS-Bienestar por defecto.",
+            "expression": "extension.where(url='returnedInstitution').empty() implies (extension.where(url='defaultApplied').value = true and extension.where(url='effectiveInstitution').count() = 1 and extension.where(url='effectiveInstitution').value.coding.where(system='https://fhir.sus-rda-mx.local/CodeSystem/instituciones-fase0-working' and code='IMSS-BIENESTAR').exists())",
+            "source": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence"
+          },
+          {
+            "key": "sus-dh-no-default",
+            "severity": "error",
+            "human": "Con instituciones retornadas no se aplica el valor por defecto.",
+            "expression": "extension.where(url='returnedInstitution').exists() implies (extension.where(url='defaultApplied').value = false)",
+            "source": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "min": 9
+      },
+      {
+        "id": "Extension.extension:curp",
+        "path": "Extension.extension",
+        "sliceName": "curp",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:curp.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:curp.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "curp"
+      },
+      {
+        "id": "Extension.extension:curp.value[x]",
+        "path": "Extension.extension.value[x]",
+        "min": 1,
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:curpValidated",
+        "path": "Extension.extension",
+        "sliceName": "curpValidated",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:curpValidated.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:curpValidated.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "curpValidated"
+      },
+      {
+        "id": "Extension.extension:curpValidated.value[x]",
+        "path": "Extension.extension.value[x]",
+        "min": 1,
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ],
+        "patternBoolean": true
+      },
+      {
+        "id": "Extension.extension:queryStatus",
+        "path": "Extension.extension",
+        "sliceName": "queryStatus",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:queryStatus.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:queryStatus.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "queryStatus"
+      },
+      {
+        "id": "Extension.extension:queryStatus.value[x]",
+        "path": "Extension.extension.value[x]",
+        "min": 1,
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "patternCode": "complete"
+      },
+      {
+        "id": "Extension.extension:sourceSystem",
+        "path": "Extension.extension",
+        "sliceName": "sourceSystem",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:sourceSystem.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:sourceSystem.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "sourceSystem"
+      },
+      {
+        "id": "Extension.extension:sourceSystem.value[x]",
+        "path": "Extension.extension.value[x]",
+        "min": 1,
+        "type": [
+          {
+            "code": "uri"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:queriedAt",
+        "path": "Extension.extension",
+        "sliceName": "queriedAt",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:queriedAt.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:queriedAt.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "queriedAt"
+      },
+      {
+        "id": "Extension.extension:queriedAt.value[x]",
+        "path": "Extension.extension.value[x]",
+        "min": 1,
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:consultationHash",
+        "path": "Extension.extension",
+        "sliceName": "consultationHash",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:consultationHash.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:consultationHash.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "consultationHash"
+      },
+      {
+        "id": "Extension.extension:consultationHash.value[x]",
+        "path": "Extension.extension.value[x]",
+        "min": 1,
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:response",
+        "path": "Extension.extension",
+        "sliceName": "response",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:response.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:response.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "response"
+      },
+      {
+        "id": "Extension.extension:response.value[x]",
+        "path": "Extension.extension.value[x]",
+        "min": 1,
+        "type": [
+          {
+            "code": "Attachment"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:response.value[x].contentType",
+        "path": "Extension.extension.value[x].contentType",
+        "min": 1
+      },
+      {
+        "id": "Extension.extension:response.value[x].data",
+        "path": "Extension.extension.value[x].data",
+        "min": 1
+      },
+      {
+        "id": "Extension.extension:returnedInstitution",
+        "path": "Extension.extension",
+        "sliceName": "returnedInstitution",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "Extension.extension:returnedInstitution.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:returnedInstitution.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "returnedInstitution"
+      },
+      {
+        "id": "Extension.extension:returnedInstitution.value[x]",
+        "path": "Extension.extension.value[x]",
+        "min": 1,
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:effectiveInstitution",
+        "path": "Extension.extension",
+        "sliceName": "effectiveInstitution",
+        "min": 1,
+        "max": "*"
+      },
+      {
+        "id": "Extension.extension:effectiveInstitution.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:effectiveInstitution.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "effectiveInstitution"
+      },
+      {
+        "id": "Extension.extension:effectiveInstitution.value[x]",
+        "path": "Extension.extension.value[x]",
+        "min": 1,
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:defaultApplied",
+        "path": "Extension.extension",
+        "sliceName": "defaultApplied",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:defaultApplied.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:defaultApplied.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "defaultApplied"
+      },
+      {
+        "id": "Extension.extension:defaultApplied.value[x]",
+        "path": "Extension.extension.value[x]",
+        "min": 1,
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ]
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-eligibility-evidence"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "max": "0"
+      }
+    ]
+  }
+}
