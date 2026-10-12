@@ -1,0 +1,246 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "identifier": {
+    "system": "https://fhir.sus-rda-mx.local/NamingSystem/transaccion-demo/prestador",
+    "value": "TX-inmunizacion-001"
+  },
+  "timestamp": "2026-10-12T09:31:00-06:00",
+  "entry": [
+    {
+      "fullUrl": "https://example.invalid/fhir/Patient/paciente-inmunizacion",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "paciente-inmunizacion",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/curp",
+            "value": "SAMA600303MDFXXX03"
+          }
+        ],
+        "name": [
+          {
+            "use": "usual",
+            "given": [
+              "Marta"
+            ],
+            "family": "Sanchez"
+          }
+        ],
+        "birthDate": "1960-03-03"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/paciente-inmunizacion"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Organization/prestador-inmunizacion",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "prestador-inmunizacion",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo",
+            "value": "PRESTADOR-DEMO"
+          }
+        ],
+        "name": "Institución prestadora sintética"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/prestador-inmunizacion"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Organization/pagador-inmunizacion",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "pagador-inmunizacion",
+        "active": true,
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/institucion-demo",
+            "value": "IMSS-DEMO"
+          }
+        ],
+        "name": "IMSS (ejemplo sintético)"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/pagador-inmunizacion"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Location/unidad-inmunizacion",
+      "resource": {
+        "resourceType": "Location",
+        "id": "unidad-inmunizacion",
+        "status": "active",
+        "name": "Unidad ambulatoria sintética",
+        "managingOrganization": {
+          "reference": "Organization/prestador-inmunizacion"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/unidad-inmunizacion"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Coverage/derechos-inmunizacion",
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "derechos-inmunizacion",
+        "status": "active",
+        "beneficiary": {
+          "reference": "Patient/paciente-inmunizacion"
+        },
+        "payor": [
+          {
+            "reference": "Organization/pagador-inmunizacion"
+          }
+        ],
+        "period": {
+          "start": "2026-01-01",
+          "end": "2026-12-31"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Coverage/derechos-inmunizacion"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Encounter/atencion-inmunizacion",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "atencion-inmunizacion",
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/folio-atencion-demo",
+            "value": "FOLIO-inmunizacion"
+          }
+        ],
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB"
+        },
+        "subject": {
+          "reference": "Patient/paciente-inmunizacion"
+        },
+        "serviceProvider": {
+          "reference": "Organization/prestador-inmunizacion"
+        },
+        "location": [
+          {
+            "location": {
+              "reference": "Location/unidad-inmunizacion"
+            }
+          }
+        ],
+        "period": {
+          "start": "2026-10-12T09:00:00-06:00",
+          "end": "2026-10-12T09:30:00-06:00"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Encounter/atencion-inmunizacion"
+      }
+    },
+    {
+      "fullUrl": "https://example.invalid/fhir/Claim/reclamacion-inmunizacion",
+      "resource": {
+        "resourceType": "Claim",
+        "id": "reclamacion-inmunizacion",
+        "identifier": [
+          {
+            "system": "https://fhir.sus-rda-mx.local/NamingSystem/transaccion-demo/prestador",
+            "value": "TX-inmunizacion-001"
+          }
+        ],
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional"
+            }
+          ]
+        },
+        "use": "claim",
+        "patient": {
+          "reference": "Patient/paciente-inmunizacion"
+        },
+        "created": "2026-10-12T09:31:00-06:00",
+        "provider": {
+          "reference": "Organization/prestador-inmunizacion"
+        },
+        "priority": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/processpriority",
+              "code": "normal"
+            }
+          ]
+        },
+        "insurance": [
+          {
+            "sequence": 1,
+            "focal": true,
+            "coverage": {
+              "reference": "Coverage/derechos-inmunizacion"
+            }
+          }
+        ],
+        "item": [
+          {
+            "sequence": 1,
+            "extension": [
+              {
+                "url": "https://fhir.sus-rda-mx.local/StructureDefinition/demo-service-line-id",
+                "valueIdentifier": {
+                  "system": "https://fhir.sus-rda-mx.local/NamingSystem/linea-demo",
+                  "value": "LINEA-inmunizacion-001"
+                }
+              }
+            ],
+            "productOrService": {
+              "coding": [
+                {
+                  "system": "https://fhir.sus-rda-mx.local/CodeSystem/sus-fase0-service-working",
+                  "version": "2026-10-09-working",
+                  "code": "993106",
+                  "display": "VACUNACION CONTRA NEUMOCOCO"
+                }
+              ],
+              "text": "VACUNACION CONTRA NEUMOCOCO"
+            },
+            "quantity": {
+              "value": 1
+            },
+            "servicedDate": "2026-10-12",
+            "encounter": [
+              {
+                "reference": "Encounter/atencion-inmunizacion"
+              }
+            ]
+          }
+        ],
+        "meta": {
+          "profile": [
+            "https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-vaccination-claim"
+          ]
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Claim/reclamacion-inmunizacion"
+      }
+    }
+  ]
+}

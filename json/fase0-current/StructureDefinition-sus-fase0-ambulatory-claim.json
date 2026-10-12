@@ -1,0 +1,134 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "sus-fase0-ambulatory-claim",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-fase0-ambulatory-claim",
+  "name": "SUSFase0AmbulatoryClaim",
+  "title": "Reclamacion inicial ambulatoria Fase 0 (trabajo)",
+  "status": "draft",
+  "experimental": true,
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Claim",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Claim",
+  "derivation": "constraint",
+  "description": "Recepcion inicial sin insurer ni supportingInfo. Consulta con diagnostico. Perfil especifico de trabajo: no reemplaza silenciosamente SUSCrossCareClaim.",
+  "differential": {
+    "element": [
+      {
+        "id": "Claim",
+        "path": "Claim"
+      },
+      {
+        "id": "Claim.identifier",
+        "path": "Claim.identifier",
+        "min": 1,
+        "max": "*"
+      },
+      {
+        "id": "Claim.use",
+        "path": "Claim.use",
+        "min": 1,
+        "max": "1",
+        "fixedCode": "claim"
+      },
+      {
+        "id": "Claim.status",
+        "path": "Claim.status",
+        "min": 1,
+        "max": "1",
+        "fixedCode": "active"
+      },
+      {
+        "id": "Claim.insurer",
+        "path": "Claim.insurer",
+        "min": 0,
+        "max": "0"
+      },
+      {
+        "id": "Claim.supportingInfo",
+        "path": "Claim.supportingInfo",
+        "min": 0,
+        "max": "0"
+      },
+      {
+        "id": "Claim.diagnosis",
+        "path": "Claim.diagnosis",
+        "min": 1,
+        "max": "*"
+      },
+      {
+        "id": "Claim.diagnosis.diagnosis[x]",
+        "path": "Claim.diagnosis.diagnosis[x]",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Condition"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Claim.item",
+        "path": "Claim.item",
+        "min": 1,
+        "max": "*"
+      },
+      {
+        "id": "Claim.item.productOrService",
+        "path": "Claim.item.productOrService",
+        "min": 1,
+        "max": "1",
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.sus-rda-mx.local/ValueSet/sus-fase0-service-working"
+        }
+      },
+      {
+        "id": "Claim.item.serviced[x]",
+        "path": "Claim.item.serviced[x]",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Claim.item.encounter",
+        "path": "Claim.item.encounter",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Claim.item.quantity",
+        "path": "Claim.item.quantity",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Claim.item.quantity.value",
+        "path": "Claim.item.quantity.value",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Claim.item.unitPrice",
+        "path": "Claim.item.unitPrice",
+        "min": 0,
+        "max": "0"
+      },
+      {
+        "id": "Claim.item.net",
+        "path": "Claim.item.net",
+        "min": 0,
+        "max": "0"
+      },
+      {
+        "id": "Claim.total",
+        "path": "Claim.total",
+        "min": 0,
+        "max": "0"
+      }
+    ]
+  }
+}

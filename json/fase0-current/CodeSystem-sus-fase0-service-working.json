@@ -1,0 +1,27 @@
+{
+  "resourceType": "CodeSystem",
+  "id": "sus-fase0-service-working",
+  "url": "https://fhir.sus-rda-mx.local/CodeSystem/sus-fase0-service-working",
+  "version": "2026-10-09-working",
+  "name": "SUSFase0ServiceWorkingCS",
+  "title": "Servicios Fase 0: extracto de trabajo CUBS",
+  "status": "draft",
+  "experimental": true,
+  "caseSensitive": true,
+  "content": "fragment",
+  "description": "Extracto CUBS de DGMOSS Listado de Terminologias - Acotado (1).xlsm, hoja CUBS - Servicios Ambulatorios, filas 2, 3 y 593. Derivado de CUPS; no aprobacion oficial mexicana.",
+  "concept": [
+    {
+      "code": "890201",
+      "display": "CONSULTA DE PRIMERA VEZ POR MEDICINA GENERAL"
+    },
+    {
+      "code": "890301",
+      "display": "CONSULTA DE CONTROL O DE SEGUIMIENTO POR MEDICINA GENERAL"
+    },
+    {
+      "code": "993106",
+      "display": "VACUNACION CONTRA NEUMOCOCO"
+    }
+  ]
+}
