@@ -1,0 +1,110 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "sus-compensation-payment-notice",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-compensation-payment-notice",
+  "name": "SUSCompensationPaymentNotice",
+  "title": "SUS Compensation PaymentNotice (PROVISIONAL)",
+  "status": "draft",
+  "description": "Aviso FHIR sintético del pago reportado por el pagador. El prestador confirma posteriormente la recepción y entonces se registra el asiento separado.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "PaymentNotice",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/PaymentNotice",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "PaymentNotice.status",
+        "path": "PaymentNotice.status",
+        "patternCode": "active"
+      },
+      {
+        "id": "PaymentNotice.request",
+        "path": "PaymentNotice.request",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-claim"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "PaymentNotice.response",
+        "path": "PaymentNotice.response",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-compensation-claim-response"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "PaymentNotice.provider",
+        "path": "PaymentNotice.provider",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-provider-organization"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "PaymentNotice.payment",
+        "path": "PaymentNotice.payment",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-compensation-payment-reconciliation"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "PaymentNotice.paymentDate",
+        "path": "PaymentNotice.paymentDate",
+        "min": 1
+      },
+      {
+        "id": "PaymentNotice.payee",
+        "path": "PaymentNotice.payee",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-provider-organization"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "PaymentNotice.recipient",
+        "path": "PaymentNotice.recipient",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-provider-organization"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "PaymentNotice.amount.currency",
+        "path": "PaymentNotice.amount.currency",
+        "patternCode": "MXN"
+      }
+    ]
+  }
+}

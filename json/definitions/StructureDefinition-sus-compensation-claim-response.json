@@ -1,0 +1,86 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "sus-compensation-claim-response",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-compensation-claim-response",
+  "name": "SUSCompensationClaimResponse",
+  "title": "SUS Compensation ClaimResponse (PROVISIONAL)",
+  "status": "draft",
+  "description": "Resultado económico sintético de la PoC. Conserva separados el Claim clínico-administrativo de origen y la adjudicación tarifaria.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "ClaimResponse",
+  "baseDefinition": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-compensation-response",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "ClaimResponse.status",
+        "path": "ClaimResponse.status",
+        "patternCode": "active"
+      },
+      {
+        "id": "ClaimResponse.use",
+        "path": "ClaimResponse.use",
+        "patternCode": "claim"
+      },
+      {
+        "id": "ClaimResponse.patient",
+        "path": "ClaimResponse.patient",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-patient"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ClaimResponse.insurer",
+        "path": "ClaimResponse.insurer",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-organization"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ClaimResponse.request",
+        "path": "ClaimResponse.request",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-claim"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ClaimResponse.item",
+        "path": "ClaimResponse.item",
+        "min": 1
+      },
+      {
+        "id": "ClaimResponse.item.adjudication.amount",
+        "path": "ClaimResponse.item.adjudication.amount",
+        "min": 1
+      },
+      {
+        "id": "ClaimResponse.total",
+        "path": "ClaimResponse.total",
+        "min": 1
+      },
+      {
+        "id": "ClaimResponse.total.amount.currency",
+        "path": "ClaimResponse.total.amount.currency",
+        "patternCode": "MXN"
+      }
+    ]
+  }
+}

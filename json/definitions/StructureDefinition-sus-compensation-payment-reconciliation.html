@@ -1,0 +1,57 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>StructureDefinition-sus-compensation-payment-reconciliation</title><link rel="stylesheet" href="../../assets/styles.css"><style>pre{background:#f5f6f7;color:#202124;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6}</style></head><body><main><p><a href="../../perfiles/sus-compensation-payment-reconciliation.html">Volver al perfil</a> · <a href="StructureDefinition-sus-compensation-payment-reconciliation.json" download>Descargar JSON</a></p><h1>SUS Compensation PaymentReconciliation (PROVISIONAL)</h1><p>Definición disponible en el repositorio. Su publicación no implica validación o actualización de su contenido al contrato de Fase 0.</p><pre>{
+  "resourceType": "StructureDefinition",
+  "id": "sus-compensation-payment-reconciliation",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-compensation-payment-reconciliation",
+  "name": "SUSCompensationPaymentReconciliation",
+  "title": "SUS Compensation PaymentReconciliation (PROVISIONAL)",
+  "status": "draft",
+  "description": "Notificación FHIR sintética de un pago agrupado. No es el libro mayor contable, no ejecuta transferencias y no demuestra conciliación bancaria.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "PaymentReconciliation",
+  "baseDefinition": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-payment-reconciliation-candidate",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "PaymentReconciliation.status",
+        "path": "PaymentReconciliation.status",
+        "patternCode": "active"
+      },
+      {
+        "id": "PaymentReconciliation.period",
+        "path": "PaymentReconciliation.period",
+        "min": 1
+      },
+      {
+        "id": "PaymentReconciliation.paymentIssuer",
+        "path": "PaymentReconciliation.paymentIssuer",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-organization"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "PaymentReconciliation.outcome",
+        "path": "PaymentReconciliation.outcome",
+        "patternCode": "complete"
+      },
+      {
+        "id": "PaymentReconciliation.paymentAmount.currency",
+        "path": "PaymentReconciliation.paymentAmount.currency",
+        "patternCode": "MXN"
+      },
+      {
+        "id": "PaymentReconciliation.paymentIdentifier",
+        "path": "PaymentReconciliation.paymentIdentifier",
+        "min": 1
+      }
+    ]
+  }
+}</pre></main></body></html>

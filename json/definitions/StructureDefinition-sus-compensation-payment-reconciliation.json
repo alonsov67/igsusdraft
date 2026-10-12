@@ -1,0 +1,57 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "sus-compensation-payment-reconciliation",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-compensation-payment-reconciliation",
+  "name": "SUSCompensationPaymentReconciliation",
+  "title": "SUS Compensation PaymentReconciliation (PROVISIONAL)",
+  "status": "draft",
+  "description": "Notificación FHIR sintética de un pago agrupado. No es el libro mayor contable, no ejecuta transferencias y no demuestra conciliación bancaria.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "PaymentReconciliation",
+  "baseDefinition": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-payment-reconciliation-candidate",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "PaymentReconciliation.status",
+        "path": "PaymentReconciliation.status",
+        "patternCode": "active"
+      },
+      {
+        "id": "PaymentReconciliation.period",
+        "path": "PaymentReconciliation.period",
+        "min": 1
+      },
+      {
+        "id": "PaymentReconciliation.paymentIssuer",
+        "path": "PaymentReconciliation.paymentIssuer",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-organization"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "PaymentReconciliation.outcome",
+        "path": "PaymentReconciliation.outcome",
+        "patternCode": "complete"
+      },
+      {
+        "id": "PaymentReconciliation.paymentAmount.currency",
+        "path": "PaymentReconciliation.paymentAmount.currency",
+        "patternCode": "MXN"
+      },
+      {
+        "id": "PaymentReconciliation.paymentIdentifier",
+        "path": "PaymentReconciliation.paymentIdentifier",
+        "min": 1
+      }
+    ]
+  }
+}

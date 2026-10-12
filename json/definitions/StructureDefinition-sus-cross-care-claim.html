@@ -1,0 +1,336 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>StructureDefinition-sus-cross-care-claim</title><link rel="stylesheet" href="../../assets/styles.css"><style>pre{background:#f5f6f7;color:#202124;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6}</style></head><body><main><p><a href="../../perfiles/sus-cross-care-claim.html">Volver al perfil</a> · <a href="StructureDefinition-sus-cross-care-claim.json" download>Descargar JSON</a></p><h1>SUS Cross-Care Claim (PROVISIONAL)</h1><p>Definición disponible en el repositorio. Su publicación no implica validación o actualización de su contenido al contrato de Fase 0.</p><pre>{
+  "resourceType": "StructureDefinition",
+  "id": "sus-cross-care-claim",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-claim",
+  "name": "SUSCrossCareClaim",
+  "title": "SUS Cross-Care Claim (PROVISIONAL)",
+  "status": "draft",
+  "description": "Ancla FHIR de la radicación B6. Es una solicitud para evaluación del evento prestado, sin montos del prestador y sin responsabilidad final resuelta.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Claim",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Claim",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Claim",
+        "path": "Claim",
+        "constraint": [
+          {
+            "key": "sus-cross-care-claim-focal-1",
+            "severity": "error",
+            "human": "Exactly one reported Coverage is focal for this Claim; focal does not mean final responsibility.",
+            "expression": "insurance.where(focal = true).count() = 1",
+            "source": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-claim"
+          }
+        ]
+      },
+      {
+        "id": "Claim.extension",
+        "path": "Claim.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Claim.extension:demoWorkflow",
+        "path": "Claim.extension",
+        "sliceName": "demoWorkflow",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/demo-claim-workflow"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Claim.identifier",
+        "path": "Claim.identifier",
+        "min": 1
+      },
+      {
+        "id": "Claim.status",
+        "path": "Claim.status",
+        "patternCode": "active"
+      },
+      {
+        "id": "Claim.type",
+        "path": "Claim.type",
+        "binding": {
+          "strength": "required",
+          "valueSet": "http://hl7.org/fhir/ValueSet/claim-type"
+        }
+      },
+      {
+        "id": "Claim.subType",
+        "path": "Claim.subType",
+        "min": 1,
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.sus-rda-mx.local/ValueSet/sus-service-pattern-provisional"
+        }
+      },
+      {
+        "id": "Claim.use",
+        "path": "Claim.use",
+        "patternCode": "claim"
+      },
+      {
+        "id": "Claim.patient",
+        "path": "Claim.patient",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-patient"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Claim.insurer",
+        "path": "Claim.insurer",
+        "max": "0"
+      },
+      {
+        "id": "Claim.provider",
+        "path": "Claim.provider",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-provider-organization"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Claim.priority",
+        "path": "Claim.priority",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "normal",
+              "system": "http://terminology.hl7.org/CodeSystem/processpriority"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Claim.fundsReserve",
+        "path": "Claim.fundsReserve",
+        "max": "0"
+      },
+      {
+        "id": "Claim.payee",
+        "path": "Claim.payee",
+        "max": "0"
+      },
+      {
+        "id": "Claim.supportingInfo",
+        "path": "Claim.supportingInfo",
+        "min": 1
+      },
+      {
+        "id": "Claim.supportingInfo.category",
+        "path": "Claim.supportingInfo.category",
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.sus-rda-mx.local/ValueSet/sus-supporting-info-category-provisional"
+        }
+      },
+      {
+        "id": "Claim.supportingInfo.value[x]",
+        "path": "Claim.supportingInfo.value[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        },
+        "min": 1,
+        "type": [
+          {
+            "code": "boolean"
+          },
+          {
+            "code": "Quantity"
+          },
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Resource"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Claim.supportingInfo.value[x]:valueReference",
+        "path": "Claim.supportingInfo.value[x]",
+        "sliceName": "valueReference",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-condition",
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-observation",
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-diagnostic-report",
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-procedure",
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-service-request",
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-medication-request",
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-immunization",
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-rda-bundle",
+              "http://hl7.org/fhir/StructureDefinition/DocumentReference"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Claim.diagnosis.diagnosis[x]",
+        "path": "Claim.diagnosis.diagnosis[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Claim.diagnosis.diagnosis[x]:diagnosisReference",
+        "path": "Claim.diagnosis.diagnosis[x]",
+        "sliceName": "diagnosisReference",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-condition"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Claim.procedure.procedure[x]",
+        "path": "Claim.procedure.procedure[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Claim.procedure.procedure[x]:procedureReference",
+        "path": "Claim.procedure.procedure[x]",
+        "sliceName": "procedureReference",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-procedure"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Claim.insurance.coverage",
+        "path": "Claim.insurance.coverage",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-eligibility-coverage"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Claim.item",
+        "path": "Claim.item",
+        "min": 1
+      },
+      {
+        "id": "Claim.item.productOrService",
+        "path": "Claim.item.productOrService",
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.sus-rda-mx.local/ValueSet/sus-service-code-provisional"
+        }
+      },
+      {
+        "id": "Claim.item.serviced[x]",
+        "path": "Claim.item.serviced[x]",
+        "min": 1
+      },
+      {
+        "id": "Claim.item.unitPrice",
+        "path": "Claim.item.unitPrice",
+        "max": "0"
+      },
+      {
+        "id": "Claim.item.factor",
+        "path": "Claim.item.factor",
+        "max": "0"
+      },
+      {
+        "id": "Claim.item.net",
+        "path": "Claim.item.net",
+        "max": "0"
+      },
+      {
+        "id": "Claim.item.encounter",
+        "path": "Claim.item.encounter",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-encounter"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Claim.item.detail",
+        "path": "Claim.item.detail",
+        "max": "0"
+      },
+      {
+        "id": "Claim.total",
+        "path": "Claim.total",
+        "max": "0"
+      }
+    ]
+  }
+}</pre></main></body></html>

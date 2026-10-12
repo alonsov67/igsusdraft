@@ -1,0 +1,76 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>StructureDefinition-sus-cross-care-pdf-document-reference</title><link rel="stylesheet" href="../../assets/styles.css"><style>pre{background:#f5f6f7;color:#202124;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6}</style></head><body><main><p><a href="../../perfiles/sus-cross-care-pdf-document-reference.html">Volver al perfil</a> · <a href="StructureDefinition-sus-cross-care-pdf-document-reference.json" download>Descargar JSON</a></p><h1>SUS Cross-Care PDF DocumentReference (PROVISIONAL)</h1><p>Definición disponible en el repositorio. Su publicación no implica validación o actualización de su contenido al contrato de Fase 0.</p><pre>{
+  "resourceType": "StructureDefinition",
+  "id": "sus-cross-care-pdf-document-reference",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-pdf-document-reference",
+  "name": "SUSCrossCarePDFDocumentReference",
+  "title": "SUS Cross-Care PDF DocumentReference (PROVISIONAL)",
+  "status": "draft",
+  "description": "Metadatos de un soporte PDF sintético de epicrisis, imagenología o laboratorio. El contenido binario se referencia mediante Attachment.url.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "DocumentReference",
+  "baseDefinition": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-document-reference",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "DocumentReference.type",
+        "path": "DocumentReference.type",
+        "min": 1
+      },
+      {
+        "id": "DocumentReference.date",
+        "path": "DocumentReference.date",
+        "min": 1
+      },
+      {
+        "id": "DocumentReference.author",
+        "path": "DocumentReference.author",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-provider-organization"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "DocumentReference.custodian",
+        "path": "DocumentReference.custodian",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-provider-organization"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "DocumentReference.content.attachment.contentType",
+        "path": "DocumentReference.content.attachment.contentType",
+        "min": 1,
+        "patternCode": "application/pdf"
+      },
+      {
+        "id": "DocumentReference.content.attachment.size",
+        "path": "DocumentReference.content.attachment.size",
+        "min": 1
+      },
+      {
+        "id": "DocumentReference.content.attachment.hash",
+        "path": "DocumentReference.content.attachment.hash",
+        "min": 1
+      },
+      {
+        "id": "DocumentReference.content.attachment.title",
+        "path": "DocumentReference.content.attachment.title",
+        "min": 1
+      }
+    ]
+  }
+}</pre></main></body></html>

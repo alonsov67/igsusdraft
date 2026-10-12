@@ -1,0 +1,29 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "sus-cross-care-pdf-binary",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-pdf-binary",
+  "name": "SUSCrossCarePDFBinary",
+  "title": "SUS Cross-Care PDF Binary (PROVISIONAL)",
+  "status": "draft",
+  "description": "PDF sintético transportado como Binary para la PoC. No debe contener PHI/PII ni documentos clínicos reales.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Binary",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Binary",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Binary.contentType",
+        "path": "Binary.contentType",
+        "patternCode": "application/pdf"
+      },
+      {
+        "id": "Binary.data",
+        "path": "Binary.data",
+        "min": 1
+      }
+    ]
+  }
+}

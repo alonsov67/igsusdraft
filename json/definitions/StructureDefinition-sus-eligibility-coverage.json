@@ -1,0 +1,108 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "sus-eligibility-coverage",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-eligibility-coverage",
+  "name": "SUSEligibilityCoverage",
+  "title": "SUS Eligibility Coverage (PROVISIONAL)",
+  "status": "draft",
+  "description": "Contexto de afiliación/derecho conocido o reportado. payor es el emisor de la afiliación y no prueba responsabilidad final del evento.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Coverage",
+  "baseDefinition": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-coverage",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Coverage.extension",
+        "path": "Coverage.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        },
+        "min": 3
+      },
+      {
+        "id": "Coverage.extension:verificationStatus",
+        "path": "Coverage.extension",
+        "sliceName": "verificationStatus",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-coverage-verification-status"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Coverage.extension:affiliationMultiplicity",
+        "path": "Coverage.extension",
+        "sliceName": "affiliationMultiplicity",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-affiliation-multiplicity-status"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Coverage.extension:responsibilityContext",
+        "path": "Coverage.extension",
+        "sliceName": "responsibilityContext",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-responsibility-context"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Coverage.identifier",
+        "path": "Coverage.identifier",
+        "min": 1
+      },
+      {
+        "id": "Coverage.beneficiary",
+        "path": "Coverage.beneficiary",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-patient"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Coverage.payor",
+        "path": "Coverage.payor",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-organization"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

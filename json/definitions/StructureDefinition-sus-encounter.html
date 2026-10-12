@@ -1,0 +1,50 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>StructureDefinition-sus-encounter</title><link rel="stylesheet" href="../../assets/styles.css"><style>pre{background:#f5f6f7;color:#202124;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6}</style></head><body><main><p><a href="../../perfiles/sus-encounter.html">Volver al perfil</a> · <a href="StructureDefinition-sus-encounter.json" download>Descargar JSON</a></p><h1>SUS Encounter (PROVISIONAL)</h1><p>Definición disponible en el repositorio. Su publicación no implica validación o actualización de su contenido al contrato de Fase 0.</p><pre>{
+  "resourceType": "StructureDefinition",
+  "id": "sus-encounter",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-encounter",
+  "name": "SUSEncounter",
+  "title": "SUS Encounter (PROVISIONAL)",
+  "status": "draft",
+  "description": "Perfil mínimo y PROVISIONAL del evento asistencial documentado por SUS-RDA-MX.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Encounter",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Encounter",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Encounter.subject",
+        "path": "Encounter.subject",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-patient"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Encounter.period",
+        "path": "Encounter.period",
+        "min": 1
+      },
+      {
+        "id": "Encounter.serviceProvider",
+        "path": "Encounter.serviceProvider",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-organization"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}</pre></main></body></html>

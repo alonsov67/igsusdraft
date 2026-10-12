@@ -1,0 +1,511 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "sus-cross-care-bundle",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-bundle",
+  "name": "SUSCrossCareBundle",
+  "title": "SUS Cross-Care Radicación Bundle (PROVISIONAL)",
+  "status": "draft",
+  "description": "Paquete lógico collection de un evento compensable. Claim es el ancla; no duplica el expediente clínico ni contiene montos del prestador.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Bundle",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Bundle",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Bundle",
+        "path": "Bundle",
+        "constraint": [
+          {
+            "key": "sus-cross-care-bundle-reference-1",
+            "severity": "error",
+            "human": "Every urn:uuid reference in the package resolves to a Bundle.entry.fullUrl.",
+            "expression": "entry.resource.descendants().where($this is Reference).reference.where(startsWith('urn:uuid:')).all($this in %resource.entry.fullUrl)",
+            "source": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-bundle"
+          },
+          {
+            "key": "sus-cross-care-bundle-category-1",
+            "severity": "error",
+            "human": "The Bundle service-pattern tag equals the Claim subtype code.",
+            "expression": "entry.resource.ofType(Claim).subType.coding.where(system = 'https://fhir.sus-rda-mx.local/CodeSystem/sus-service-pattern-provisional').code = meta.tag.where(system = 'https://fhir.sus-rda-mx.local/CodeSystem/sus-service-pattern-provisional').code",
+            "source": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-bundle"
+          },
+          {
+            "key": "sus-cross-care-bundle-financial-resources-1",
+            "severity": "error",
+            "human": "Invoice, PaymentNotice and PaymentReconciliation are forbidden in the initial radicación.",
+            "expression": "entry.resource.ofType(Invoice).empty() and entry.resource.ofType(PaymentNotice).empty() and entry.resource.ofType(PaymentReconciliation).empty()",
+            "source": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-bundle"
+          }
+        ]
+      },
+      {
+        "id": "Bundle.meta.tag",
+        "path": "Bundle.meta.tag",
+        "min": 1,
+        "max": "1",
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.sus-rda-mx.local/ValueSet/sus-service-pattern-provisional"
+        }
+      },
+      {
+        "id": "Bundle.identifier",
+        "path": "Bundle.identifier",
+        "min": 1
+      },
+      {
+        "id": "Bundle.type",
+        "path": "Bundle.type",
+        "patternCode": "collection"
+      },
+      {
+        "id": "Bundle.timestamp",
+        "path": "Bundle.timestamp",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry",
+        "path": "Bundle.entry",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "profile",
+              "path": "resource"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        },
+        "min": 7
+      },
+      {
+        "id": "Bundle.entry:claim",
+        "path": "Bundle.entry",
+        "sliceName": "claim",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Bundle.entry:claim.fullUrl",
+        "path": "Bundle.entry.fullUrl",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry:claim.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Claim",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-claim"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:patient",
+        "path": "Bundle.entry",
+        "sliceName": "patient",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Bundle.entry:patient.fullUrl",
+        "path": "Bundle.entry.fullUrl",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry:patient.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Patient",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-patient"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:coverage",
+        "path": "Bundle.entry",
+        "sliceName": "coverage",
+        "min": 1,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:coverage.fullUrl",
+        "path": "Bundle.entry.fullUrl",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry:coverage.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Coverage",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-eligibility-coverage"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:organization",
+        "path": "Bundle.entry",
+        "sliceName": "organization",
+        "min": 2,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:organization.fullUrl",
+        "path": "Bundle.entry.fullUrl",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry:organization.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Organization",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-organization"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:practitioner",
+        "path": "Bundle.entry",
+        "sliceName": "practitioner",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:practitioner.fullUrl",
+        "path": "Bundle.entry.fullUrl",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry:practitioner.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Practitioner",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-practitioner"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:practitionerRole",
+        "path": "Bundle.entry",
+        "sliceName": "practitionerRole",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:practitionerRole.fullUrl",
+        "path": "Bundle.entry.fullUrl",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry:practitionerRole.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "PractitionerRole",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-practitioner-role"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:encounter",
+        "path": "Bundle.entry",
+        "sliceName": "encounter",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Bundle.entry:encounter.fullUrl",
+        "path": "Bundle.entry.fullUrl",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry:encounter.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Encounter",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-encounter"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:condition",
+        "path": "Bundle.entry",
+        "sliceName": "condition",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:condition.fullUrl",
+        "path": "Bundle.entry.fullUrl",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry:condition.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Condition",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-condition"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:observation",
+        "path": "Bundle.entry",
+        "sliceName": "observation",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:observation.fullUrl",
+        "path": "Bundle.entry.fullUrl",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry:observation.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Observation",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-observation"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:diagnosticReport",
+        "path": "Bundle.entry",
+        "sliceName": "diagnosticReport",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:diagnosticReport.fullUrl",
+        "path": "Bundle.entry.fullUrl",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry:diagnosticReport.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "DiagnosticReport",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-diagnostic-report"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:procedure",
+        "path": "Bundle.entry",
+        "sliceName": "procedure",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:procedure.fullUrl",
+        "path": "Bundle.entry.fullUrl",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry:procedure.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Procedure",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-procedure"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:serviceRequest",
+        "path": "Bundle.entry",
+        "sliceName": "serviceRequest",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:serviceRequest.fullUrl",
+        "path": "Bundle.entry.fullUrl",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry:serviceRequest.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "ServiceRequest",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-service-request"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:medicationRequest",
+        "path": "Bundle.entry",
+        "sliceName": "medicationRequest",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:medicationRequest.fullUrl",
+        "path": "Bundle.entry.fullUrl",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry:medicationRequest.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "MedicationRequest",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-medication-request"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:immunization",
+        "path": "Bundle.entry",
+        "sliceName": "immunization",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:immunization.fullUrl",
+        "path": "Bundle.entry.fullUrl",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry:immunization.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Immunization",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-immunization"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:documentReference",
+        "path": "Bundle.entry",
+        "sliceName": "documentReference",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:documentReference.fullUrl",
+        "path": "Bundle.entry.fullUrl",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry:documentReference.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "DocumentReference",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-document-reference"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:documentBundle",
+        "path": "Bundle.entry",
+        "sliceName": "documentBundle",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:documentBundle.fullUrl",
+        "path": "Bundle.entry.fullUrl",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry:documentBundle.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Bundle",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-rda-bundle"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:provenance",
+        "path": "Bundle.entry",
+        "sliceName": "provenance",
+        "min": 1,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:provenance.fullUrl",
+        "path": "Bundle.entry.fullUrl",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry:provenance.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Provenance",
+            "profile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-technical-stamp-provenance"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

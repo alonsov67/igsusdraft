@@ -1,0 +1,29 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "sus-patient",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-patient",
+  "name": "SUSPatient",
+  "title": "SUS Patient (PROVISIONAL)",
+  "status": "draft",
+  "description": "Perfil mínimo y PROVISIONAL de una persona en un documento SUS-RDA-MX. No exige CURP ni identificador permanente porque puede existir identidad temporal o de emergencia.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Patient",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Patient",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Patient.identifier",
+        "path": "Patient.identifier",
+        "short": "Identificador disponible; puede ser temporal y no se limita a CURP"
+      },
+      {
+        "id": "Patient.active",
+        "path": "Patient.active",
+        "min": 1
+      }
+    ]
+  }
+}

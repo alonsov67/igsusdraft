@@ -1,0 +1,53 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "sus-compensation-workflow-provenance",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-compensation-workflow-provenance",
+  "name": "SUSCompensationWorkflowProvenance",
+  "title": "SUS Compensation Workflow Provenance (PROVISIONAL)",
+  "status": "draft",
+  "description": "Trazabilidad de cada transición sintética del flujo. No reemplaza AuditEvent de seguridad ni el asiento del libro mayor.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Provenance",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Provenance",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Provenance.target",
+        "path": "Provenance.target",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-claim",
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-compensation-claim-response",
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-compensation-task",
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-pdf-document-reference",
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-epicrisis-composition"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Provenance.activity",
+        "path": "Provenance.activity",
+        "min": 1
+      },
+      {
+        "id": "Provenance.agent.who",
+        "path": "Provenance.agent.who",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-organization",
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-practitioner-role"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

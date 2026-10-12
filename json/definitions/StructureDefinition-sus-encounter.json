@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "sus-encounter",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-encounter",
+  "name": "SUSEncounter",
+  "title": "SUS Encounter (PROVISIONAL)",
+  "status": "draft",
+  "description": "Perfil mínimo y PROVISIONAL del evento asistencial documentado por SUS-RDA-MX.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Encounter",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Encounter",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Encounter.subject",
+        "path": "Encounter.subject",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-patient"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Encounter.period",
+        "path": "Encounter.period",
+        "min": 1
+      },
+      {
+        "id": "Encounter.serviceProvider",
+        "path": "Encounter.serviceProvider",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-organization"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

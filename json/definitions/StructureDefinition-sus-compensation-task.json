@@ -1,0 +1,83 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "sus-compensation-task",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-compensation-task",
+  "name": "SUSCompensationTask",
+  "title": "SUS Compensation Human Task (PROVISIONAL)",
+  "status": "draft",
+  "description": "Tarea humana sintética para revisión del pagador o respuesta del prestador. Los vencimientos de 3 y 5 días hábiles son reglas de la PoC y no una afirmación normativa.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Task",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Task",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Task.intent",
+        "path": "Task.intent",
+        "patternCode": "order"
+      },
+      {
+        "id": "Task.code",
+        "path": "Task.code",
+        "min": 1
+      },
+      {
+        "id": "Task.focus",
+        "path": "Task.focus",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-claim"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Task.authoredOn",
+        "path": "Task.authoredOn",
+        "min": 1
+      },
+      {
+        "id": "Task.lastModified",
+        "path": "Task.lastModified",
+        "min": 1
+      },
+      {
+        "id": "Task.requester",
+        "path": "Task.requester",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-organization"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Task.owner",
+        "path": "Task.owner",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-organization"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Task.restriction.period.end",
+        "path": "Task.restriction.period.end",
+        "min": 1
+      }
+    ]
+  }
+}

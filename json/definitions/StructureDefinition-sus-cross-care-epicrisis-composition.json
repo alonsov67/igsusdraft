@@ -1,0 +1,62 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "sus-cross-care-epicrisis-composition",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-epicrisis-composition",
+  "name": "SUSCrossCareEpicrisisComposition",
+  "title": "SUS Cross-Care Epicrisis Composition (PROVISIONAL)",
+  "status": "draft",
+  "description": "Cabecera estructurada de una epicrisis sintética. Por sí sola no constituye un documento FHIR completo: para intercambio documental debe ser la primera entrada de un Bundle de tipo document.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Composition",
+  "baseDefinition": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-rda-composition",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Composition.type",
+        "path": "Composition.type",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "18842-5",
+              "system": "http://loinc.org",
+              "display": "Discharge summary"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Composition.author",
+        "path": "Composition.author",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-provider-organization"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Composition.section",
+        "path": "Composition.section",
+        "min": 1
+      },
+      {
+        "id": "Composition.section.entry",
+        "path": "Composition.section.entry",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.sus-rda-mx.local/StructureDefinition/sus-cross-care-pdf-document-reference"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>StructureDefinition-sus-patient</title><link rel="stylesheet" href="../../assets/styles.css"><style>pre{background:#f5f6f7;color:#202124;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6}</style></head><body><main><p><a href="../../perfiles/sus-patient.html">Volver al perfil</a> · <a href="StructureDefinition-sus-patient.json" download>Descargar JSON</a></p><h1>SUS Patient (PROVISIONAL)</h1><p>Definición disponible en el repositorio. Su publicación no implica validación o actualización de su contenido al contrato de Fase 0.</p><pre>{
+  "resourceType": "StructureDefinition",
+  "id": "sus-patient",
+  "url": "https://fhir.sus-rda-mx.local/StructureDefinition/sus-patient",
+  "name": "SUSPatient",
+  "title": "SUS Patient (PROVISIONAL)",
+  "status": "draft",
+  "description": "Perfil mínimo y PROVISIONAL de una persona en un documento SUS-RDA-MX. No exige CURP ni identificador permanente porque puede existir identidad temporal o de emergencia.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Patient",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Patient",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Patient.identifier",
+        "path": "Patient.identifier",
+        "short": "Identificador disponible; puede ser temporal y no se limita a CURP"
+      },
+      {
+        "id": "Patient.active",
+        "path": "Patient.active",
+        "min": 1
+      }
+    ]
+  }
+}</pre></main></body></html>
